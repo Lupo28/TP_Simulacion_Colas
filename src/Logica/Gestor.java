@@ -2,11 +2,7 @@ package Logica;
 
 public class Gestor
 {
-    public static void main (String [ ] args)
-    {
+    private int contador;
+    private int cantIteraciones;
 
-
-
-
-    }
 }
