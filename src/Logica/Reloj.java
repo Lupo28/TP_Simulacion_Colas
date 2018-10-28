@@ -42,6 +42,7 @@ public class Reloj {
         return ceroH + horas + ":"  + ceroM + minutos + ":" + ceroS + segundos2;
     }
 
+
     public static String tiempoString(long tiempo){
 
         long horas = tiempo / 3600;
