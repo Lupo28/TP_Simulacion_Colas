@@ -7,7 +7,8 @@ public enum EstadoCamion
     En_Cola_Balanza_("En cola de Pesaje"),
     En_Pesaje("Pesandose"),
     En_Cola_De_Descarga("En cola de Descarga"),
-    En_Descargue("Descargandose");
+    En_Descargue("Descargandose"),
+    Nuevo("Sin asignar Estado");
 
 
     private final String name;

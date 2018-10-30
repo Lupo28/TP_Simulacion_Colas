@@ -1,6 +1,6 @@
 package Logica;
 
-public class Distribuciones {
+public  class Distribuciones {
 
     public static long proximoRecepcion(long tiempoActual){
         double demora = 3 + Math.random() * 4;

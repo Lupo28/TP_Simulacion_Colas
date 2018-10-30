@@ -2,6 +2,8 @@ package Logica;
 
 public class Balanza {
     private long tiempoPesando;
+    private long proxFinAtencion;
+    private boolean estado;
     private Camion camion;
     private EstadoBalanza estadoBalanza;
 
