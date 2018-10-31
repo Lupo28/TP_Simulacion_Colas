@@ -18,20 +18,19 @@ public class Recepcion {
         this.cola = cola;
     }
 
-    public void agregarCamionAcola(Camion c)
-    {
+    public void agregarCamionAcola(Camion c) {
         cola.add(c);
     }
 
 
-    public Recepcion(){}
+    public Recepcion() {
+    }
 
-    public Recepcion( EstadoRecepcion estado, Camion camion) {
+    public Recepcion(EstadoRecepcion estado, Camion camion) {
 
-        this.tiempoAtencion = calcularTiempoAtencion();
         this.estado = estado;
-        this.camion= camion;
-        this.cola=null;
+        this.camion = camion;
+        this.cola = null;
     }
 
     public double getTiempoAtencion() {
@@ -48,6 +47,14 @@ public class Recepcion {
 
     public void setCamion(Camion camion) {
         this.camion = camion;
+        if (camion != null) {
+            calcularTiempoAtencion();
+            proximoFinDeATencion(Reloj.getInstancia().getTiempoActual());
+        }
+        else {
+            this.tiempoAtencion = 0;
+            this.proxFinAtencion = 0;
+        }
     }
 
     public EstadoRecepcion getEstado() {
@@ -66,22 +73,13 @@ public class Recepcion {
         this.proxFinAtencion = proxFinAtencion;
     }
 
-    public void atenderCamion()
-    {
 
-    }
-
-    public long calcularTiempoAtencion()
-    {
+    public void calcularTiempoAtencion() {
         double demora = 3 + Math.random() * 4;
-        this.tiempoAtencion= (demora/60);
-        return (long)getTiempoAtencion();
+        this.tiempoAtencion = (demora / 60);
     }
 
-    public long proximoFinDeATencion(long relojActual)
-    {
-
-        setProxFinAtencion((long)getTiempoAtencion() + relojActual);
-        return getProxFinAtencion();
+    public void proximoFinDeATencion(long relojActual) {
+        setProxFinAtencion((long) getTiempoAtencion() + relojActual);
     }
 }

@@ -5,18 +5,28 @@ public class FinAtencionRecepcion extends Evento
     private Recepcion recepcion;
     private Balanza balanza;
 
-    public FinAtencionRecepcion(long reloj, Gestor gestor, Recepcion recepcion) {
-        super(reloj, gestor);
+    public FinAtencionRecepcion(Recepcion recepcion, Balanza balanza) {
         this.recepcion = recepcion;
+        this.balanza = balanza;
     }
 
     public void ejecutar()
     {
-        recepcion.getCamion().setEstado(EstadoCamion.Recepcionado);
-        balanza.setCamion(recepcion.getCamion());
-        if (!recepcion.getCola().isEmpty())
+        if (balanza.getEstadoBalanza() == EstadoBalanza.Ocupado)
         {
+            balanza.getCola().add(recepcion.getCamion());
+            recepcion.setCamion(null);
+        }
+        else{
+            balanza.setCamion(recepcion.getCamion());
+            recepcion.setCamion(null);
+        }
+
+        if (!recepcion.getCola().isEmpty()){
             recepcion.setCamion(recepcion.getCola().poll());
+        }
+        else{
+            recepcion.setEstado(EstadoRecepcion.Libre);
         }
     }
     public String getNombre()

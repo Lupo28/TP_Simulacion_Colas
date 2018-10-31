@@ -8,10 +8,8 @@ public class Darsena {
     private long proxFinAtencion;
     private Camion camion;
     private EstadoDarsena estadoDarsena;
-    private LinkedList<Camion> cola;
 
     public Darsena() {
-        this.cola = new LinkedList<Camion>();
         this.estadoDarsena = EstadoDarsena.Libre;
     }
 
@@ -53,14 +51,6 @@ public class Darsena {
 
     public void setEstadoDarsena(EstadoDarsena estadoDarsena) {
         this.estadoDarsena = estadoDarsena;
-    }
-
-    public LinkedList<Camion> getCola() {
-        return cola;
-    }
-
-    public void setCola(LinkedList<Camion> cola) {
-        this.cola = cola;
     }
 
     @Override
