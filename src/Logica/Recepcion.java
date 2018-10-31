@@ -3,7 +3,7 @@ package Logica;
 import java.util.LinkedList;
 
 public class Recepcion {
-    private long tiempoAtencion;
+    private double tiempoAtencion;
     private long proxFinAtencion;
     private EstadoRecepcion estado;
     private Camion camion;
@@ -26,14 +26,15 @@ public class Recepcion {
 
     public Recepcion(){}
 
-    public Recepcion(long tiempoAtencion, EstadoRecepcion estado, Camion camion) {
-        this.tiempoAtencion = tiempoAtencion;
+    public Recepcion( EstadoRecepcion estado, Camion camion) {
+
+        this.tiempoAtencion = calcularTiempoAtencion();
         this.estado = estado;
         this.camion= camion;
         this.cola=null;
     }
 
-    public long getTiempoAtencion() {
+    public double getTiempoAtencion() {
         return tiempoAtencion;
     }
 
@@ -68,5 +69,19 @@ public class Recepcion {
     public void atenderCamion()
     {
 
+    }
+
+    public long calcularTiempoAtencion()
+    {
+        double demora = 3 + Math.random() * 4;
+        this.tiempoAtencion= (demora/60);
+        return (long)getTiempoAtencion();
+    }
+
+    public long proximoFinDeATencion(long relojActual)
+    {
+
+        setProxFinAtencion((long)getTiempoAtencion() + relojActual);
+        return getProxFinAtencion();
     }
 }
