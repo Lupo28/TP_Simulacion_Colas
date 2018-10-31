@@ -33,11 +33,12 @@ public class LlegadaDeCamion extends Evento
         this.randomLlegada = randomLlegada;
     }
 
-    public LlegadaDeCamion(long tiempoLlegada, Gestor gestor)
+    public LlegadaDeCamion(long tiempoLlegada, Gestor gestor, Recepcion recepcion)
     {
         this.gestor=gestor;
         this.randomLlegada=Math.random();
         this.tiempoLlegada=tiempoLlegada;
+        this.recepcion=recepcion;
     };
 
     public LlegadaDeCamion(Gestor gestor) {
@@ -106,7 +107,7 @@ public class LlegadaDeCamion extends Evento
     {
 
         LlegadaDeCamion proximaLlegada=new LlegadaDeCamion(this.gestor);
-        gestor.getConjuntosCamiones().add(camion);
+        gestor.addCamion(camion);
         gestor.getConjuntoEventos().add(proximaLlegada);
         asignarRecepcion(camion);
         FinAtencionRecepcion finAtencion= new FinAtencionRecepcion(gestor.getReloj(),gestor,getRecepcion());

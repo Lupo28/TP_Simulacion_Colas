@@ -9,9 +9,9 @@ public class Gestor
     private int contador;
 
     private TreeSet<Evento> conjuntoEventos;
-    private LinkedList<Camion> ConjuntosCamiones;
+    private LinkedList<Camion> conjuntosCamiones;
 
-    private Evento eventoActual;
+    private static Evento eventoActual;
 
     public long getReloj() {
         return reloj;
@@ -30,7 +30,8 @@ public class Gestor
     }
 
 
-    public TreeSet<Evento> getConjuntoEventos() {
+    public TreeSet<Evento> getConjuntoEventos()
+    {
         return conjuntoEventos;
     }
 
@@ -39,11 +40,11 @@ public class Gestor
     }
 
     public LinkedList<Camion> getConjuntosCamiones() {
-        return ConjuntosCamiones;
+        return conjuntosCamiones;
     }
 
     public void setConjuntosCamiones(LinkedList<Camion> conjuntosCamiones) {
-        ConjuntosCamiones = conjuntosCamiones;
+        conjuntosCamiones = conjuntosCamiones;
     }
 
     public Gestor()
@@ -52,6 +53,7 @@ public class Gestor
         this.contador = 0;
         this.eventoActual = null;
         conjuntoEventos = new TreeSet<>();
+        conjuntosCamiones = new LinkedList<>();
     }
 
     public Evento getEventoActual() {
@@ -65,11 +67,16 @@ public class Gestor
     public void inicio()
     {
         Recepcion recepcion= new Recepcion();
-        LlegadaDeCamion proximaLlegada = new LlegadaDeCamion(Distribuciones.proximoRecepcion(getReloj(), Math.random()), this);
+        LlegadaDeCamion proximaLlegada = new LlegadaDeCamion(Distribuciones.proximoRecepcion(getReloj(), Math.random()), this,recepcion);
         setEventoActual(proximaLlegada);
         conjuntoEventos.add(getEventoActual());
         iterar();
 
+    }
+
+    public void addCamion(Camion c)
+    {
+        conjuntosCamiones.add(c);
     }
 
 

@@ -24,4 +24,9 @@ public class FinAtencionRecepcion extends Evento
         String nombre= "Fin At Recepcion";
         return nombre;
     }
+    public Recepcion  getRecepcion()
+
+    {
+        return null;
+    }
 }

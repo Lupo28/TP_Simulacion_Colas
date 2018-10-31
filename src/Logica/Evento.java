@@ -36,7 +36,7 @@ public abstract class Evento implements Comparable<Evento>
             return 0;
         }
     }
-
+    public abstract Recepcion getRecepcion();
     public abstract void ejecutar();
     public abstract String getNombre();
 }

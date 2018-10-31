@@ -22,14 +22,6 @@ public class Camion
         this.numero = numero;
     }
 
-//    public long getTiempoLlegada() {
-//        return tiempoLlegada;
-//    }
-
-//    public void setTiempoLlegada(long tiempoLlegada) {
-//        this.tiempoLlegada = tiempoLlegada;
-//    }
-
     public EstadoCamion getEstado() {
         return estado;
     }
@@ -37,10 +29,5 @@ public class Camion
     public void setEstado(EstadoCamion estado) {
         this.estado = estado;
     }
-
-
-
-
-
 
 }
