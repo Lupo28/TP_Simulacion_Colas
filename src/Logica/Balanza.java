@@ -3,7 +3,7 @@ package Logica;
 import java.util.LinkedList;
 
 public class Balanza {
-    private long tiempoPesando;
+    private long tiempoAtencion;
     private long proxFinAtencion;
     private Camion camion;
     private EstadoBalanza estadoBalanza;
@@ -17,13 +17,10 @@ public class Balanza {
         this.proxFinAtencion = proxFinAtencion;
     }
 
-    public Balanza(long tiempoPesando, Camion camion, EstadoBalanza estadoBalanza)
+    public Balanza()
     {
-        this.tiempoPesando=tiempoPesando;
-        this.camion=camion;
-        this.estadoBalanza=estadoBalanza;
-        this.cola=null;
-
+        this.cola = new LinkedList<Camion>();
+        this.estadoBalanza = EstadoBalanza.Libre;
     }
 
     public LinkedList<Camion> getCola() {
@@ -33,12 +30,12 @@ public class Balanza {
     public void setCola(LinkedList<Camion> cola) {
         this.cola = cola;
     }
-    public long getTiempoPesando() {
-        return tiempoPesando;
+    public long getTiempoAtencion() {
+        return tiempoAtencion;
     }
 
-    public void setTiempoPesando(long tiempoPesando) {
-        this.tiempoPesando = tiempoPesando;
+    public void setTiempoAtencion(long tiempoAtencion) {
+        this.tiempoAtencion = tiempoAtencion;
     }
 
     public Camion getCamion() {
@@ -55,5 +52,17 @@ public class Balanza {
 
     public void setEstadoBalanza(EstadoBalanza estadoBalanza) {
         this.estadoBalanza = estadoBalanza;
+    }
+
+    //Calcula tiempo de atencion
+    public long calcularTiempoAtencion(){
+        double demora = 5 + Math.random() * 2;
+        this.tiempoAtencion = (long)(demora/60);
+        return getTiempoAtencion();
+    }
+
+    public long proximoBalanza(long relojActual){
+        this.proxFinAtencion = relojActual + this.tiempoAtencion;
+        return getProxFinAtencion();
     }
 }
