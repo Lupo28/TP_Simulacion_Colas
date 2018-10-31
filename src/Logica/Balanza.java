@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 public class Balanza {
     private long tiempoAtencion;
+    private long tiempoRecalibrado;
     private long proxFinAtencion;
     private Camion camion;
     private EstadoBalanza estadoBalanza;
@@ -38,6 +39,10 @@ public class Balanza {
         this.tiempoAtencion = tiempoAtencion;
     }
 
+    public long getTiempoRecalibrado(){return tiempoRecalibrado;}
+
+    public void setTiempoRecalibrado(long tiempoRecalibrado){this.tiempoRecalibrado = tiempoRecalibrado;}
+
     public Camion getCamion() {
         return camion;
     }
@@ -64,5 +69,13 @@ public class Balanza {
     public long proximoBalanza(long relojActual){
         this.proxFinAtencion = relojActual + this.tiempoAtencion;
         return getProxFinAtencion();
+    }
+
+    //Calcula el tiempo que tomara recalibrar la balanza
+    public long calcularTiempoRecalibrado(){
+        double z = Math.sqrt(-2*Math.log(Math.random())*Math.cos(2*Math.PI*Math.random()));
+        double demora = 10 + (z*1.2);
+        this.tiempoRecalibrado = (long)(demora / 60);
+        return getTiempoRecalibrado();
     }
 }
