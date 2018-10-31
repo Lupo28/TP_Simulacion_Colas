@@ -1,10 +1,30 @@
 package Logica;
 
+import java.util.LinkedList;
+
 public class ConjuntoDarsena {
     private Darsena[] darsenas = new Darsena[2];
+    private LinkedList cola;
+
+    public Darsena[] getDarsenas() {
+        return darsenas;
+    }
+
+    public void setDarsenas(Darsena[] darsenas) {
+        this.darsenas = darsenas;
+    }
+
+    public LinkedList getCola() {
+        return cola;
+    }
+
+    public void setCola(LinkedList cola) {
+        this.cola = cola;
+    }
 
     public ConjuntoDarsena() {
         cargarVector();
+        this.cola = new LinkedList<Camion>();
     }
 
     public int size() {
