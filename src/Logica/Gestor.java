@@ -5,21 +5,16 @@ import java.util.TreeSet;
 
 public class Gestor
 {
-    private long reloj;
     private int contador;
 
     private TreeSet<Evento> conjuntoEventos;
-    private LinkedList<Camion> conjuntosCamiones;
+    private LinkedList<Camion> camionesEnPuerta;
 
     private static Evento eventoActual;
 
-    public long getReloj() {
-        return reloj;
-    }
-
-    public void setReloj(long reloj) {
-        this.reloj = reloj;
-    }
+    private Recepcion ServidorRecepcion;
+    private Balanza ServidorBalanza;
+    private ConjuntoDarsena ServidoresDarsena;
 
     public int getContador() {
         return contador;
@@ -39,21 +34,22 @@ public class Gestor
         this.conjuntoEventos = conjuntoEventos;
     }
 
-    public LinkedList<Camion> getConjuntosCamiones() {
-        return conjuntosCamiones;
+    public LinkedList<Camion> getCamionesEnPuerta() {
+        return camionesEnPuerta;
     }
 
-    public void setConjuntosCamiones(LinkedList<Camion> conjuntosCamiones) {
-        conjuntosCamiones = conjuntosCamiones;
+    public void setCamionesEnPuerta(LinkedList<Camion> camionesEnPuerta) {
+        this.camionesEnPuerta = camionesEnPuerta;
     }
 
     public Gestor()
     {
-        this.reloj = 0;
         this.contador = 0;
-        this.eventoActual = null;
-        conjuntoEventos = new TreeSet<>();
-        conjuntosCamiones = new LinkedList<>();
+        this.conjuntoEventos = new TreeSet<>();
+        this.camionesEnPuerta = new LinkedList<>();
+        this.ServidorRecepcion = new Recepcion();
+        this.ServidorBalanza = new Balanza();
+        this.ServidoresDarsena = new ConjuntoDarsena();
     }
 
     public Evento getEventoActual() {
@@ -67,25 +63,21 @@ public class Gestor
     public void inicio()
     {
         Recepcion recepcion= new Recepcion();
-        LlegadaDeCamion proximaLlegada = new LlegadaDeCamion(Distribuciones.proximoRecepcion(getReloj(), Math.random()), this,recepcion);
-        setEventoActual(proximaLlegada);
-        conjuntoEventos.add(getEventoActual());
         iterar();
-
     }
 
-    public void addCamion(Camion c)
+    public void addCamionEnPuerta(Camion c)
     {
-        conjuntosCamiones.add(c);
+        camionesEnPuerta.add(c);
     }
 
 
     public void iterar()
     {
-        while(reloj< 43200)
+        while(Reloj.getInstancia().getTiempoActual()< 43200)
         {
             eventoActual = conjuntoEventos.pollFirst();
-            this.reloj = eventoActual.getReloj();
+            Reloj.getInstancia().setTiempoActual(eventoActual.getReloj());
             eventoActual.ejecutar();
         }
     }

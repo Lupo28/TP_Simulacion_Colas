@@ -76,6 +76,7 @@ public class Balanza {
         double z = Math.sqrt(-2*Math.log(Math.random())*Math.cos(2*Math.PI*Math.random()));
         double demora = 10 + (z*1.2);
         this.tiempoRecalibrado = (long)(demora / 60);
+        this.estadoBalanza = EstadoBalanza.En_Recalibracion;
         return getTiempoRecalibrado();
     }
 }

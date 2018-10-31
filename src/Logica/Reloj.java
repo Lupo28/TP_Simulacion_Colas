@@ -55,4 +55,10 @@ public class Reloj {
 
         return ceroH + horas + ":"  + ceroM + minutos + ":" + ceroS + segundos2;
     }
+
+    public Boolean esCierrePlanta(){
+        return (this.tiempoActual < 18 && this.tiempoActual > 5) ? false : true;
+    }
+
+
 }

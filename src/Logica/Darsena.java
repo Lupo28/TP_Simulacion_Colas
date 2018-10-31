@@ -43,6 +43,14 @@ public class Darsena {
 
     public void setCamion(Camion camion) {
         this.camion = camion;
+        if(camion!=null){
+            calcularTiempoAtencion();
+            proximoDarsena(Reloj.getInstancia().getTiempoActual());
+        }
+        else{
+            this.tiempoAtencion = 0;
+            this.proxFinAtencion = 0;
+        }
     }
 
     public EstadoDarsena getEstadoDarsena() {
@@ -59,15 +67,13 @@ public class Darsena {
     }
 
     //Calcula el tiempo de atencion
-    public long calcularTiempoAtencion() {
+    public void calcularTiempoAtencion() {
         double demora = 15 + Math.random() * 5;
         this.tiempoAtencion = (long) (demora / 60);
-        return getTiempoAtencion();
     }
 
     //Calcula el proximo fin de atencion
-    public long proximoDarsena(long relojActual) {
+    public void proximoDarsena(long relojActual) {
         this.proxFinAtencion = relojActual + this.tiempoAtencion;
-        return getProxFinAtencion();
     }
 }
