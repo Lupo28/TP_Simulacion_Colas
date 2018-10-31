@@ -32,7 +32,13 @@ public class LlegadaDeCamion extends Evento
     public void setRandomLlegada(double randomLlegada) {
         this.randomLlegada = randomLlegada;
     }
-    public LlegadaDeCamion(long l, Gestor gestor){};
+
+    public LlegadaDeCamion(long tiempoLlegada, Gestor gestor)
+    {
+        this.gestor=gestor;
+        this.randomLlegada=Math.random();
+        this.tiempoLlegada=tiempoLlegada;
+    };
 
     public LlegadaDeCamion(Gestor gestor) {
         this.gestor=gestor;
@@ -80,6 +86,22 @@ public class LlegadaDeCamion extends Evento
         }
     }
 
+    public Recepcion getRecepcion() {
+        return recepcion;
+    }
+
+    public void setRecepcion(Recepcion recepcion) {
+        this.recepcion = recepcion;
+    }
+
+    public static int getContadorCamiones() {
+        return contadorCamiones;
+    }
+
+    public static void setContadorCamiones(int contadorCamiones) {
+        LlegadaDeCamion.contadorCamiones = contadorCamiones;
+    }
+
     public void ejecutar()
     {
 
@@ -87,8 +109,8 @@ public class LlegadaDeCamion extends Evento
         gestor.getConjuntosCamiones().add(camion);
         gestor.getConjuntoEventos().add(proximaLlegada);
         asignarRecepcion(camion);
+        FinAtencionRecepcion finAtencion= new FinAtencionRecepcion(gestor.getReloj(),gestor,getRecepcion());
 
-
-
+        finAtencion.ejecutar();
     }
 }
