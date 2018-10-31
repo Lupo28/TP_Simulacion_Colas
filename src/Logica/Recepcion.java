@@ -1,18 +1,20 @@
 package Logica;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Recepcion {
     private long tiempoAtencion;
     private long proxFinAtencion;
     private EstadoRecepcion estado;
     private Camion camion;
+    private LinkedList<Camion> cola;
 
-    public ArrayList<Camion> getCola() {
+
+    public LinkedList<Camion> getCola() {
         return cola;
     }
 
-    public void setCola(ArrayList<Camion> cola) {
+    public void setCola(LinkedList<Camion> cola) {
         this.cola = cola;
     }
 
@@ -20,8 +22,6 @@ public class Recepcion {
     {
         cola.add(c);
     }
-
-    private ArrayList<Camion> cola;
 
 
     public Recepcion(){}
@@ -65,7 +65,8 @@ public class Recepcion {
         this.proxFinAtencion = proxFinAtencion;
     }
 
-    public void atender(Camion camion){
+    public void atenderCamion()
+    {
 
     }
 }

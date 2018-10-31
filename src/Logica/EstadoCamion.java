@@ -6,6 +6,7 @@ public enum EstadoCamion
     En_Recepcion ("En Recepcion"),
     En_Cola_Balanza_("En cola de Pesaje"),
     En_Pesaje("Pesandose"),
+    Recepcionado("Recepcionado"),
     En_Cola_De_Descarga("En cola de Descarga"),
     En_Descargue("Descargandose"),
     Nuevo("Sin asignar Estado");

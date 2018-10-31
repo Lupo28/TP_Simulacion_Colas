@@ -32,14 +32,16 @@ public class LlegadaDeCamion extends Evento
     public void setRandomLlegada(double randomLlegada) {
         this.randomLlegada = randomLlegada;
     }
-    public LlegadaDeCamion(){};
+    public LlegadaDeCamion(long l, Gestor gestor){};
 
-    public LlegadaDeCamion(  double randomLlegada, Gestor gestor) {
+    public LlegadaDeCamion(Gestor gestor) {
         this.gestor=gestor;
         this.camion = generarCamion();
-        this.randomLlegada = randomLlegada;
-
+        this.randomLlegada = Math.random();
+        this.tiempoLlegada=calcularTiempoLlegada(gestor.getReloj());
+        this.recepcion = new Recepcion();
         contadorCamiones++;
+
     }
 
     public String getNombre()
@@ -48,9 +50,10 @@ public class LlegadaDeCamion extends Evento
         return nombre;
     }
 
-    public double calcularTiempoLlegada(long tiempoActual)
+    public long calcularTiempoLlegada(long tiempoActual)
     {
-        return Distribuciones.proximoRecepcion(tiempoActual);
+
+        return Distribuciones.proximoRecepcion(tiempoActual,randomLlegada);
     }
 
     public Camion generarCamion()
@@ -61,32 +64,31 @@ public class LlegadaDeCamion extends Evento
     }
 
 
-    public Recepcion asignarRecepcion(Camion c)
+    public void asignarRecepcion(Camion c)
     {
-        if(recepcion.getCola()==null)
+        if(recepcion.getCola()==null && recepcion.getEstado()==EstadoRecepcion.Libre)
         {
-            if(recepcion.getEstado().getName()=="Libre")
-            {
+
                 recepcion.setCamion(c);
-                c.setEstado(EstadoCamion.En_cola_Recepcion);
+                c.setEstado(EstadoCamion.En_Recepcion);
                 recepcion.setEstado(EstadoRecepcion.Ocupado);
-            }
-            else
-            {
-                c.setEstado(EstadoCamion.En_cola_Recepcion);
-                recepcion.agregarCamionAcola(c);
-            }
-
-
         }
-        return recepcion;
+        else
+        {
+            c.setEstado(EstadoCamion.En_cola_Recepcion);
+            recepcion.agregarCamionAcola(c);
+        }
     }
 
     public void ejecutar()
     {
-        gestor.getConjuntosCamiones().add(camion);
 
-        LlegadaDeCamion proximaLlegada=new LlegadaDeCamion();
+        LlegadaDeCamion proximaLlegada=new LlegadaDeCamion(this.gestor);
+        gestor.getConjuntosCamiones().add(camion);
+        gestor.getConjuntoEventos().add(proximaLlegada);
+        asignarRecepcion(camion);
+
+
 
     }
 }

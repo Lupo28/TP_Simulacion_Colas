@@ -1,20 +1,19 @@
 package Logica;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.TreeSet;
 
 public class Gestor
 {
     private long reloj;
     private int contador;
-    private int cantIteraciones;
 
     private TreeSet<Evento> conjuntoEventos;
-    private ArrayList<Camion> ConjuntosCamiones;
+    private LinkedList<Camion> ConjuntosCamiones;
 
     private Evento eventoActual;
 
-    public double getReloj() {
+    public long getReloj() {
         return reloj;
     }
 
@@ -30,13 +29,6 @@ public class Gestor
         this.contador = contador;
     }
 
-    public int getCantIteraciones() {
-        return cantIteraciones;
-    }
-
-    public void setCantIteraciones(int cantIteraciones) {
-        this.cantIteraciones = cantIteraciones;
-    }
 
     public TreeSet<Evento> getConjuntoEventos() {
         return conjuntoEventos;
@@ -46,32 +38,36 @@ public class Gestor
         this.conjuntoEventos = conjuntoEventos;
     }
 
-    public ArrayList<Camion> getConjuntosCamiones() {
+    public LinkedList<Camion> getConjuntosCamiones() {
         return ConjuntosCamiones;
     }
 
-    public void setConjuntosCamiones(ArrayList<Camion> conjuntosCamiones) {
+    public void setConjuntosCamiones(LinkedList<Camion> conjuntosCamiones) {
         ConjuntosCamiones = conjuntosCamiones;
     }
 
-    public Gestor( int contador, int cantIteraciones, TreeSet<Evento> conjuntoEventos, ArrayList<Camion> cola, int contadorCola, ArrayList<Camion> conjuntosCamiones) {
-        this.reloj = 0;
-        this.contador = contador;
-        this.cantIteraciones = cantIteraciones;
-        this.conjuntoEventos = conjuntoEventos;
-        ConjuntosCamiones = conjuntosCamiones;
-    }
-
-
-    public void inicio(int cantIteraciones)
+    public Gestor()
     {
-        this.cantIteraciones=cantIteraciones;
+        this.reloj = 0;
+        this.contador = 0;
+        this.eventoActual = null;
+        conjuntoEventos = new TreeSet<>();
+    }
+
+    public Evento getEventoActual() {
+        return eventoActual;
+    }
+
+    public void setEventoActual(Evento eventoActual) {
+        this.eventoActual = eventoActual;
+    }
+
+    public void inicio()
+    {
         Recepcion recepcion= new Recepcion();
-
-        LlegadaDeCamion proximaLlegada = new LlegadaDeCamion(Distribuciones.proximoRecepcion(reloj), this);
-        conjuntoEventos.add(proximaLlegada);
-
-
+        LlegadaDeCamion proximaLlegada = new LlegadaDeCamion(Distribuciones.proximoRecepcion(getReloj(), Math.random()), this);
+        setEventoActual(proximaLlegada);
+        conjuntoEventos.add(getEventoActual());
         iterar();
 
     }
@@ -79,14 +75,10 @@ public class Gestor
 
     public void iterar()
     {
-        double diferencia;
-        for (int i = 0; i <cantIteraciones ; i++)
+        while(reloj< 43200)
         {
             eventoActual = conjuntoEventos.pollFirst();
-
-
             this.reloj = eventoActual.getReloj();
-
             eventoActual.ejecutar();
         }
     }
