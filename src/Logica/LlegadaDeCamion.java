@@ -14,7 +14,7 @@ public class LlegadaDeCamion extends Evento
         return tiempoLlegada;
     }
 
-    public void setTiempoLlegada(long tiempoLlegada) {
+    public void setTiempoLlegada(double tiempoLlegada) {
         this.tiempoLlegada = tiempoLlegada;
     }
 
