@@ -11,6 +11,8 @@ public class Darsena {
     private EstadoDarsena estadoDarsena;
 
     public Darsena() {
+        this.tiempoAtencion = 0;
+        this.proxFinAtencion = 0;
         this.estadoDarsena = EstadoDarsena.Libre;
     }
 
@@ -55,6 +57,7 @@ public class Darsena {
         if(camion!=null){
             calcularTiempoAtencion();
             proximoDarsena(Reloj.getInstancia().getTiempoActual());
+            this.setEstadoDarsena(EstadoDarsena.Ocupado);
         }
         else{
             this.tiempoAtencion = 0;
