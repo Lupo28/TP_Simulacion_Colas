@@ -24,13 +24,8 @@ public class Recepcion {
 
 
     public Recepcion() {
-    }
-
-    public Recepcion(EstadoRecepcion estado, Camion camion) {
-
-        this.estado = estado;
-        this.camion = camion;
-        this.cola = null;
+        this.estado = EstadoRecepcion.Libre;
+        this.cola = new LinkedList<Camion>();
     }
 
     public double getTiempoAtencion() {

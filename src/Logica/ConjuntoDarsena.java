@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class ConjuntoDarsena {
     private Darsena[] darsenas = new Darsena[2];
-    private LinkedList cola;
+    private LinkedList<Camion> cola;
 
     public Darsena[] getDarsenas() {
         return darsenas;
@@ -14,11 +14,11 @@ public class ConjuntoDarsena {
         this.darsenas = darsenas;
     }
 
-    public LinkedList getCola() {
+    public LinkedList<Camion> getCola() {
         return cola;
     }
 
-    public void setCola(LinkedList cola) {
+    public void setCola(LinkedList<Camion> cola) {
         this.cola = cola;
     }
 
@@ -34,6 +34,7 @@ public class ConjuntoDarsena {
     public void cargarVector() {
         for (int i = 0; i < darsenas.length; i++) {
             darsenas[i] = new Darsena();
+            darsenas[i].setEstadoDarsena(EstadoDarsena.Libre);
             darsenas[i].setId(i + 1);
         }
     }

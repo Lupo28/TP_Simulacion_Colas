@@ -53,10 +53,4 @@ public class FinAtencionBalanza extends Evento {
         String nombre= "Fin At Balanza";
         return nombre;
     }
-
-    public Recepcion  getRecepcion()
-
-    {
-        return null;
-    }
 }
