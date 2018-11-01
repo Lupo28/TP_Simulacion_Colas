@@ -3,7 +3,7 @@ package Logica;
 public class Reloj {
     private static Reloj instancia;
     private int ultNumeroCamion;
-    private long tiempoActual;
+    private double tiempoActual;
 
     private Reloj() {
         this.ultNumeroCamion = 0;
@@ -17,7 +17,7 @@ public class Reloj {
         return instancia;
     }
 
-    public long getTiempoActual() {
+    public double getTiempoActual() {
         return tiempoActual;
     }
 
@@ -31,9 +31,9 @@ public class Reloj {
 
     public String tiempoString(){
 
-        long horas = tiempoActual / 3600;
-        long minutos = (tiempoActual - horas*3600) / 60;
-        long segundos2 =  tiempoActual - (horas*3600 + minutos*60);
+        double horas = tiempoActual / 3600;
+        double minutos = (tiempoActual - horas*3600) / 60;
+        double segundos2 =  tiempoActual - (horas*3600 + minutos*60);
         String ceroH = "", ceroM = "", ceroS = "";
         if( horas < 10 ) ceroH = "0";
         if( minutos < 10 ) ceroM = "0";
@@ -43,11 +43,11 @@ public class Reloj {
     }
 
 
-    public static String tiempoString(long tiempo){
+    public static String tiempoString(double tiempo){
 
-        long horas = tiempo / 3600;
-        long minutos = (tiempo - horas*3600) / 60;
-        long segundos2 =  tiempo - (horas*3600 + minutos*60);
+        double horas = tiempo / 3600;
+        double minutos = (tiempo - horas*3600) / 60;
+        double segundos2 =  tiempo - (horas*3600 + minutos*60);
         String ceroH = "", ceroM = "", ceroS = "";
         if( horas < 10 ) ceroH = "0";
         if( minutos < 10 ) ceroM = "0";
