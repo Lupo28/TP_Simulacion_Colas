@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Recepcion {
     private double tiempoAtencion;
-    private long proxFinAtencion;
+    private double proxFinAtencion;
     private double randomAtencion;
     private EstadoRecepcion estado;
     private Camion camion;
@@ -73,7 +73,7 @@ public class Recepcion {
         this.estado = estado;
     }
 
-    public long getProxFinAtencion() {
+    public double getProxFinAtencion() {
         return proxFinAtencion;
     }
 

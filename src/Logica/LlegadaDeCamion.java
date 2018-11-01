@@ -3,14 +3,14 @@ package Logica;
 public class LlegadaDeCamion extends Evento
 {
 
-    private long tiempoLlegada;
-    private long proxLlegadaCamion;
+    private double tiempoLlegada;
+    private double proxLlegadaCamion;
     private Camion camion;
     private double randomLlegada;
     private Recepcion recepcion;
-    private static int contadorCamiones = 1;
+    private static int contadorCamiones;
 
-    public long getTiempoLlegada() {
+    public double getTiempoLlegada() {
         return tiempoLlegada;
     }
 
@@ -34,21 +34,11 @@ public class LlegadaDeCamion extends Evento
         this.randomLlegada = randomLlegada;
     }
 
-    public LlegadaDeCamion(long tiempoLlegada, Gestor gestor, Recepcion recepcion)
+    public LlegadaDeCamion( Recepcion recepcion)
     {
-        this.gestor=gestor;
-        this.randomLlegada=Math.random();
-        this.tiempoLlegada=tiempoLlegada;
+        this.camion=generarCamion();
         this.recepcion=recepcion;
-    };
-
-    public LlegadaDeCamion(Gestor gestor) {
-        this.gestor=gestor;
-        this.camion = generarCamion();
-        this.randomLlegada = Math.random();
-        this.recepcion = new Recepcion();
         contadorCamiones++;
-
     }
 
     public String getNombre()
@@ -57,10 +47,10 @@ public class LlegadaDeCamion extends Evento
         return nombre;
     }
 
-    public long calcularTiempoLlegada(long tiempoActual)
+    public double calcularTiempoLlegada(long tiempoActual)
     {
 
-        return Distribuciones.proximoRecepcion(tiempoActual,randomLlegada);
+        return proximoRecepcion(tiempoActual,randomLlegada);
     }
 
     public Camion generarCamion()
@@ -70,6 +60,11 @@ public class LlegadaDeCamion extends Evento
         return camion;
     }
 
+    public void calcularTiempoAtencion() {
+        setRandomLlegada(Math.random());
+        double demora = -(1/7.5)*Math.log(1-randomLlegada);
+        setTiempoLlegada((long)demora / 60);
+    }
 
     public void ejecutar()
     {

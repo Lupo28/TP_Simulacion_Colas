@@ -3,7 +3,7 @@ package Logica;
 public class Camion
 {
     private int numero;
-//    private long tiempoLlegada;
+    private long tiempoLlegada;
     private EstadoCamion estado;
 
 

@@ -4,8 +4,8 @@ import java.util.LinkedList;
 
 public class Darsena {
     private int id;
-    private long tiempoAtencion;
-    private long proxFinAtencion;
+    private double tiempoAtencion;
+    private double proxFinAtencion;
     private Camion camion;
     private EstadoDarsena estadoDarsena;
 
@@ -21,7 +21,7 @@ public class Darsena {
         this.id = id;
     }
 
-    public long getTiempoAtencion() {
+    public double getTiempoAtencion() {
         return tiempoAtencion;
     }
 
@@ -29,7 +29,7 @@ public class Darsena {
         this.tiempoAtencion = tiempoAtencion;
     }
 
-    public long getProxFinAtencion() {
+    public double getProxFinAtencion() {
         return proxFinAtencion;
     }
 
