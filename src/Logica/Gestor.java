@@ -114,7 +114,7 @@ public class Gestor
     public double tiempoMinimo()
     {
         double tiempo;
-        tiempo=Math.min(ServidoresDarsena.getDarsenas()[0].getProxFinAtencion(),ServidoresDarsena.getDarsenas()[1].getProxFinAtencion())
+        tiempo=Math.min(ServidoresDarsena.getDarsenas()[0].getProxFinAtencion(),ServidoresDarsena.getDarsenas()[1].getProxFinAtencion());
         tiempo=Math.min(ServidorBalanza.getProxFinAtencion(),tiempo);
         tiempo=Math.min(ServidorRecepcion.getProxFinAtencion(),tiempo);
         return tiempo;
