@@ -4,8 +4,9 @@ import java.util.LinkedList;
 
 public class Darsena {
     private int id;
-    private double tiempoAtencion;
-    private double proxFinAtencion;
+    private long tiempoAtencion;
+    private long proxFinAtencion;
+    private double randomAtencion;
     private Camion camion;
     private EstadoDarsena estadoDarsena;
 
@@ -21,7 +22,15 @@ public class Darsena {
         this.id = id;
     }
 
-    public double getTiempoAtencion() {
+    public double getRandomAtencion() {
+        return randomAtencion;
+    }
+
+    public void setRandomAtencion(double randomAtencion) {
+        this.randomAtencion = randomAtencion;
+    }
+
+    public long getTiempoAtencion() {
         return tiempoAtencion;
     }
 
@@ -29,7 +38,7 @@ public class Darsena {
         this.tiempoAtencion = tiempoAtencion;
     }
 
-    public double getProxFinAtencion() {
+    public long getProxFinAtencion() {
         return proxFinAtencion;
     }
 
@@ -68,7 +77,8 @@ public class Darsena {
 
     //Calcula el tiempo de atencion
     public void calcularTiempoAtencion() {
-        double demora = 15 + Math.random() * 5;
+        this.setRandomAtencion(Math.random());
+        double demora = 15 + this.getRandomAtencion() * 5;
         this.tiempoAtencion = (long) (demora / 60);
     }
 

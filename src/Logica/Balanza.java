@@ -3,19 +3,46 @@ package Logica;
 import java.util.LinkedList;
 
 public class Balanza {
-    private long tiempoAtencion;
-    private long tiempoRecalibrado;
-    private long proxFinAtencion;
+    private double tiempoAtencion;
+    private double tiempoRecalibrado;
+    private double proxFinAtencion;
+    private double randomAtencion;
+    private double randomRecal1;
+    private double randomRecal2;
     private Camion camion;
     private EstadoBalanza estadoBalanza;
     private LinkedList<Camion> cola;
 
-    public long getProxFinAtencion() {
+    public double getProxFinAtencion() {
         return proxFinAtencion;
     }
 
-    public void setProxFinAtencion(long proxFinAtencion) {
+    public void setProxFinAtencion(double proxFinAtencion) {
         this.proxFinAtencion = proxFinAtencion;
+    }
+
+    public double getRandomAtencion() {
+        return randomAtencion;
+    }
+
+    public void setRandomAtencion(double randomAtencion) {
+        this.randomAtencion = randomAtencion;
+    }
+
+    public double getRandomRecal1() {
+        return randomRecal1;
+    }
+
+    public void setRandomRecal1(double randomRecal1) {
+        this.randomRecal1 = randomRecal1;
+    }
+
+    public double getRandomRecal2() {
+        return randomRecal2;
+    }
+
+    public void setRandomRecal2(double randomRecal2) {
+        this.randomRecal2 = randomRecal2;
     }
 
     public Balanza()
@@ -31,17 +58,17 @@ public class Balanza {
     public void setCola(LinkedList<Camion> cola) {
         this.cola = cola;
     }
-    public long getTiempoAtencion() {
+    public double getTiempoAtencion() {
         return tiempoAtencion;
     }
 
-    public void setTiempoAtencion(long tiempoAtencion) {
+    public void setTiempoAtencion(double tiempoAtencion) {
         this.tiempoAtencion = tiempoAtencion;
     }
 
-    public long getTiempoRecalibrado(){return tiempoRecalibrado;}
+    public double getTiempoRecalibrado(){return tiempoRecalibrado;}
 
-    public void setTiempoRecalibrado(long tiempoRecalibrado){this.tiempoRecalibrado = tiempoRecalibrado;}
+    public void setTiempoRecalibrado(double tiempoRecalibrado){this.tiempoRecalibrado = tiempoRecalibrado;}
 
     public Camion getCamion() {
         return camion;
@@ -60,22 +87,25 @@ public class Balanza {
     }
 
     //Calcula tiempo de atencion
-    public long calcularTiempoAtencion(){
-        double demora = 5 + Math.random() * 2;
-        this.tiempoAtencion = (long)(demora/60);
+    public double calcularTiempoAtencion(){
+        this.setRandomAtencion(Math.random());
+        double demora = 5 + this.getRandomAtencion() * 2;
+        this.tiempoAtencion = (demora/60);
         return getTiempoAtencion();
     }
 
-    public long proximoBalanza(long relojActual){
+    public double proximoBalanza(long relojActual){
         this.proxFinAtencion = relojActual + this.tiempoAtencion;
         return getProxFinAtencion();
     }
 
     //Calcula el tiempo que tomara recalibrar la balanza
-    public long calcularTiempoRecalibrado(){
-        double z = Math.sqrt(-2*Math.log(Math.random())*Math.cos(2*Math.PI*Math.random()));
+    public double calcularTiempoRecalibrado(){
+        this.setRandomRecal1(Math.random());
+        this.setRandomRecal2(Math.random());
+        double z = Math.sqrt(-2*Math.log(this.getRandomRecal1())*Math.cos(2*Math.PI*this.getRandomRecal2()));
         double demora = 10 + (z*1.2);
-        this.tiempoRecalibrado = (long)(demora / 60);
+        this.tiempoRecalibrado = (demora / 60);
         this.estadoBalanza = EstadoBalanza.En_Recalibracion;
         return getTiempoRecalibrado();
     }
