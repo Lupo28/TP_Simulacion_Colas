@@ -21,7 +21,7 @@ public class Reloj {
         return tiempoActual;
     }
 
-    public void setTiempoActual(long tiempoActual) {
+    public void setTiempoActual(double tiempoActual) {
         this.tiempoActual = tiempoActual;
     }
 

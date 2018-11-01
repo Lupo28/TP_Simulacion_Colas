@@ -47,6 +47,8 @@ public class Balanza {
 
     public Balanza()
     {
+        this.tiempoAtencion = 0;
+        this.proxFinAtencion = 0;
         this.cola = new LinkedList<Camion>();
         this.estadoBalanza = EstadoBalanza.Libre;
     }

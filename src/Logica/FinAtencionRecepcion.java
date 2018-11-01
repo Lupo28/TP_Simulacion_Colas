@@ -12,7 +12,7 @@ public class FinAtencionRecepcion extends Evento
 
     public void ejecutar()
     {
-        if (balanza.getEstadoBalanza() == EstadoBalanza.Ocupado)
+        if (balanza.getEstadoBalanza() == EstadoBalanza.Ocupado || balanza.getEstadoBalanza() == EstadoBalanza.En_Recalibracion)
         {
             balanza.getCola().add(recepcion.getCamion());
             recepcion.setCamion(null);

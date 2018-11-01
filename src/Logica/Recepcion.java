@@ -37,6 +37,8 @@ public class Recepcion {
     }
 
     public Recepcion() {
+        this.tiempoAtencion = 0;
+        this.proxFinAtencion = 0;
         this.estado = EstadoRecepcion.Libre;
         this.cola = new LinkedList<Camion>();
     }
@@ -58,6 +60,7 @@ public class Recepcion {
         if (camion != null) {
             calcularTiempoAtencion();
             proximoFinDeATencion(Reloj.getInstancia().getTiempoActual());
+            this.setEstado(EstadoRecepcion.Ocupado);
         }
         else {
             this.tiempoAtencion = 0;

@@ -1,5 +1,6 @@
 package Logica;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.TreeSet;
 
@@ -7,7 +8,7 @@ public class Gestor
 {
     private int contador;
 
-    private TreeSet<Evento> conjuntoEventos;
+    private ArrayList<String> conjuntoEventos;
     private LinkedList<Camion> camionesEnPuerta;
 
     private static Evento eventoActual;
@@ -25,12 +26,12 @@ public class Gestor
     }
 
 
-    public TreeSet<Evento> getConjuntoEventos()
+    public ArrayList<String> getConjuntoEventos()
     {
         return conjuntoEventos;
     }
 
-    public void setConjuntoEventos(TreeSet<Evento> conjuntoEventos) {
+    public void setConjuntoEventos(ArrayList<String> conjuntoEventos) {
         this.conjuntoEventos = conjuntoEventos;
     }
 
@@ -62,7 +63,11 @@ public class Gestor
 
     public void inicio()
     {
-        Recepcion recepcion= new Recepcion();
+        Reloj.getInstancia().setTiempoActual(0);
+        LlegadaDeCamion primeraLlegada = new LlegadaDeCamion(this.ServidorRecepcion);
+        this.setEventoActual(primeraLlegada);
+        this.getConjuntoEventos().add(this.getEventoActual().getNombre());
+        primeraLlegada.ejecutar();
         iterar();
     }
 

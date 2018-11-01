@@ -34,7 +34,6 @@ public class ConjuntoDarsena {
     public void cargarVector() {
         for (int i = 0; i < darsenas.length; i++) {
             darsenas[i] = new Darsena();
-            darsenas[i].setEstadoDarsena(EstadoDarsena.Libre);
             darsenas[i].setId(i + 1);
         }
     }
