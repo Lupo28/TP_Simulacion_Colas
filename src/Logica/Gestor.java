@@ -46,7 +46,7 @@ public class Gestor
     public Gestor()
     {
         this.contador = 0;
-        this.conjuntoEventos = new TreeSet<>();
+        this.conjuntoEventos = new ArrayList<>();
         this.camionesEnPuerta = new LinkedList<>();
         this.ServidorRecepcion = new Recepcion();
         this.ServidorBalanza = new Balanza();
@@ -79,11 +79,54 @@ public class Gestor
 
     public void iterar()
     {
-        while(Reloj.getInstancia().getTiempoActual()< 43200)
+        while(Reloj.getInstancia().getTiempoActual()< 2592000)
         {
-            eventoActual = conjuntoEventos.pollFirst();
+
             Reloj.getInstancia().setTiempoActual(eventoActual.getReloj());
             eventoActual.ejecutar();
         }
+    }
+
+    public Recepcion getServidorRecepcion() {
+        return ServidorRecepcion;
+    }
+
+    public void setServidorRecepcion(Recepcion servidorRecepcion) {
+        ServidorRecepcion = servidorRecepcion;
+    }
+
+    public Balanza getServidorBalanza() {
+        return ServidorBalanza;
+    }
+
+    public void setServidorBalanza(Balanza servidorBalanza) {
+        ServidorBalanza = servidorBalanza;
+    }
+
+    public ConjuntoDarsena getServidoresDarsena() {
+        return ServidoresDarsena;
+    }
+
+    public void setServidoresDarsena(ConjuntoDarsena servidoresDarsena) {
+        ServidoresDarsena = servidoresDarsena;
+    }
+
+    public double tiempoMinimo()
+    {
+        double tiempo;
+        tiempo=Math.min(ServidoresDarsena.getDarsenas()[0].getProxFinAtencion(),ServidoresDarsena.getDarsenas()[1].getProxFinAtencion())
+        tiempo=Math.min(ServidorBalanza.getProxFinAtencion(),tiempo);
+        tiempo=Math.min(ServidorRecepcion.getProxFinAtencion(),tiempo);
+        return tiempo;
+    }
+
+    public Object proxEvento()
+    {
+        double tiempo=tiempoMinimo();
+        if (tiempo==ServidoresDarsena.getDarsenas()[0].getProxFinAtencion())
+        return ServidoresDarsena.getDarsenas()[0];
+
+
+        return null;
     }
 }
