@@ -109,4 +109,16 @@ public class Balanza {
         this.estadoBalanza = EstadoBalanza.En_Recalibracion;
         return getTiempoRecalibrado();
     }
+
+    @Override
+    public String toString() {
+        return "Balanza{" +
+                "tiempoAtencion=" + tiempoAtencion +
+                ", tiempoRecalibrado=" + tiempoRecalibrado +
+                ", proxFinAtencion=" + proxFinAtencion +
+                ", camion=" + camion +
+                ", estadoBalanza=" + estadoBalanza +
+                ", cola=" + cola +
+                '}';
+    }
 }

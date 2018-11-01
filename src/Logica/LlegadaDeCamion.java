@@ -4,6 +4,7 @@ public class LlegadaDeCamion extends Evento
 {
 
     private long tiempoLlegada;
+    private long proxLlegadaCamion;
     private Camion camion;
     private double randomLlegada;
     private Recepcion recepcion;
@@ -45,7 +46,6 @@ public class LlegadaDeCamion extends Evento
         this.gestor=gestor;
         this.camion = generarCamion();
         this.randomLlegada = Math.random();
-        this.tiempoLlegada=calcularTiempoLlegada(gestor.getReloj());
         this.recepcion = new Recepcion();
         contadorCamiones++;
 
@@ -71,47 +71,8 @@ public class LlegadaDeCamion extends Evento
     }
 
 
-    public void asignarRecepcion(Camion c)
-    {
-        if(recepcion.getCola()==null && recepcion.getEstado()==EstadoRecepcion.Libre)
-        {
-
-                recepcion.setCamion(c);
-                c.setEstado(EstadoCamion.En_Recepcion);
-                recepcion.setEstado(EstadoRecepcion.Ocupado);
-        }
-        else
-        {
-            c.setEstado(EstadoCamion.En_cola_Recepcion);
-            recepcion.agregarCamionAcola(c);
-        }
-    }
-
-    public Recepcion getRecepcion() {
-        return recepcion;
-    }
-
-    public void setRecepcion(Recepcion recepcion) {
-        this.recepcion = recepcion;
-    }
-
-    public static int getContadorCamiones() {
-        return contadorCamiones;
-    }
-
-    public static void setContadorCamiones(int contadorCamiones) {
-        LlegadaDeCamion.contadorCamiones = contadorCamiones;
-    }
-
     public void ejecutar()
     {
 
-        LlegadaDeCamion proximaLlegada=new LlegadaDeCamion(this.gestor);
-        gestor.addCamion(camion);
-        gestor.getConjuntoEventos().add(proximaLlegada);
-        asignarRecepcion(camion);
-        FinAtencionRecepcion finAtencion= new FinAtencionRecepcion(gestor.getReloj(),gestor,getRecepcion());
-
-        finAtencion.ejecutar();
     }
 }
