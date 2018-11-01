@@ -5,6 +5,7 @@ import java.util.LinkedList;
 public class Recepcion {
     private double tiempoAtencion;
     private long proxFinAtencion;
+    private double randomAtencion;
     private EstadoRecepcion estado;
     private Camion camion;
     private LinkedList<Camion> cola;
@@ -22,6 +23,18 @@ public class Recepcion {
         cola.add(c);
     }
 
+
+    public void setTiempoAtencion(double tiempoAtencion) {
+        this.tiempoAtencion = tiempoAtencion;
+    }
+
+    public double getRandomAtencion() {
+        return randomAtencion;
+    }
+
+    public void setRandomAtencion(double randomAtencion) {
+        this.randomAtencion = randomAtencion;
+    }
 
     public Recepcion() {
         this.estado = EstadoRecepcion.Libre;
@@ -70,11 +83,23 @@ public class Recepcion {
 
 
     public void calcularTiempoAtencion() {
-        double demora = 3 + Math.random() * 4;
+        setRandomAtencion(Math.random());
+        double demora = 3 + getRandomAtencion() * 4;
         this.tiempoAtencion = (demora / 60);
     }
 
     public void proximoFinDeATencion(long relojActual) {
         setProxFinAtencion((long) getTiempoAtencion() + relojActual);
+    }
+
+    @Override
+    public String toString() {
+        return "Recepcion{" +
+                "tiempoAtencion=" + tiempoAtencion +
+                ", proxFinAtencion=" + proxFinAtencion +
+                ", estado=" + estado +
+                ", camion=" + camion +
+                ", cola=" + cola +
+                '}';
     }
 }
