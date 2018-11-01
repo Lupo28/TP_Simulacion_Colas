@@ -27,6 +27,7 @@ public class FinAtencionDarsena extends Evento {
     }
 
     public String getNombre() {
-        return null;
+        String nombre= "Fin At Darsena " + this.darsenas.getDarsena(darsenaFinalizada).getId();
+        return nombre;
     }
 }
