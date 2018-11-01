@@ -2,7 +2,7 @@ package Logica;
 
 import java.util.LinkedList;
 
-public class Recepcion {
+public class Recepcion{
     private double tiempoAtencion;
     private double proxFinAtencion;
     private double randomAtencion;
