@@ -77,7 +77,7 @@ public class Recepcion {
         return proxFinAtencion;
     }
 
-    public void setProxFinAtencion(long proxFinAtencion) {
+    public void setProxFinAtencion(double proxFinAtencion) {
         this.proxFinAtencion = proxFinAtencion;
     }
 
@@ -88,8 +88,8 @@ public class Recepcion {
         this.tiempoAtencion = (demora / 60);
     }
 
-    public void proximoFinDeATencion(long relojActual) {
-        setProxFinAtencion((long) getTiempoAtencion() + relojActual);
+    public void proximoFinDeATencion(double relojActual) {
+        setProxFinAtencion(getTiempoAtencion() + relojActual);
     }
 
     @Override
