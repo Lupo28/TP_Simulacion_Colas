@@ -14,7 +14,7 @@ public class LlegadaDeCamion extends Evento
         return tiempoLlegada;
     }
 
-    public void setTiempoLlegada(long tiempoLlegada) {
+    public void setTiempoLlegada(double tiempoLlegada) {
         this.tiempoLlegada = tiempoLlegada;
     }
 
@@ -47,11 +47,7 @@ public class LlegadaDeCamion extends Evento
         return nombre;
     }
 
-    public double calcularTiempoLlegada(long tiempoActual)
-    {
 
-        return proximoRecepcion(tiempoActual,randomLlegada);
-    }
 
     public Camion generarCamion()
     {
@@ -60,14 +56,29 @@ public class LlegadaDeCamion extends Evento
         return camion;
     }
 
-    public void calcularTiempoAtencion() {
+    public void calcularTiempoLlegada() {
         setRandomLlegada(Math.random());
         double demora = -(1/7.5)*Math.log(1-randomLlegada);
-        setTiempoLlegada((long)demora / 60);
+        setTiempoLlegada(demora / 60);
+    }
+
+    public void calcularProxLlegada()
+    {
+        setTiempoLlegada(this.getTiempoLlegada()+Reloj.getInstancia().getTiempoActual());
     }
 
     public void ejecutar()
     {
-
+        this.calcularTiempoLlegada();
+        this.calcularProxLlegada();
+        if (recepcion.getEstado()==EstadoRecepcion.Libre)
+        {
+            recepcion.setEstado(EstadoRecepcion.Ocupado);
+            recepcion.setCamion(this.getCamion());
+        }
+        else
+        {
+            recepcion.getCola().add(this.getCamion());
+        }
     }
 }
