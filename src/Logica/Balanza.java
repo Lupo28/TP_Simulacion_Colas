@@ -3,9 +3,9 @@ package Logica;
 import java.util.LinkedList;
 
 public class Balanza {
-    private double tiempoAtencion;
+    private Double tiempoAtencion;
     private double tiempoRecalibrado;
-    private double proxFinAtencion;
+    private Double proxFinAtencion;
     private double randomAtencion;
     private double randomRecal1;
     private double randomRecal2;
@@ -47,8 +47,8 @@ public class Balanza {
 
     public Balanza()
     {
-        this.tiempoAtencion = 0;
-        this.proxFinAtencion = 0;
+        this.tiempoAtencion = null;
+        this.proxFinAtencion = null;
         this.cola = new LinkedList<Camion>();
         this.estadoBalanza = EstadoBalanza.Libre;
     }

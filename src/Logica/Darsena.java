@@ -4,15 +4,15 @@ import java.util.LinkedList;
 
 public class Darsena {
     private int id;
-    private double tiempoAtencion;
-    private double proxFinAtencion;
+    private Double tiempoAtencion;
+    private Double proxFinAtencion;
     private double randomAtencion;
     private Camion camion;
     private EstadoDarsena estadoDarsena;
 
     public Darsena() {
-        this.tiempoAtencion = 0;
-        this.proxFinAtencion = 0;
+        this.tiempoAtencion = null;
+        this.proxFinAtencion = null;
         this.estadoDarsena = EstadoDarsena.Libre;
     }
 
@@ -54,14 +54,10 @@ public class Darsena {
 
     public void setCamion(Camion camion) {
         this.camion = camion;
-        if(camion!=null){
+        if (camion != null) {
             calcularTiempoAtencion();
             proximoDarsena(Reloj.getInstancia().getTiempoActual());
             this.setEstadoDarsena(EstadoDarsena.Ocupado);
-        }
-        else{
-            this.tiempoAtencion = 0;
-            this.proxFinAtencion = 0;
         }
     }
 
@@ -75,14 +71,14 @@ public class Darsena {
 
     @Override
     public String toString() {
-        return "Darsena ("+ id +") {" + "estado=" + this.getEstadoDarsena() + '}';
+        return "Darsena (" + id + ") {" + "estado=" + this.getEstadoDarsena() + '}';
     }
 
     //Calcula el tiempo de atencion
     public void calcularTiempoAtencion() {
         this.setRandomAtencion(Math.random());
         double demora = 15 + this.getRandomAtencion() * 5;
-        this.tiempoAtencion = (long) (demora / 60);
+        this.tiempoAtencion = (demora / 60);
     }
 
     //Calcula el proximo fin de atencion
