@@ -9,7 +9,7 @@ public class Gestor {
 
     private ArrayList<String> conjuntoEventos;
     private LinkedList<Camion> camionesEnPuerta;
-
+    private LlegadaDeCamion llegadaCamion;
     private static Evento eventoActual;
 
     private Recepcion ServidorRecepcion;
@@ -48,6 +48,7 @@ public class Gestor {
         this.ServidorRecepcion = new Recepcion();
         this.ServidorBalanza = new Balanza();
         this.ServidoresDarsena = new ConjuntoDarsena();
+        this.llegadaCamion=new LlegadaDeCamion(getServidorRecepcion());
     }
 
     public Evento getEventoActual() {
@@ -133,9 +134,10 @@ public class Gestor {
 
     public double tiempoMinimo() {
         double tiempo;
-        tiempo = Math.min(ServidoresDarsena.getDarsenas()[0].getProxFinAtencion(), ServidoresDarsena.getDarsenas()[1].getProxFinAtencion());
+        tiempo = Math.min(ServidoresDarsena.getDarsenas()[0].getProxFinAtencion(), ServidoresDarsena.getDarsenas()[1].getProxFinAtencion( ));
         tiempo = Math.min(ServidorBalanza.getProxFinAtencion(), tiempo);
         tiempo = Math.min(ServidorRecepcion.getProxFinAtencion(), tiempo);
+        tiempo = Math.min(llegadaCamion.getProxLlegadaCamion(),tiempo);
         return tiempo;
     }
 
@@ -147,7 +149,11 @@ public class Gestor {
             return ServidoresDarsena.getDarsena(1);
         } else if (tiempo == ServidorBalanza.getProxFinAtencion()) {
             return ServidorBalanza;
-        } else {
+        } else if(tiempo == llegadaCamion.getProxLlegadaCamion())
+        {
+            return llegadaCamion;
+        }else
+        {
             return ServidorRecepcion;
         }
     }

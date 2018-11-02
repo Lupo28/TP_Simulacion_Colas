@@ -4,6 +4,15 @@ public class LlegadaDeCamion extends Evento
 {
 
     private double tiempoLlegada;
+
+    public double getProxLlegadaCamion() {
+        return proxLlegadaCamion;
+    }
+
+    public void setProxLlegadaCamion(double proxLlegadaCamion) {
+        this.proxLlegadaCamion = proxLlegadaCamion;
+    }
+
     private double proxLlegadaCamion;
     private Camion camion;
     private double randomLlegada;
