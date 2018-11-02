@@ -82,6 +82,9 @@ public class Gestor {
                     this.getConjuntoEventos().add(this.getEventoActual().getNombre());
                     finAtRecepcion.ejecutar();
                     Reloj.getInstancia().setTiempoActual(this.getServidorRecepcion().getProxFinAtencion());
+                    getServidorBalanza().setEstadoBalanza(EstadoBalanza.Ocupado);
+                    getServidorBalanza().setProxFinAtencion(Reloj.getInstancia().getTiempoActual());
+                    getServidorRecepcion().setProxFinAtencion(0);
                     break;
                 case "Balanza":
                     FinAtencionBalanza finAtBalanza = new FinAtencionBalanza(this.ServidorBalanza, this.ServidoresDarsena);
@@ -153,6 +156,11 @@ public class Gestor {
         {
             minTiempo=llegadaCamion.getProxLlegadaCamion();
         }
+
+//        minTiempo=Math.min(ServidoresDarsena.getDarsenas()[0].getProxFinAtencion(),ServidoresDarsena.getDarsenas()[1].getProxFinAtencion());
+//        minTiempo=Math.min(minTiempo,ServidorBalanza.getProxFinAtencion());
+//        minTiempo=Math.min(minTiempo,ServidorRecepcion.getProxFinAtencion());
+//        minTiempo=Math.min(minTiempo,llegadaCamion.getProxLlegadaCamion());
         return minTiempo;
     }
 

@@ -15,6 +15,7 @@ public class FinAtencionBalanza extends Evento {
 
     public void ejecutar()
     {
+
         if(conjuntoDarsena.getCola().isEmpty())
         {
             if(conjuntoDarsena.getDarsenas()[0].getEstadoDarsena() == EstadoDarsena.Libre)

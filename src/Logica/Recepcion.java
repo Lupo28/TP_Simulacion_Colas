@@ -3,8 +3,8 @@ package Logica;
 import java.util.LinkedList;
 
 public class Recepcion{
-    private Double tiempoAtencion;
-    private Double proxFinAtencion;
+    private double tiempoAtencion;
+    private double proxFinAtencion;
     private double randomAtencion;
     private EstadoRecepcion estado;
     private Camion camion;
@@ -37,8 +37,8 @@ public class Recepcion{
     }
 
     public Recepcion() {
-        this.tiempoAtencion = null;
-        this.proxFinAtencion = null;
+        this.tiempoAtencion = 0;
+        this.proxFinAtencion = 0;
         this.estado = EstadoRecepcion.Libre;
         this.cola = new LinkedList<Camion>();
     }

@@ -12,15 +12,19 @@ public class FinAtencionRecepcion extends Evento
 
     public void ejecutar()
     {
+        balanza.calcularTiempoAtencion();
         if (balanza.getEstadoBalanza() == EstadoBalanza.Ocupado || balanza.getEstadoBalanza() == EstadoBalanza.En_Recalibracion)
         {
             balanza.getCola().add(recepcion.getCamion());
             recepcion.setCamion(null);
+
         }
-        else{
+        else
+            {
             balanza.setCamion(recepcion.getCamion());
             recepcion.setCamion(null);
-        }
+
+            }
 
         if (!recepcion.getCola().isEmpty()){
             recepcion.setCamion(recepcion.getCola().poll());

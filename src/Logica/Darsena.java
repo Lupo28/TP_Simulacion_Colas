@@ -4,15 +4,15 @@ import java.util.LinkedList;
 
 public class Darsena {
     private int id;
-    private Double tiempoAtencion;
-    private Double proxFinAtencion;
+    private double tiempoAtencion;
+    private double proxFinAtencion;
     private double randomAtencion;
     private Camion camion;
     private EstadoDarsena estadoDarsena;
 
     public Darsena() {
-        this.tiempoAtencion = null;
-        this.proxFinAtencion = null;
+        this.tiempoAtencion = 0;
+        this.proxFinAtencion = 0;
         this.estadoDarsena = EstadoDarsena.Libre;
     }
 
