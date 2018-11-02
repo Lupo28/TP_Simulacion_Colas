@@ -96,11 +96,12 @@ public class Gestor {
                     }
                     break;
                 case "Darsena":
-                    FinAtencionDarsena finAtDarsena = new FinAtencionDarsena(this.ServidoresDarsena);
+                    Darsena darsenaFinalizada = this.ServidoresDarsena.getUltimaDarsena();
+                    FinAtencionDarsena finAtDarsena = new FinAtencionDarsena(this.ServidoresDarsena, darsenaFinalizada.getId());
                     this.setEventoActual(finAtDarsena);
                     this.getConjuntoEventos().add(this.getEventoActual().getNombre());
                     finAtDarsena.ejecutar();
-                    Reloj.getInstancia().setTiempoActual(this.getServidoresDarsena().getProxFinAtencion());
+                    Reloj.getInstancia().setTiempoActual(this.getServidoresDarsena().getDarsena(darsenaFinalizada.getId()).getProxFinAtencion());
                     break;
 
 
