@@ -62,10 +62,6 @@ public class Recepcion{
             proximoFinDeATencion(Reloj.getInstancia().getTiempoActual());
             this.setEstado(EstadoRecepcion.Ocupado);
         }
-        else {
-            this.tiempoAtencion = 0;
-            this.proxFinAtencion = 0;
-        }
     }
 
     public EstadoRecepcion getEstado() {

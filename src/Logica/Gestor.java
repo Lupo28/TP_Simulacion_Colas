@@ -2,7 +2,6 @@ package Logica;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.TreeSet;
 
 public class Gestor {
     private int contadorRecalibracion;
@@ -76,7 +75,7 @@ public class Gestor {
     public void iterar() {
         while (Reloj.getInstancia().getTiempoActual() < 2592000) {
 
-            switch (proxEvento().getClass().toString()) {
+            switch (proxEvento()) {
                 case "Recepcion":
                     FinAtencionRecepcion finAtRecepcion = new FinAtencionRecepcion(this.ServidorRecepcion, this.ServidorBalanza);
                     this.setEventoActual(finAtRecepcion);
@@ -132,29 +131,46 @@ public class Gestor {
         ServidoresDarsena = servidoresDarsena;
     }
 
-    public double tiempoMinimo() {
-        double tiempo;
-        tiempo = Math.min(ServidoresDarsena.getDarsenas()[0].getProxFinAtencion(), ServidoresDarsena.getDarsenas()[1].getProxFinAtencion( ));
-        tiempo = Math.min(ServidorBalanza.getProxFinAtencion(), tiempo);
-        tiempo = Math.min(ServidorRecepcion.getProxFinAtencion(), tiempo);
-        tiempo = Math.min(llegadaCamion.getProxLlegadaCamion(),tiempo);
-        return tiempo;
-    }
-
-    public Object proxEvento() {
-        double tiempo = tiempoMinimo();
-        if (tiempo == ServidoresDarsena.getDarsenas()[0].getProxFinAtencion()) {
-            return ServidoresDarsena.getDarsena(0);
-        } else if (tiempo == ServidoresDarsena.getDarsenas()[1].getProxFinAtencion()) {
-            return ServidoresDarsena.getDarsena(1);
-        } else if (tiempo == ServidorBalanza.getProxFinAtencion()) {
-            return ServidorBalanza;
-        } else if(tiempo == llegadaCamion.getProxLlegadaCamion())
+    public double tiempoMinimo()
+    {
+        double minTiempo=2592001;   //seteo el tiempo minimo en un valor bien alto para que pueda funcionar
+        if(ServidoresDarsena.getDarsenas()[0].getProxFinAtencion()!=0)
         {
-            return llegadaCamion;
+            minTiempo = ServidoresDarsena.getDarsenas()[0].getProxFinAtencion();
+        }
+        if(ServidoresDarsena.getDarsenas()[1].getProxFinAtencion( )!=0 && ServidoresDarsena.getDarsenas()[1].getProxFinAtencion()< minTiempo)
+        {
+            minTiempo=ServidoresDarsena.getDarsenas()[1].getProxFinAtencion( );
+        }
+        if(ServidorBalanza.getProxFinAtencion()!= 0 && ServidorBalanza.getProxFinAtencion() <minTiempo)
+        {
+            minTiempo=ServidorBalanza.getProxFinAtencion();
+        }
+        if(ServidorRecepcion.getProxFinAtencion()!=0 && ServidorRecepcion.getProxFinAtencion() < minTiempo)
+        {
+            minTiempo= ServidorRecepcion.getProxFinAtencion();
         }else
         {
-            return ServidorRecepcion;
+            minTiempo=llegadaCamion.getProxLlegadaCamion();
+        }
+        return minTiempo;
+    }
+
+    public String proxEvento() {
+        double tiempo = tiempoMinimo();
+
+        if (tiempo == ServidoresDarsena.getDarsenas()[0].getProxFinAtencion() ) {
+            return  "Darsena";
+        } else if (tiempo == ServidoresDarsena.getDarsenas()[1].getProxFinAtencion()) {
+            return "Darsena";
+        } else if (tiempo == ServidorBalanza.getProxFinAtencion()) {
+            return "Balanza";
+        } else if(tiempo == llegadaCamion.getProxLlegadaCamion())
+        {
+            return "LlegadaCamion";
+        }else
+        {
+            return "Recepcion";
         }
     }
 }

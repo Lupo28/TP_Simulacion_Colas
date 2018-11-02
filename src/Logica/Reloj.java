@@ -5,7 +5,7 @@ public class Reloj {
     private int ultNumeroCamion;
     private double tiempoActual;
 
-    private Reloj() {
+    public Reloj() {
         this.ultNumeroCamion = 0;
         this.tiempoActual = 0;
     }
