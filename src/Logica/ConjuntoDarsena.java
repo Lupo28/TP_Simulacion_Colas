@@ -76,6 +76,8 @@ public class ConjuntoDarsena {
     }
 
     public Darsena getUltimaDarsena(){
+        if(darsenas[0].getProxFinAtencion()==0)return darsenas[1];
+        if (darsenas[1].getProxFinAtencion()==0)return  darsenas[0];
         return (darsenas[0].getProxFinAtencion() <= darsenas[1].getProxFinAtencion()) ? darsenas[0] : darsenas[1];
     }
 

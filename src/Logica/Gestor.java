@@ -60,10 +60,9 @@ public class Gestor {
 
     public void inicio() {
         Reloj.getInstancia().setTiempoActual(0);
-        LlegadaDeCamion primeraLlegada = new LlegadaDeCamion(this.ServidorRecepcion);
-        this.setEventoActual(primeraLlegada);
+        this.setEventoActual(llegadaCamion);
         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
-        primeraLlegada.ejecutar();
+        llegadaCamion.ejecutar();
         iterar();
     }
 
@@ -92,11 +91,13 @@ public class Gestor {
                     this.getConjuntoEventos().add(this.getEventoActual().getNombre());
                     finAtBalanza.ejecutar();
                     Reloj.getInstancia().setTiempoActual(this.getServidorBalanza().getProxFinAtencion());
+
                     contadorRecalibracion++;
                     if (contadorRecalibracion == 15) {
                         setContadorRecalibracion(0);
                         ServidorBalanza.setEstadoBalanza(EstadoBalanza.En_Recalibracion);
                     }
+                    getServidorBalanza().setProxFinAtencion(0);
                     break;
                 case "Darsena":
                     Darsena darsenaFinalizada = this.ServidoresDarsena.getUltimaDarsena();
@@ -105,7 +106,15 @@ public class Gestor {
                     this.getConjuntoEventos().add(this.getEventoActual().getNombre());
                     finAtDarsena.ejecutar();
                     Reloj.getInstancia().setTiempoActual(this.getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).getProxFinAtencion());
+                    getServidoresDarsena().getDarsena(darsenaFinalizada.getId()-1).setProxFinAtencion(0);
                     break;
+
+                    default:
+                        this.setEventoActual(llegadaCamion);
+                        this.getConjuntoEventos().add(this.getEventoActual().getNombre());
+                        llegadaCamion.ejecutar();
+                        break;
+
             }
         }
     }
@@ -152,7 +161,8 @@ public class Gestor {
         if(ServidorRecepcion.getProxFinAtencion()!=0 && ServidorRecepcion.getProxFinAtencion() < minTiempo)
         {
             minTiempo= ServidorRecepcion.getProxFinAtencion();
-        }else
+        }
+        if(llegadaCamion.getProxLlegadaCamion()!=0 && llegadaCamion.getProxLlegadaCamion() < minTiempo)
         {
             minTiempo=llegadaCamion.getProxLlegadaCamion();
         }

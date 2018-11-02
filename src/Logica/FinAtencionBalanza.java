@@ -21,22 +21,26 @@ public class FinAtencionBalanza extends Evento {
             if(conjuntoDarsena.getDarsenas()[0].getEstadoDarsena() == EstadoDarsena.Libre)
             {
                 conjuntoDarsena.getDarsenas()[0].setCamion(balanza.getCamion());
+                balanza.setCamion(null);
             }
             else
             {
                 if(conjuntoDarsena.getDarsenas()[1].getEstadoDarsena()==EstadoDarsena.Libre)
                 {
                     conjuntoDarsena.getDarsenas()[1].setCamion(balanza.getCamion());
+                    balanza.setCamion(null);
                 }
                 else
                 {
                     conjuntoDarsena.getCola().add(balanza.getCamion());
+                    balanza.setCamion(null);
                 }
             }
         }
         else
         {
             conjuntoDarsena.getCola().add(balanza.getCamion());
+            balanza.setCamion(null);
         }
         if (balanza.getCola().isEmpty())
         {

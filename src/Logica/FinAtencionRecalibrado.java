@@ -4,7 +4,6 @@ public class FinAtencionRecalibrado extends Evento
 {
     private Balanza balanza;
 
-
     public  void ejecutar()
     {
         if(balanza.getCola().isEmpty())
