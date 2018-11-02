@@ -75,7 +75,7 @@ public class Gestor {
     public void iterar() {
         while (Reloj.getInstancia().getTiempoActual() < 2592000) {
 
-            switch (proxEvento().getClass().toString()){
+            switch (proxEvento().getClass().toString()) {
                 case "Recepcion":
                     FinAtencionRecepcion finAtRecepcion = new FinAtencionRecepcion(this.ServidorRecepcion, this.ServidorBalanza);
                     this.setEventoActual(finAtRecepcion);
@@ -90,7 +90,7 @@ public class Gestor {
                     finAtBalanza.ejecutar();
                     Reloj.getInstancia().setTiempoActual(this.getServidorBalanza().getProxFinAtencion());
                     contadorRecalibracion++;
-                    if(contadorRecalibracion == 15){
+                    if (contadorRecalibracion == 15) {
                         setContadorRecalibracion(0);
                         ServidorBalanza.setEstadoBalanza(EstadoBalanza.En_Recalibracion);
                     }
@@ -103,11 +103,7 @@ public class Gestor {
                     finAtDarsena.ejecutar();
                     Reloj.getInstancia().setTiempoActual(this.getServidoresDarsena().getDarsena(darsenaFinalizada.getId()).getProxFinAtencion());
                     break;
-
-
             }
-            Reloj.getInstancia().setTiempoActual(eventoActual.getReloj());
-            eventoActual.ejecutar();
         }
     }
 
