@@ -1,6 +1,7 @@
 package sample;
 import Logica.Reloj;
 import javafx.collections.FXCollections;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.fxml.FXML;
 import util.*;
@@ -11,10 +12,8 @@ public class Controller {
 
     private ObservableList<Fila> data;
 
-    public Controller() {
-        data = FXCollections.observableArrayList();
-    }
-
+    @FXML
+    private TableView<Fila> tvSim;
     @FXML
     private TableColumn<Fila, String>reloj;
     @FXML
@@ -52,13 +51,13 @@ public class Controller {
     @FXML
     private TableColumn<Fila, String> proxFinAtBalan;
     @FXML
-    private TableColumn<Fila, String> colaBalanz;
+    private TableColumn<Fila, String> colaBalan;
     @FXML
     private TableColumn<Fila, String> camionDarsen1;
     @FXML
     private TableColumn<Fila, String> estadoDarsen1;
     @FXML
-    private TableColumn<Fila, String> rndmDarsen1;
+    private TableColumn<Fila, String> rndDarsen1;
     @FXML
     private TableColumn<Fila, String> tiempoAtencionDarse1;
     @FXML
@@ -74,13 +73,18 @@ public class Controller {
     @FXML
     private TableColumn<Fila, String> proxFinAtDarse2;
 
+    @FXML
+    public void initialize() {
+        data = FXCollections.observableArrayList();
+        this.cargarTabla();
 
+    }
 
     public void cargarTabla()
     {
-        String relojContent = Reloj.getInstancia().tiempoString();
+        String relojContent = "123";
         String eventContent = "0";
-        String camionContent="";
+        String camionContent="pruba";
         String rnd1Content="";
         String tiempoEntreLlegadasContent="";
         String proxContent="";
@@ -110,15 +114,18 @@ public class Controller {
 
 
 
-//
+
 //        data.addAll(new Fila(relojContent,eventContent,camionContent,rnd1Content,tiempoEntreLlegadasContent,proxContent,colaRecepcionContent,
 //                camionRecepcionContent,estadoRecepcionContet,rndRecepcionContent,tiempoLlegadaRecepcionContent,proxFinAtencionRecepcionContent,
 //        colaRecepContent,camionBalanzContent,estadBalanzContent,rndBalanzaContent,tiempoAtencionBalanzContent,proxFinAtBalContent,
 //                colaBalanzContent,camionDarse1Content,estadoDarse1Content,rndmDarse1Content,tiempoAtencionDarse1Content,finAtencionProxDarse1Content,
 //                camionDarse2Content,estadoDarse2Content,rndDarse2Content,tiempoArDarse2Content,proxFinAtDarse2Content));
 //
-//                reloj.setCellFactory(new PropertyValueFactory<>("reloj"));
-//                event.setCellFactory(new PropertyValueFactory<>("event"));
+//                reloj.setCellFactory(new PropertyValueFactory("reloj"));
+//                event.setCellFactory(new PropertyValueFactory("event"));
+
+
+        tvSim.setItems(data);
     }
 
 

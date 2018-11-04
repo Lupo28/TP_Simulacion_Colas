@@ -40,7 +40,7 @@
                   <TableColumn fx:id="camion" prefWidth="75.0" text="Camion" />
                   <TableColumn fx:id="rnd1" prefWidth="75.0" text="RND" />
                   <TableColumn fx:id="tiempoEntreLlegadas" prefWidth="75.0" text="T.Entre Llegadas" />
-                  <TableColumn fx:id="prox" prefWidth="75.0" text="Proxima" />
+                  <TableColumn fx:id="prox" prefWidth="75.0" text="Proxima Fin Atencion" />
                   <TableColumn fx:id="colaRecepcion" prefWidth="75.0" text="Cola Recepcion" />
                   <TableColumn fx:id="camionRecepcion" prefWidth="75.0" text="Camion" />
                   <TableColumn fx:id="estadoRecepcion" prefWidth="75.0" text="Estado" />
@@ -54,10 +54,16 @@
                   <TableColumn fx:id="tiempoAtencionBalanz" prefWidth="75.0" text="Tiempo Atencion" />
                   <TableColumn fx:id="proxFinAtBalan" prefWidth="75.0" text="Proximo Fin Atencion" />
                   <TableColumn fx:id="colaBalan" prefWidth="75.0" text="Cola" />
-                  <TableColumn fx:id="rndDarse1" prefWidth="75.0" text="Rnd" />
                   <TableColumn fx:id="camionDarsen1" prefWidth="75.0" text="Camion" />
                   <TableColumn fx:id="estadoDarsen1" prefWidth="75.0" text="Estado" />
-                  <TableColumn fx:id="tiempoAtencionBalanz1" prefWidth="75.0" text="Tiempo Atencion" />
+                  <TableColumn fx:id="rndDarsen1" prefWidth="75.0" text="Rnd" />
+                  <TableColumn fx:id="tiempoAtencionDarse1" prefWidth="75.0" text="Tiempo Atencion" />
+                  <TableColumn fx:id="finAtencionProxDarse1" prefWidth="75.0" text="Proximo Fin Atencion" />
+                  <TableColumn fx:id="camionDarse2" prefWidth="75.0" text="Camion" />
+                  <TableColumn fx:id="estadoDarse2" prefWidth="75.0" text="Estado" />
+                  <TableColumn fx:id="rndDarse2" prefWidth="75.0" text="Rnd" />
+                  <TableColumn fx:id="tiempoAtDarse2" prefWidth="75.0" text="Tiempo Atencion" />
+                  <TableColumn fx:id="proxFinAtDarse2" prefWidth="75.0" text="Proximo Fin Atencion" />
               </columns>
             </TableView>
          </children>
