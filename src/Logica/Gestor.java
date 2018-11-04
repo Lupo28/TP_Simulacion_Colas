@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public class Gestor {
     private int contadorRecalibracion;
-    private static ObservableList<Fila> data;
+    private ObservableList<Fila> data;
     private ArrayList<String> conjuntoEventos;
     private LinkedList<Camion> camionesEnPuerta;
     private LlegadaDeCamion llegadaCamion;
@@ -53,7 +53,7 @@ public class Gestor {
         this.ServidorBalanza = new Balanza();
         this.ServidoresDarsena = new ConjuntoDarsena();
         this.llegadaCamion = new LlegadaDeCamion(getServidorRecepcion());
-        this.data=FXCollections.observableArrayList();
+        this.data = FXCollections.observableArrayList();
 
     }
 
@@ -209,14 +209,14 @@ public class Gestor {
     }
 
     public ObservableList<Fila> getData() {
-        return data;
+        return this.data;
     }
 
     public void cargarFila()
     {
         String relojContent = Reloj.getInstancia().tiempoString();
         String eventContent = eventoActual.getNombre();
-        String camionContent="2";
+        String camionContent="0";
         String rnd1Content="3";
         String tiempoEntreLlegadasContent="4";
         String proxContent="5";
@@ -249,5 +249,6 @@ public class Gestor {
                 colaRecepContent,camionBalanzContent,estadBalanzContent,rndBalanzaContent,tiempoAtencionBalanzContent,proxFinAtBalContent,
                 colaBalanzContent,camionDarse1Content,estadoDarse1Content,rndmDarse1Content,tiempoAtencionDarse1Content,finAtencionProxDarse1Content,
                 camionDarse2Content,estadoDarse2Content,rndDarse2Content,tiempoArDarse2Content,proxFinAtDarse2Content));
+
     }
 }

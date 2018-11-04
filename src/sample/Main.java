@@ -12,7 +12,6 @@ public class Main extends Application {
 
 
     public void start(Stage primaryStage) throws Exception{
-
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Trabajo Practico N5 Simulacion de Colas");
         primaryStage.setScene(new Scene(root, 2560, 1600));

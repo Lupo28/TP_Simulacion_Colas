@@ -17,10 +17,11 @@ public class Controller implements Initializable {
     private ObservableList<Fila> data;
     private Gestor gestor;
     private Reloj reloj1;
+
     public Controller() {
-        this.gestor=new Gestor();
-        this.reloj1= Reloj.getInstancia();
-        this.tvSim=new TableView<>();
+        this.gestor = new Gestor();
+        this.reloj1 = Reloj.getInstancia();
+        this.tvSim = new TableView<Fila>();
     }
 
     @FXML
@@ -88,15 +89,19 @@ public class Controller implements Initializable {
     public void cargarTabla()
     {
         this.gestor.inicio();
-        data=gestor.getData();
 
-        tvSim.setItems(data);
+        this.setearColummnas();
+
+        ObservableList<Fila> list = gestor.getData();
+
+        tvSim.setItems(list);
     }
 
     public void setearColummnas()
     {
         reloj.setCellValueFactory(new PropertyValueFactory<>("reloj"));
         event.setCellValueFactory(new PropertyValueFactory<>("event"));
+        rnd1.setCellValueFactory(new PropertyValueFactory<>("rnd1"));
         camion.setCellValueFactory(new PropertyValueFactory<>("camion"));
         tiempoEntreLlegadas.setCellValueFactory(new PropertyValueFactory<>("tiempoEntreLlegadas"));
         colaRecepcion.setCellValueFactory(new PropertyValueFactory<>("colaRecepcion"));
@@ -124,13 +129,13 @@ public class Controller implements Initializable {
         rndDarse2.setCellValueFactory(new PropertyValueFactory<>("rndDarse2"));
         tiempoAtDarse2.setCellValueFactory(new PropertyValueFactory<>("tiempoAtDarse2"));
         proxFinAtDarse2.setCellValueFactory(new PropertyValueFactory<>("proxFinAtDarse2"));
-
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.setearColummnas();
         this.cargarTabla();
     }
+
+
 }
