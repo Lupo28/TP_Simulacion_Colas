@@ -40,7 +40,7 @@
                   <TableColumn fx:id="camion" prefWidth="75.0" text="Camion" />
                   <TableColumn fx:id="rnd1" prefWidth="75.0" text="RND" />
                   <TableColumn fx:id="tiempoEntreLlegadas" prefWidth="75.0" text="T.Entre Llegadas" />
-                  <TableColumn fx:id="proxFinAtencionRecepcion" prefWidth="75.0" text="Proxima" />
+                  <TableColumn fx:id="prox" prefWidth="75.0" text="Proxima" />
                   <TableColumn fx:id="colaRecepcion" prefWidth="75.0" text="Cola Recepcion" />
                   <TableColumn fx:id="camionRecepcion" prefWidth="75.0" text="Camion" />
                   <TableColumn fx:id="estadoRecepcion" prefWidth="75.0" text="Estado" />

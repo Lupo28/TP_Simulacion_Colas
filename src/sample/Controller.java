@@ -25,7 +25,7 @@ public class Controller {
     private TableColumn<Fila, String>rnd1;
     @FXML
     private TableColumn<Fila, String>tiempoEntreLlegadas;
-
+    @FXML
     private TableColumn<Fila, String>prox;
     @FXML
     private TableColumn<Fila, String> colaRecepcion;
@@ -48,31 +48,31 @@ public class Controller {
     @FXML
     private TableColumn<Fila, String>rndBalanz;
     @FXML
-    private ObservableList<Fila> tiempoAtencionBalanz;
+    private TableColumn<Fila, String> tiempoAtencionBalanz;
     @FXML
-    private ObservableList<Fila> proxFinAtBalan;
+    private TableColumn<Fila, String> proxFinAtBalan;
     @FXML
-    private ObservableList<Fila> colaBalanz;
+    private TableColumn<Fila, String> colaBalanz;
     @FXML
-    private ObservableList<Fila> camionDarsen1;
+    private TableColumn<Fila, String> camionDarsen1;
     @FXML
-    private ObservableList<Fila> estadoDarsen1;
+    private TableColumn<Fila, String> estadoDarsen1;
     @FXML
-    private ObservableList<Fila> rndmDarsen1;
+    private TableColumn<Fila, String> rndmDarsen1;
     @FXML
-    private ObservableList<Fila> tiempoAtencionDarse1;
+    private TableColumn<Fila, String> tiempoAtencionDarse1;
     @FXML
-    private ObservableList<Fila> finAtencionProxDarse1;
+    private TableColumn<Fila, String> finAtencionProxDarse1;
     @FXML
-    private ObservableList<Fila> camionDarse2;
+    private TableColumn<Fila, String> camionDarse2;
     @FXML
-    private ObservableList<Fila> estadoDarse2;
+    private TableColumn<Fila, String> estadoDarse2;
     @FXML
-    private ObservableList<Fila> rndDarse2;
+    private TableColumn<Fila, String> rndDarse2;
     @FXML
-    private ObservableList<Fila> tiempoAtDarse2;
+    private TableColumn<Fila, String> tiempoAtDarse2;
     @FXML
-    private ObservableList<Fila> proxFinAtDarse2;
+    private TableColumn<Fila, String> proxFinAtDarse2;
 
 
 
