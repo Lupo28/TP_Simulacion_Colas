@@ -20,6 +20,7 @@ public class FinAtencionBalanza extends Evento {
         {
             if(conjuntoDarsena.getDarsenas()[0].getEstadoDarsena() == EstadoDarsena.Libre)
             {
+                balanza.getCamion().setEstado(EstadoCamion.En_Descargue);
                 conjuntoDarsena.getDarsenas()[0].setCamion(balanza.getCamion());
                 balanza.setCamion(null);
             }
@@ -27,11 +28,13 @@ public class FinAtencionBalanza extends Evento {
             {
                 if(conjuntoDarsena.getDarsenas()[1].getEstadoDarsena()==EstadoDarsena.Libre)
                 {
+                    balanza.getCamion().setEstado(EstadoCamion.En_Descargue);
                     conjuntoDarsena.getDarsenas()[1].setCamion(balanza.getCamion());
                     balanza.setCamion(null);
                 }
                 else
                 {
+                    balanza.getCamion().setEstado(EstadoCamion.En_Cola_De_Descarga);
                     conjuntoDarsena.getCola().add(balanza.getCamion());
                     balanza.setCamion(null);
                 }
@@ -39,6 +42,7 @@ public class FinAtencionBalanza extends Evento {
         }
         else
         {
+            balanza.getCamion().setEstado(EstadoCamion.En_Cola_De_Descarga);
             conjuntoDarsena.getCola().add(balanza.getCamion());
             balanza.setCamion(null);
         }
@@ -48,6 +52,7 @@ public class FinAtencionBalanza extends Evento {
         }
         else
         {
+            balanza.getCola().getFirst().setEstado(EstadoCamion.En_Pesaje);
             balanza.setCamion(balanza.getCola().poll());
         }
 

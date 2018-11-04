@@ -2,6 +2,7 @@ package Logica;
 
 public enum EstadoDarsena {
     Libre("Libre"),
+    En_Recalibracion("En Recalibracion"),
     Ocupado("Ocupado");
 
 

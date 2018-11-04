@@ -9,6 +9,7 @@ public class Gestor {
     private ArrayList<String> conjuntoEventos;
     private LinkedList<Camion> camionesEnPuerta;
     private LlegadaDeCamion llegadaCamion;
+    private FinAtencionRecalibrado finAtRecalibrado;
     private static Evento eventoActual;
 
     private Recepcion ServidorRecepcion;
@@ -47,7 +48,8 @@ public class Gestor {
         this.ServidorRecepcion = new Recepcion();
         this.ServidorBalanza = new Balanza();
         this.ServidoresDarsena = new ConjuntoDarsena();
-        this.llegadaCamion=new LlegadaDeCamion(getServidorRecepcion());
+        this.llegadaCamion = new LlegadaDeCamion(getServidorRecepcion());
+
     }
 
     public Evento getEventoActual() {
@@ -63,6 +65,7 @@ public class Gestor {
         this.setEventoActual(llegadaCamion);
         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
         llegadaCamion.ejecutar();
+        Reloj.getInstancia().setTiempoActual(llegadaCamion.getProxLlegadaCamion());
         iterar();
     }
 
@@ -73,7 +76,6 @@ public class Gestor {
 
     public void iterar() {
         while (Reloj.getInstancia().getTiempoActual() < 2592000) {
-
             switch (proxEvento()) {
                 case "Recepcion":
                     FinAtencionRecepcion finAtRecepcion = new FinAtencionRecepcion(this.ServidorRecepcion, this.ServidorBalanza);
@@ -91,12 +93,6 @@ public class Gestor {
                     this.getConjuntoEventos().add(this.getEventoActual().getNombre());
                     finAtBalanza.ejecutar();
                     Reloj.getInstancia().setTiempoActual(this.getServidorBalanza().getProxFinAtencion());
-
-                    contadorRecalibracion++;
-                    if (contadorRecalibracion == 15) {
-                        setContadorRecalibracion(0);
-                        ServidorBalanza.setEstadoBalanza(EstadoBalanza.En_Recalibracion);
-                    }
                     getServidorBalanza().setProxFinAtencion(0);
                     break;
                 case "Darsena":
@@ -106,14 +102,26 @@ public class Gestor {
                     this.getConjuntoEventos().add(this.getEventoActual().getNombre());
                     finAtDarsena.ejecutar();
                     Reloj.getInstancia().setTiempoActual(this.getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).getProxFinAtencion());
-                    getServidoresDarsena().getDarsena(darsenaFinalizada.getId()-1).setProxFinAtencion(0);
+                    contadorRecalibracion++;
+                    if (contadorRecalibracion == 15) {
+                        setContadorRecalibracion(0);
+                        ServidoresDarsena.getDarsena(darsenaFinalizada.getId() - 1).calcularTiempoRecalibrado();
+                        this.finAtRecalibrado = new FinAtencionRecalibrado(ServidoresDarsena, darsenaFinalizada.getId() - 1);
+                    }
+                    getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).setProxFinAtencion(0);
                     break;
 
-                    default:
-                        this.setEventoActual(llegadaCamion);
-                        this.getConjuntoEventos().add(this.getEventoActual().getNombre());
-                        llegadaCamion.ejecutar();
-                        break;
+                case "LlegadaCamion":
+                    this.setEventoActual(llegadaCamion);
+                    this.getConjuntoEventos().add(this.getEventoActual().getNombre());
+                    this.llegadaCamion.setCamion(llegadaCamion.generarCamion());
+                    llegadaCamion.sumarContadorCamiones();
+                    llegadaCamion.ejecutar();
+                    Reloj.getInstancia().setTiempoActual(llegadaCamion.getProxLlegadaCamion());
+                    break;
+
+                case "FinRecalibracion":
+                    break;
 
             }
         }
@@ -143,28 +151,28 @@ public class Gestor {
         ServidoresDarsena = servidoresDarsena;
     }
 
-    public double tiempoMinimo()
-    {
-        double minTiempo=2592001;   //seteo el tiempo minimo en un valor bien alto para que pueda funcionar
-        if(ServidoresDarsena.getDarsenas()[0].getProxFinAtencion()!=0)
-        {
+    public double tiempoMinimo() {
+        double minTiempo = 2592001;   //seteo el tiempo minimo en un valor bien alto para que pueda funcionar
+        if (ServidoresDarsena.getDarsenas()[0].getProxFinAtencion() != 0) {
             minTiempo = ServidoresDarsena.getDarsenas()[0].getProxFinAtencion();
         }
-        if(ServidoresDarsena.getDarsenas()[1].getProxFinAtencion( )!=0 && ServidoresDarsena.getDarsenas()[1].getProxFinAtencion()< minTiempo)
-        {
-            minTiempo=ServidoresDarsena.getDarsenas()[1].getProxFinAtencion( );
+        if (ServidoresDarsena.getDarsenas()[1].getProxFinAtencion() != 0 && ServidoresDarsena.getDarsenas()[1].getProxFinAtencion() < minTiempo) {
+            minTiempo = ServidoresDarsena.getDarsenas()[1].getProxFinAtencion();
         }
-        if(ServidorBalanza.getProxFinAtencion()!= 0 && ServidorBalanza.getProxFinAtencion() <minTiempo)
-        {
-            minTiempo=ServidorBalanza.getProxFinAtencion();
+        if (ServidorBalanza.getProxFinAtencion() != 0 && ServidorBalanza.getProxFinAtencion() < minTiempo) {
+            minTiempo = ServidorBalanza.getProxFinAtencion();
         }
-        if(ServidorRecepcion.getProxFinAtencion()!=0 && ServidorRecepcion.getProxFinAtencion() < minTiempo)
-        {
-            minTiempo= ServidorRecepcion.getProxFinAtencion();
+        if (ServidorRecepcion.getProxFinAtencion() != 0 && ServidorRecepcion.getProxFinAtencion() < minTiempo) {
+            minTiempo = ServidorRecepcion.getProxFinAtencion();
         }
-        if(llegadaCamion.getProxLlegadaCamion()!=0 && llegadaCamion.getProxLlegadaCamion() < minTiempo)
-        {
-            minTiempo=llegadaCamion.getProxLlegadaCamion();
+        if (llegadaCamion.getProxLlegadaCamion() != 0 && llegadaCamion.getProxLlegadaCamion() < minTiempo) {
+            minTiempo = llegadaCamion.getProxLlegadaCamion();
+        }
+        if (ServidoresDarsena.getDarsenas()[0].getProxFinRecalibrado() != 0 && ServidoresDarsena.getDarsenas()[0].getProxFinRecalibrado() < minTiempo) {
+            minTiempo = ServidoresDarsena.getDarsenas()[0].getProxFinRecalibrado();
+        }
+        if (ServidoresDarsena.getDarsenas()[1].getProxFinRecalibrado() != 0 && ServidoresDarsena.getDarsenas()[1].getProxFinRecalibrado() < minTiempo) {
+            minTiempo = ServidoresDarsena.getDarsenas()[1].getProxFinRecalibrado();
         }
 
 //        minTiempo=Math.min(ServidoresDarsena.getDarsenas()[0].getProxFinAtencion(),ServidoresDarsena.getDarsenas()[1].getProxFinAtencion());
@@ -177,17 +185,19 @@ public class Gestor {
     public String proxEvento() {
         double tiempo = tiempoMinimo();
 
-        if (tiempo == ServidoresDarsena.getDarsenas()[0].getProxFinAtencion() ) {
-            return  "Darsena";
+        if (tiempo == ServidoresDarsena.getDarsenas()[0].getProxFinAtencion()) {
+            return "Darsena";
         } else if (tiempo == ServidoresDarsena.getDarsenas()[1].getProxFinAtencion()) {
             return "Darsena";
         } else if (tiempo == ServidorBalanza.getProxFinAtencion()) {
             return "Balanza";
-        } else if(tiempo == llegadaCamion.getProxLlegadaCamion())
-        {
+        } else if (tiempo == llegadaCamion.getProxLlegadaCamion()) {
             return "LlegadaCamion";
-        }else
-        {
+        } else if(tiempo == ServidoresDarsena.getDarsenas()[0].getProxFinRecalibrado()){
+            return "Fin Recalibracion";
+        } else if(tiempo == ServidoresDarsena.getDarsenas()[1].getProxFinRecalibrado()){
+            return "Fin Recalibracion";
+        }else{
             return "Recepcion";
         }
     }
