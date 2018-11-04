@@ -3,7 +3,6 @@ package Logica;
 public enum EstadoBalanza {
 
     Libre("Libre"),
-    En_Recalibracion("En Recalibracion"),
     Ocupado("Ocupado");
 
 

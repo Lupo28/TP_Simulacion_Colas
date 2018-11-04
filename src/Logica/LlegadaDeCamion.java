@@ -17,7 +17,7 @@ public class LlegadaDeCamion extends Evento
     private Camion camion;
     private double randomLlegada;
     private Recepcion recepcion;
-    private static int contadorCamiones;
+    private int contadorCamiones;
 
     public double getTiempoLlegada() {
         return tiempoLlegada;
@@ -43,6 +43,8 @@ public class LlegadaDeCamion extends Evento
         this.randomLlegada = randomLlegada;
     }
 
+    public void sumarContadorCamiones() {this.contadorCamiones++;}
+
     public LlegadaDeCamion( Recepcion recepcion)
     {
         this.camion=generarCamion();
@@ -61,33 +63,37 @@ public class LlegadaDeCamion extends Evento
     public Camion generarCamion()
     {
         Camion camion = new Camion(contadorCamiones,EstadoCamion.Nuevo);
-        camion.setNumero(contadorCamiones);
+        this.randomLlegada = Math.random();
+        this.calcularTiempoLlegada();
+        this.calcularProxLlegada();
         return camion;
     }
 
     public void calcularTiempoLlegada() {
         setRandomLlegada(Math.random());
-        double demora = -(1/7.5)*Math.log(1-randomLlegada);
-        setTiempoLlegada(demora / 60);
+        double demora = -((1/7.5)*Math.log(1-randomLlegada));
+        setTiempoLlegada(demora);
     }
 
     public void calcularProxLlegada()
     {
-        setTiempoLlegada(this.getTiempoLlegada()+Reloj.getInstancia().getTiempoActual());
+        setProxLlegadaCamion(this.getTiempoLlegada()+Reloj.getInstancia().getTiempoActual());
     }
 
     public void ejecutar()
     {
-        this.calcularTiempoLlegada();
-        this.calcularProxLlegada();
         if (recepcion.getEstado()==EstadoRecepcion.Libre)
         {
             recepcion.setEstado(EstadoRecepcion.Ocupado);
+            this.getCamion().setEstado(EstadoCamion.En_Recepcion);
             recepcion.setCamion(this.getCamion());
+            this.setCamion(null);
         }
         else
         {
+            this.getCamion().setEstado(EstadoCamion.En_cola_Recepcion);
             recepcion.getCola().add(this.getCamion());
+            this.setCamion(null);
         }
     }
 }

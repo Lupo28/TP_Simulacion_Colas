@@ -4,11 +4,8 @@ import java.util.LinkedList;
 
 public class Balanza {
     private double tiempoAtencion;
-    private double tiempoRecalibrado;
     private double proxFinAtencion;
     private double randomAtencion;
-    private double randomRecal1;
-    private double randomRecal2;
     private Camion camion;
     private EstadoBalanza estadoBalanza;
     private LinkedList<Camion> cola;
@@ -27,22 +24,6 @@ public class Balanza {
 
     public void setRandomAtencion(double randomAtencion) {
         this.randomAtencion = randomAtencion;
-    }
-
-    public double getRandomRecal1() {
-        return randomRecal1;
-    }
-
-    public void setRandomRecal1(double randomRecal1) {
-        this.randomRecal1 = randomRecal1;
-    }
-
-    public double getRandomRecal2() {
-        return randomRecal2;
-    }
-
-    public void setRandomRecal2(double randomRecal2) {
-        this.randomRecal2 = randomRecal2;
     }
 
     public Balanza()
@@ -68,16 +49,17 @@ public class Balanza {
         this.tiempoAtencion = tiempoAtencion;
     }
 
-    public double getTiempoRecalibrado(){return tiempoRecalibrado;}
-
-    public void setTiempoRecalibrado(double tiempoRecalibrado){this.tiempoRecalibrado = tiempoRecalibrado;}
-
     public Camion getCamion() {
         return camion;
     }
 
     public void setCamion(Camion camion) {
         this.camion = camion;
+        if (camion != null) {
+            calcularTiempoAtencion();
+            proximoBalanza(Reloj.getInstancia().getTiempoActual());
+            this.setEstadoBalanza(EstadoBalanza.Ocupado);
+        }
     }
 
     public EstadoBalanza getEstadoBalanza() {
@@ -96,27 +78,15 @@ public class Balanza {
         return getTiempoAtencion();
     }
 
-    public double proximoBalanza(long relojActual){
+    public double proximoBalanza(double relojActual){
         this.proxFinAtencion = relojActual + this.tiempoAtencion;
         return getProxFinAtencion();
-    }
-
-    //Calcula el tiempo que tomara recalibrar la balanza
-    public double calcularTiempoRecalibrado(){
-        this.setRandomRecal1(Math.random());
-        this.setRandomRecal2(Math.random());
-        double z = Math.sqrt(-2*Math.log(this.getRandomRecal1())*Math.cos(2*Math.PI*this.getRandomRecal2()));
-        double demora = 10 + (z*1.2);
-        this.tiempoRecalibrado = (demora / 60);
-        this.estadoBalanza = EstadoBalanza.En_Recalibracion;
-        return getTiempoRecalibrado();
     }
 
     @Override
     public String toString() {
         return "Balanza{" +
                 "tiempoAtencion=" + tiempoAtencion +
-                ", tiempoRecalibrado=" + tiempoRecalibrado +
                 ", proxFinAtencion=" + proxFinAtencion +
                 ", camion=" + camion +
                 ", estadoBalanza=" + estadoBalanza +
