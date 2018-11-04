@@ -1,11 +1,15 @@
 package Logica;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import util.Fila;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Gestor {
     private int contadorRecalibracion;
-
+    private static ObservableList<Fila> data;
     private ArrayList<String> conjuntoEventos;
     private LinkedList<Camion> camionesEnPuerta;
     private LlegadaDeCamion llegadaCamion;
@@ -49,6 +53,7 @@ public class Gestor {
         this.ServidorBalanza = new Balanza();
         this.ServidoresDarsena = new ConjuntoDarsena();
         this.llegadaCamion = new LlegadaDeCamion(getServidorRecepcion());
+        this.data=FXCollections.observableArrayList();
 
     }
 
@@ -75,7 +80,8 @@ public class Gestor {
 
 
     public void iterar() {
-        while (Reloj.getInstancia().getTiempoActual() < 2592000) {
+        while (Reloj.getInstancia().getTiempoActual() < 259) {
+            this.cargarFila();
             switch (proxEvento()) {
                 case "Recepcion":
                     FinAtencionRecepcion finAtRecepcion = new FinAtencionRecepcion(this.ServidorRecepcion, this.ServidorBalanza);
@@ -200,5 +206,48 @@ public class Gestor {
         }else{
             return "Recepcion";
         }
+    }
+
+    public ObservableList<Fila> getData() {
+        return data;
+    }
+
+    public void cargarFila()
+    {
+        String relojContent = Reloj.getInstancia().tiempoString();
+        String eventContent = eventoActual.getNombre();
+        String camionContent="2";
+        String rnd1Content="3";
+        String tiempoEntreLlegadasContent="4";
+        String proxContent="5";
+        String colaRecepcionContent="2";
+        String camionRecepcionContent="2";
+        String estadoRecepcionContet="2";
+        String rndRecepcionContent="2";
+        String tiempoLlegadaRecepcionContent="2";
+        String proxFinAtencionRecepcionContent="2";
+        String colaRecepContent="2";
+        String camionBalanzContent="2";
+        String estadBalanzContent="2";
+        String rndBalanzaContent="-";
+        String tiempoAtencionBalanzContent="-";
+        String proxFinAtBalContent="-";
+        String colaBalanzContent="-";
+        String camionDarse1Content="-";
+        String estadoDarse1Content="-";
+        String rndmDarse1Content="-";
+        String tiempoAtencionDarse1Content="-";
+        String finAtencionProxDarse1Content="-";
+        String camionDarse2Content="-";
+        String estadoDarse2Content="-";
+        String rndDarse2Content="-";
+        String tiempoArDarse2Content="-";
+        String proxFinAtDarse2Content="-";
+
+        data.add(new Fila(relojContent,eventContent,camionContent,rnd1Content,tiempoEntreLlegadasContent,proxContent,colaRecepcionContent,
+                camionRecepcionContent,estadoRecepcionContet,rndRecepcionContent,tiempoLlegadaRecepcionContent,proxFinAtencionRecepcionContent,
+                colaRecepContent,camionBalanzContent,estadBalanzContent,rndBalanzaContent,tiempoAtencionBalanzContent,proxFinAtBalContent,
+                colaBalanzContent,camionDarse1Content,estadoDarse1Content,rndmDarse1Content,tiempoAtencionDarse1Content,finAtencionProxDarse1Content,
+                camionDarse2Content,estadoDarse2Content,rndDarse2Content,tiempoArDarse2Content,proxFinAtDarse2Content));
     }
 }

@@ -1,6 +1,7 @@
 package sample;
-import Logica.Reloj;
+import Logica.*;
 import javafx.collections.FXCollections;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.fxml.FXML;
@@ -8,9 +9,19 @@ import util.*;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 
-public class Controller {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class Controller implements Initializable {
 
     private ObservableList<Fila> data;
+    private Gestor gestor;
+    private Reloj reloj1;
+    public Controller() {
+        this.gestor=new Gestor();
+        this.reloj1= Reloj.getInstancia();
+        this.tvSim=new TableView<>();
+    }
 
     @FXML
     private TableView<Fila> tvSim;
@@ -73,63 +84,53 @@ public class Controller {
     @FXML
     private TableColumn<Fila, String> proxFinAtDarse2;
 
-    @FXML
-    public void initialize() {
-        data = FXCollections.observableArrayList();
-        this.cargarTabla();
-
-    }
 
     public void cargarTabla()
     {
-        String relojContent = "123";
-        String eventContent = "0";
-        String camionContent="pruba";
-        String rnd1Content="";
-        String tiempoEntreLlegadasContent="";
-        String proxContent="";
-        String colaRecepcionContent="";
-        String camionRecepcionContent="";
-        String estadoRecepcionContet="";
-        String rndRecepcionContent="";
-        String tiempoLlegadaRecepcionContent="";
-        String proxFinAtencionRecepcionContent="";
-        String colaRecepContent="";
-        String camionBalanzContent="";
-        String estadBalanzContent="";
-        String rndBalanzaContent="";
-        String tiempoAtencionBalanzContent="";
-        String proxFinAtBalContent="";
-        String colaBalanzContent="";
-        String camionDarse1Content="";
-        String estadoDarse1Content="";
-        String rndmDarse1Content="";
-        String tiempoAtencionDarse1Content="";
-        String finAtencionProxDarse1Content="";
-        String camionDarse2Content="";
-        String estadoDarse2Content="";
-        String rndDarse2Content="";
-        String tiempoArDarse2Content="";
-        String proxFinAtDarse2Content="";
-
-
-
-
-//        data.addAll(new Fila(relojContent,eventContent,camionContent,rnd1Content,tiempoEntreLlegadasContent,proxContent,colaRecepcionContent,
-//                camionRecepcionContent,estadoRecepcionContet,rndRecepcionContent,tiempoLlegadaRecepcionContent,proxFinAtencionRecepcionContent,
-//        colaRecepContent,camionBalanzContent,estadBalanzContent,rndBalanzaContent,tiempoAtencionBalanzContent,proxFinAtBalContent,
-//                colaBalanzContent,camionDarse1Content,estadoDarse1Content,rndmDarse1Content,tiempoAtencionDarse1Content,finAtencionProxDarse1Content,
-//                camionDarse2Content,estadoDarse2Content,rndDarse2Content,tiempoArDarse2Content,proxFinAtDarse2Content));
-//
-//                reloj.setCellFactory(new PropertyValueFactory("reloj"));
-//                event.setCellFactory(new PropertyValueFactory("event"));
-
+        this.gestor.inicio();
+        data=gestor.getData();
 
         tvSim.setItems(data);
     }
 
+    public void setearColummnas()
+    {
+        reloj.setCellValueFactory(new PropertyValueFactory<>("reloj"));
+        event.setCellValueFactory(new PropertyValueFactory<>("event"));
+        camion.setCellValueFactory(new PropertyValueFactory<>("camion"));
+        tiempoEntreLlegadas.setCellValueFactory(new PropertyValueFactory<>("tiempoEntreLlegadas"));
+        colaRecepcion.setCellValueFactory(new PropertyValueFactory<>("colaRecepcion"));
+        prox.setCellValueFactory(new PropertyValueFactory<>("prox"));
+        camionRecepcion.setCellValueFactory(new PropertyValueFactory<>("camionRecepcion"));
+        estadoRecepcion.setCellValueFactory(new PropertyValueFactory<>("estadoRecepcion"));
+        rndRecepcion.setCellValueFactory(new PropertyValueFactory<>("rndRecepcion"));
+        tiempoLlegadaRecepcion.setCellValueFactory(new PropertyValueFactory<>("tiempoLlegadaRecepcion"));
+        proxFinAtencionRecepcion.setCellValueFactory(new PropertyValueFactory<>("proxFinAtencionRecepcion"));
+        colaRecep.setCellValueFactory(new PropertyValueFactory<>("colaRecep"));
+        camionBalanz.setCellValueFactory(new PropertyValueFactory<>("camionBalanz"));
+        estadBalanza.setCellValueFactory(new PropertyValueFactory<>("estadBalanza"));
+        tiempoAtencionBalanz.setCellValueFactory(new PropertyValueFactory<>("tiempoAtencionBalanz"));
+        proxFinAtBalan.setCellValueFactory(new PropertyValueFactory<>("proxFinAtBalan"));
+        colaBalan.setCellValueFactory(new PropertyValueFactory<>("colaBalan"));
+        rndBalanz.setCellValueFactory(new PropertyValueFactory<>("rndBalanz"));
+        camionDarsen1.setCellValueFactory(new PropertyValueFactory<>("camionDarsen1"));
+        estadoDarsen1.setCellValueFactory(new PropertyValueFactory<>("estadoDarsen1"));
+        rndBalanz.setCellValueFactory(new PropertyValueFactory<>("rndBalanz"));
+        rndDarsen1.setCellValueFactory(new PropertyValueFactory<>("rndDarsen1"));
+        tiempoAtencionDarse1.setCellValueFactory(new PropertyValueFactory<>("tiempoAtencionDarse1"));
+        finAtencionProxDarse1.setCellValueFactory(new PropertyValueFactory<>("finAtencionProxDarse1"));
+        camionDarse2.setCellValueFactory(new PropertyValueFactory<>("camionDarse2"));
+        estadoDarse2.setCellValueFactory(new PropertyValueFactory<>("estadoDarse2"));
+        rndDarse2.setCellValueFactory(new PropertyValueFactory<>("rndDarse2"));
+        tiempoAtDarse2.setCellValueFactory(new PropertyValueFactory<>("tiempoAtDarse2"));
+        proxFinAtDarse2.setCellValueFactory(new PropertyValueFactory<>("proxFinAtDarse2"));
+
+    }
 
 
-
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.setearColummnas();
+        this.cargarTabla();
+    }
 }
