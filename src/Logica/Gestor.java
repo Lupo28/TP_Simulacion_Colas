@@ -69,8 +69,11 @@ public class Gestor {
         Reloj.getInstancia().setTiempoActual(0);
         this.setEventoActual(llegadaCamion);
         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
-        llegadaCamion.ejecutar();
         Reloj.getInstancia().setTiempoActual(llegadaCamion.getProxLlegadaCamion());
+        this.cargarFila();
+        llegadaCamion.ejecutar();
+        this.llegadaCamion.setCamion(llegadaCamion.generarCamion());
+        this.llegadaCamion.sumarContadorCamiones();
         iterar();
     }
 
@@ -87,46 +90,57 @@ public class Gestor {
                     FinAtencionRecepcion finAtRecepcion = new FinAtencionRecepcion(this.ServidorRecepcion, this.ServidorBalanza);
                     this.setEventoActual(finAtRecepcion);
                     this.getConjuntoEventos().add(this.getEventoActual().getNombre());
-                    finAtRecepcion.ejecutar();
                     Reloj.getInstancia().setTiempoActual(this.getServidorRecepcion().getProxFinAtencion());
-                    getServidorBalanza().setEstadoBalanza(EstadoBalanza.Ocupado);
-                    getServidorBalanza().setProxFinAtencion(Reloj.getInstancia().getTiempoActual());
-                    getServidorRecepcion().setProxFinAtencion(0);
+                    finAtRecepcion.ejecutar();
+                    if(getServidorRecepcion().getCamion() == null) {
+                        getServidorRecepcion().setRandomAtencion(0);
+                        getServidorRecepcion().setTiempoAtencion(0);
+                        getServidorRecepcion().setProxFinAtencion(0);
+                    }
                     break;
                 case "Balanza":
                     FinAtencionBalanza finAtBalanza = new FinAtencionBalanza(this.ServidorBalanza, this.ServidoresDarsena);
                     this.setEventoActual(finAtBalanza);
                     this.getConjuntoEventos().add(this.getEventoActual().getNombre());
-                    finAtBalanza.ejecutar();
                     Reloj.getInstancia().setTiempoActual(this.getServidorBalanza().getProxFinAtencion());
-                    getServidorBalanza().setProxFinAtencion(0);
+                    finAtBalanza.ejecutar();
+                    if(getServidorBalanza().getCamion() == null) {
+                        getServidorBalanza().setRandomAtencion(0);
+                        getServidorBalanza().setTiempoAtencion(0);
+                        getServidorBalanza().setProxFinAtencion(0);
+                    }
                     break;
                 case "Darsena":
                     Darsena darsenaFinalizada = this.ServidoresDarsena.getUltimaDarsena();
                     FinAtencionDarsena finAtDarsena = new FinAtencionDarsena(this.ServidoresDarsena, darsenaFinalizada.getId() - 1);
                     this.setEventoActual(finAtDarsena);
                     this.getConjuntoEventos().add(this.getEventoActual().getNombre());
-                    finAtDarsena.ejecutar();
                     Reloj.getInstancia().setTiempoActual(this.getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).getProxFinAtencion());
+                    finAtDarsena.ejecutar();
                     contadorRecalibracion++;
                     if (contadorRecalibracion == 15) {
                         setContadorRecalibracion(0);
                         ServidoresDarsena.getDarsena(darsenaFinalizada.getId() - 1).calcularTiempoRecalibrado();
                         this.finAtRecalibrado = new FinAtencionRecalibrado(ServidoresDarsena, darsenaFinalizada.getId() - 1);
                     }
-                    getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).setProxFinAtencion(0);
+                    if(getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).getCamion() == null) {
+                        getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).setRandomAtencion(0);
+                        getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).setTiempoAtencion(0);
+                        getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).setProxFinAtencion(0);
+                    }
                     break;
 
                 case "LlegadaCamion":
                     this.setEventoActual(llegadaCamion);
                     this.getConjuntoEventos().add(this.getEventoActual().getNombre());
+                    Reloj.getInstancia().setTiempoActual(llegadaCamion.getProxLlegadaCamion());
+                    llegadaCamion.ejecutar();
                     this.llegadaCamion.setCamion(llegadaCamion.generarCamion());
                     llegadaCamion.sumarContadorCamiones();
-                    llegadaCamion.ejecutar();
-                    Reloj.getInstancia().setTiempoActual(llegadaCamion.getProxLlegadaCamion());
                     break;
 
                 case "FinRecalibracion":
+                    this.finAtRecalibrado.ejecutar();
                     break;
 
             }
@@ -216,39 +230,40 @@ public class Gestor {
     {
         String relojContent = Reloj.getInstancia().tiempoString();
         String eventContent = eventoActual.getNombre();
-        String camionContent="-"; //llegadaCamion.getCamion().getNumeroString()
+        String camionContent= (llegadaCamion.getCamion() != null) ? llegadaCamion.getCamion().getNumeroString() : "-";
         String rnd1Content=Double.toString(llegadaCamion.getRandomLlegada()) ;
         String tiempoEntreLlegadasContent=Double.toString(llegadaCamion.getTiempoLlegada());
         String proxContent=Double.toString(llegadaCamion.getProxLlegadaCamion());
-        String colaRecepcionContent="-";
-        String camionRecepcionContent=Integer.toString(getServidorRecepcion().getCamion().getNumero());
+        String colaRecepcionContent=Integer.toString(getServidorRecepcion().getCola().size());
+        String camionRecepcionContent=(getServidorRecepcion().getCamion() != null) ? getServidorRecepcion().getCamion().getNumeroString() : "-";
         String estadoRecepcionContet=getServidorRecepcion().getEstado().getName();
         String rndRecepcionContent=Double.toString(getServidorRecepcion().getRandomAtencion());
         String tiempoLlegadaRecepcionContent=Double.toString(getServidorRecepcion().getTiempoAtencion());
         String proxFinAtencionRecepcionContent=Double.toString(getServidorRecepcion().getProxFinAtencion());
-        String colaRecepContent=Integer.toString(getServidorRecepcion().getCola().size()) ;
-        String camionBalanzContent="2";
-        String estadBalanzContent="2";
-        String rndBalanzaContent="-";
-        String tiempoAtencionBalanzContent="-";
-        String proxFinAtBalContent="-";
-        String colaBalanzContent="-";
-        String camionDarse1Content="-";
-        String estadoDarse1Content="-";
-        String rndmDarse1Content="-";
-        String tiempoAtencionDarse1Content="-";
-        String finAtencionProxDarse1Content="-";
-        String camionDarse2Content="-";
-        String estadoDarse2Content="-";
-        String rndDarse2Content="-";
-        String tiempoArDarse2Content="-";
-        String proxFinAtDarse2Content="-";
+        String colaRecepContent=Integer.toString(getServidorRecepcion().getCola().size());
+        String camionBalanzContent=(getServidorBalanza().getCamion() != null) ? getServidorBalanza().getCamion().getNumeroString() : "-";
+        String estadBalanzContent=getServidorBalanza().getEstadoBalanza().getName();
+        String rndBalanzaContent=Double.toString(getServidorBalanza().getRandomAtencion());
+        String tiempoAtencionBalanzContent=Double.toString(getServidorBalanza().getTiempoAtencion());
+        String proxFinAtBalContent=Double.toString(getServidorBalanza().getProxFinAtencion());
+        String colaBalanzContent=Integer.toString(getServidorBalanza().getCola().size());
+        String camionDarse1Content=(getServidoresDarsena().getDarsenas()[0].getCamion() != null) ? getServidoresDarsena().getDarsenas()[0].getCamion().getNumeroString() : "-";
+        String estadoDarse1Content=getServidoresDarsena().getDarsenas()[0].getEstadoDarsena().getName();
+        String rndmDarse1Content=Double.toString(getServidoresDarsena().getDarsenas()[0].getRandomAtencion());
+        String tiempoAtencionDarse1Content=Double.toString(getServidoresDarsena().getDarsenas()[0].getTiempoAtencion());
+        String finAtencionProxDarse1Content=Double.toString(getServidoresDarsena().getDarsenas()[0].getProxFinAtencion());
+        String camionDarse2Content=(getServidoresDarsena().getDarsenas()[1].getCamion() != null) ? getServidoresDarsena().getDarsenas()[1].getCamion().getNumeroString() : "-";
+        String estadoDarse2Content=getServidoresDarsena().getDarsenas()[1].getEstadoDarsena().getName();
+        String rndDarse2Content=Double.toString(getServidoresDarsena().getDarsenas()[1].getRandomAtencion());
+        String tiempoArDarse2Content=Double.toString(getServidoresDarsena().getDarsenas()[1].getTiempoAtencion());
+        String proxFinAtDarse2Content=Double.toString(getServidoresDarsena().getDarsenas()[1].getProxFinAtencion());
+        String colaDarsenas=Integer.toString(getServidoresDarsena().getCola().size());
 
         data.add(new Fila(relojContent,eventContent,camionContent,rnd1Content,tiempoEntreLlegadasContent,proxContent,colaRecepcionContent,
                 camionRecepcionContent,estadoRecepcionContet,rndRecepcionContent,tiempoLlegadaRecepcionContent,proxFinAtencionRecepcionContent,
                 colaRecepContent,camionBalanzContent,estadBalanzContent,rndBalanzaContent,tiempoAtencionBalanzContent,proxFinAtBalContent,
                 colaBalanzContent,camionDarse1Content,estadoDarse1Content,rndmDarse1Content,tiempoAtencionDarse1Content,finAtencionProxDarse1Content,
-                camionDarse2Content,estadoDarse2Content,rndDarse2Content,tiempoArDarse2Content,proxFinAtDarse2Content));
+                camionDarse2Content,estadoDarse2Content,rndDarse2Content,tiempoArDarse2Content,proxFinAtDarse2Content, colaDarsenas));
 
     }
 }

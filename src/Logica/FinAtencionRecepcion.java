@@ -10,7 +10,6 @@ public class FinAtencionRecepcion extends Evento {
     }
 
     public void ejecutar() {
-        balanza.calcularTiempoAtencion();
         if (balanza.getEstadoBalanza() == EstadoBalanza.Ocupado) {
             recepcion.getCamion().setEstado(EstadoCamion.En_Cola_Balanza_);
             balanza.getCola().add(recepcion.getCamion());

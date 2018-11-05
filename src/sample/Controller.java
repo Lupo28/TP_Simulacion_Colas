@@ -1,14 +1,21 @@
 package sample;
 import Logica.*;
+import com.sun.javafx.scene.control.skin.NestedTableColumnHeader;
+import com.sun.javafx.scene.control.skin.TableColumnHeader;
+import com.sun.javafx.scene.control.skin.TableHeaderRow;
+import com.sun.javafx.scene.control.skin.TableViewSkin;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.fxml.FXML;
+import javafx.scene.layout.StackPane;
 import util.*;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ResourceBundle;
 

@@ -350,6 +350,18 @@ public class Fila {
         this.proxFinAtDarse2.set(proxFinAtDarse2);
     }
 
+    public String getColaDarsenas() {
+        return colaDarsenas.get();
+    }
+
+    public SimpleStringProperty colaDarsenasProperty() {
+        return colaDarsenas;
+    }
+
+    public void setColaDarsenas(String colaDarsenas) {
+        this.colaDarsenas.set(colaDarsenas);
+    }
+
     private final SimpleStringProperty reloj;
     private final SimpleStringProperty event;
     private final SimpleStringProperty camion;
@@ -379,8 +391,9 @@ public class Fila {
     private final SimpleStringProperty rndDarse2;
     private final SimpleStringProperty tiempoAtDarse2;
     private final SimpleStringProperty proxFinAtDarse2;
+    private final SimpleStringProperty colaDarsenas;
 
-    public Fila(String reloj, String event, String camion, String rnd1, String tiempoEntreLlegadas, String prox, String colaRececion, String camionRecepcion, String estadoRecepcion, String rndRecepcion, String tiempoLlegadaRecepcion, String proxFinAtencionRecepcion, String colaRecep, String camionBalanz, String estadBalanza, String rndBalanz, String tiempoAtencionBalanz, String proxFinAtBalan, String colaBalanz, String camionDarsen1, String estadoDarsen1, String rndmDarsen1, String tiempoAtencionDarse1, String finAtencionProxDarse1, String camionDarse2, String estadoDarse2, String rndDarse2, String tiempoAtDarse2, String proxFinAtDarse2) {
+    public Fila(String reloj, String event, String camion, String rnd1, String tiempoEntreLlegadas, String prox, String colaRececion, String camionRecepcion, String estadoRecepcion, String rndRecepcion, String tiempoLlegadaRecepcion, String proxFinAtencionRecepcion, String colaRecep, String camionBalanz, String estadBalanza, String rndBalanz, String tiempoAtencionBalanz, String proxFinAtBalan, String colaBalanz, String camionDarsen1, String estadoDarsen1, String rndmDarsen1, String tiempoAtencionDarse1, String finAtencionProxDarse1, String camionDarse2, String estadoDarse2, String rndDarse2, String tiempoAtDarse2, String proxFinAtDarse2, String colaDarsenas) {
         this.reloj = new SimpleStringProperty(reloj);
         this.event = new SimpleStringProperty(event);
         this.camion = new SimpleStringProperty(camion);
@@ -410,5 +423,6 @@ public class Fila {
         this.rndDarse2 = new SimpleStringProperty(rndDarse2);
         this.tiempoAtDarse2 = new SimpleStringProperty(tiempoAtDarse2);
         this.proxFinAtDarse2 = new SimpleStringProperty(proxFinAtDarse2);
+        this.colaDarsenas = new SimpleStringProperty(colaDarsenas);
     }
 }
