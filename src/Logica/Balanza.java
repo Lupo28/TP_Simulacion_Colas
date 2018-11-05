@@ -73,7 +73,7 @@ public class Balanza {
     //Calcula tiempo de atencion
     public double calcularTiempoAtencion(){
         this.setRandomAtencion(Math.random());
-        double demora = 5 + this.getRandomAtencion() * 2;
+        double demora = (5 + this.getRandomAtencion() * 2)*3600;
         this.tiempoAtencion = (demora/60);
         return getTiempoAtencion();
     }

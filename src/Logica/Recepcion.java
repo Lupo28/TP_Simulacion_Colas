@@ -79,7 +79,7 @@ public class Recepcion{
 
     public void calcularTiempoAtencion() {
         setRandomAtencion(Math.random());
-        double demora = 3 + getRandomAtencion() * 4;
+        double demora = (3 + getRandomAtencion() * 4)*3600;
         this.tiempoAtencion = (demora / 60);
     }
 

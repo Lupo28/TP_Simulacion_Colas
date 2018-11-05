@@ -113,7 +113,7 @@ public class Darsena {
     //Calcula el tiempo de atencion
     public void calcularTiempoAtencion() {
         this.setRandomAtencion(Math.random());
-        double demora = 15 + this.getRandomAtencion() * 5;
+        double demora = (15 + this.getRandomAtencion() * 5)*3600;
         this.tiempoAtencion = (demora / 60);
     }
 

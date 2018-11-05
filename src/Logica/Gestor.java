@@ -83,7 +83,7 @@ public class Gestor {
 
 
     public void iterar() {
-        while (Reloj.getInstancia().getTiempoActual() < 5000) {
+        while (Reloj.getInstancia().getTiempoActual() < 2592000) {
             this.cargarFila();
             switch (proxEvento()) {
                 case "Recepcion":

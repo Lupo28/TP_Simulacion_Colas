@@ -2,11 +2,9 @@ package Logica;
 
 public class Reloj {
     private static Reloj instancia;
-    private int ultNumeroCamion;
     private double tiempoActual;
 
     public Reloj() {
-        this.ultNumeroCamion = 0;
         this.tiempoActual = 0;
     }
 
@@ -25,36 +23,24 @@ public class Reloj {
         this.tiempoActual = tiempoActual;
     }
 
-    public int getNumeroCamion(){
-        return this.ultNumeroCamion++;
-    }
+
 
     public String tiempoString(){
 
-        double horas = tiempoActual / 3600;
-        double minutos = (tiempoActual - horas*3600) / 60;
-        double segundos2 =  tiempoActual - (horas*3600 + minutos*60);
+//        return String.valueOf(tiempoActual);
+        tiempoActual=(long)tiempoActual;
+        double horas = (long)tiempoActual / 3600;
+        double minutos = (long)(tiempoActual - horas*3600) / 60;
+        double segundos = (long) (tiempoActual - (horas*3600 + minutos*60));
         String ceroH = "", ceroM = "", ceroS = "";
         if( horas < 10 ) ceroH = "0";
+        if(horas >=24)   horas = 0;
         if( minutos < 10 ) ceroM = "0";
-        if( segundos2 < 10 ) ceroS = "0";
+        if( segundos < 10 ) ceroS = "0";
 
-        return ceroH + horas + ":"  + ceroM + minutos + ":" + ceroS + segundos2;
+        return ceroH + String.valueOf(horas) + ":"  + ceroM + String.valueOf(minutos) + ":" + ceroS + String.valueOf(segundos);
     }
 
-
-    public static String tiempoString(double tiempo){
-
-        double horas = tiempo / 3600;
-        double minutos = (tiempo - horas*3600) / 60;
-        double segundos2 =  tiempo - (horas*3600 + minutos*60);
-        String ceroH = "", ceroM = "", ceroS = "";
-        if( horas < 10 ) ceroH = "0";
-        if( minutos < 10 ) ceroM = "0";
-        if( segundos2 < 10 ) ceroS = "0";
-
-        return ceroH + horas + ":"  + ceroM + minutos + ":" + ceroS + segundos2;
-    }
 
     public Boolean esCierrePlanta(){
         return (this.tiempoActual < 18 && this.tiempoActual > 5) ? false : true;

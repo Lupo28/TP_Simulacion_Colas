@@ -70,7 +70,7 @@ public class LlegadaDeCamion extends Evento
     }
 
     public void calcularTiempoLlegada() {
-        double demora = -((0.13333)*Math.log(1-randomLlegada));
+        double demora = -((0.13333)*Math.log((1-randomLlegada))*3600);
         setTiempoLlegada(demora);
     }
 
