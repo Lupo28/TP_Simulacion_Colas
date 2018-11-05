@@ -80,7 +80,7 @@ public class Gestor {
 
 
     public void iterar() {
-        while (Reloj.getInstancia().getTiempoActual() < 259) {
+        while (Reloj.getInstancia().getTiempoActual() < 5000) {
             this.cargarFila();
             switch (proxEvento()) {
                 case "Recepcion":
@@ -216,17 +216,17 @@ public class Gestor {
     {
         String relojContent = Reloj.getInstancia().tiempoString();
         String eventContent = eventoActual.getNombre();
-        String camionContent="0";
-        String rnd1Content="3";
-        String tiempoEntreLlegadasContent="4";
-        String proxContent="5";
-        String colaRecepcionContent="2";
-        String camionRecepcionContent="2";
-        String estadoRecepcionContet="2";
-        String rndRecepcionContent="2";
-        String tiempoLlegadaRecepcionContent="2";
-        String proxFinAtencionRecepcionContent="2";
-        String colaRecepContent="2";
+        String camionContent="-"; //llegadaCamion.getCamion().getNumeroString()
+        String rnd1Content=Double.toString(llegadaCamion.getRandomLlegada()) ;
+        String tiempoEntreLlegadasContent=Double.toString(llegadaCamion.getTiempoLlegada());
+        String proxContent=Double.toString(llegadaCamion.getProxLlegadaCamion());
+        String colaRecepcionContent="-";
+        String camionRecepcionContent=Integer.toString(getServidorRecepcion().getCamion().getNumero());
+        String estadoRecepcionContet=getServidorRecepcion().getEstado().getName();
+        String rndRecepcionContent=Double.toString(getServidorRecepcion().getRandomAtencion());
+        String tiempoLlegadaRecepcionContent=Double.toString(getServidorRecepcion().getTiempoAtencion());
+        String proxFinAtencionRecepcionContent=Double.toString(getServidorRecepcion().getProxFinAtencion());
+        String colaRecepContent=Integer.toString(getServidorRecepcion().getCola().size()) ;
         String camionBalanzContent="2";
         String estadBalanzContent="2";
         String rndBalanzaContent="-";

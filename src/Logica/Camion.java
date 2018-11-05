@@ -28,4 +28,9 @@ public class Camion
         this.estado = estado;
     }
 
+
+    public String getNumeroString() {
+
+        return Integer.toString(getNumero());
+    }
 }
