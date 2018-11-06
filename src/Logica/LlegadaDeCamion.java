@@ -1,5 +1,7 @@
 package Logica;
 
+import java.util.LinkedList;
+
 public class LlegadaDeCamion extends Evento
 {
 
@@ -17,7 +19,7 @@ public class LlegadaDeCamion extends Evento
     private Camion camion;
     private double randomLlegada;
     private Recepcion recepcion;
-    private int contadorCamiones;
+    private int contadorCamiones = 1;
 
     public double getTiempoLlegada() {
         return tiempoLlegada;
@@ -69,6 +71,14 @@ public class LlegadaDeCamion extends Evento
         return camion;
     }
 
+    public Camion generarCamionFueraHora(){
+        Camion camion = new Camion(EstadoCamion.Nuevo);
+        this.randomLlegada = Math.random();
+        this.calcularTiempoLlegada();
+        this.calcularProxLlegada();
+        return camion;
+    }
+
     public void calcularTiempoLlegada() {
         double demora = -((0.13333)*Math.log((1-randomLlegada))*3600);
         setTiempoLlegada(demora);
@@ -95,6 +105,7 @@ public class LlegadaDeCamion extends Evento
             this.setCamion(null);
         }
     }
+
 
     public String getTiempoLlegada1()
     {

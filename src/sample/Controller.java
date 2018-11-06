@@ -38,6 +38,8 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<Fila, String>event;
     @FXML
+    private TableColumn<Fila, String>colaEnPuerta;
+    @FXML
     private TableColumn<Fila, String>camion;
     @FXML
     private TableColumn<Fila, String>rnd1;
@@ -108,6 +110,7 @@ public class Controller implements Initializable {
     {
         reloj.setCellValueFactory(new PropertyValueFactory<>("reloj"));
         event.setCellValueFactory(new PropertyValueFactory<>("event"));
+        colaEnPuerta.setCellValueFactory(new PropertyValueFactory<>("colaEnPuerta"));
         rnd1.setCellValueFactory(new PropertyValueFactory<>("rnd1"));
         camion.setCellValueFactory(new PropertyValueFactory<>("camion"));
         tiempoEntreLlegadas.setCellValueFactory(new PropertyValueFactory<>("tiempoEntreLlegadas"));

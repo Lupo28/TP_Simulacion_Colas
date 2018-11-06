@@ -19,8 +19,8 @@ public class Reloj {
     }
 
     public Reloj() {
-        this.tiempoActual = 0;
-    }
+        this.tiempoActual = 43200.00;
+    } //12HS
 
     public static Reloj getInstancia() {
         if (instancia == null) {
