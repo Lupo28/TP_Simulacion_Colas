@@ -93,4 +93,14 @@ public class Balanza {
                 ", cola=" + cola +
                 '}';
     }
+
+    public String tiempoAtencion1()
+    {
+       return Reloj.tiempoString(getTiempoAtencion());
+    }
+
+    public String proxFinTiempoAtencion1()
+    {
+       return Reloj.tiempoString(getProxFinAtencion());
+    }
 }

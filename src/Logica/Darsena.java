@@ -135,4 +135,15 @@ public class Darsena {
     public void proximoFinRecalibrado(double relojActual){
         this.proxFinRecalibrado = relojActual + this.tiempoRecalibrado;
     }
+
+    public String getTiempoAtencion1()
+    {
+        return Reloj.tiempoString(getTiempoAtencion());
+    }
+
+    public String getProxFinAtencion1()
+    {
+        return Reloj.tiempoString(getProxFinAtencion());
+    }
+
 }

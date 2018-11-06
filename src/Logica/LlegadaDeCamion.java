@@ -95,4 +95,14 @@ public class LlegadaDeCamion extends Evento
             this.setCamion(null);
         }
     }
+
+    public String getTiempoLlegada1()
+    {
+        return Reloj.tiempoString(getTiempoLlegada());
+    }
+
+    public String getProxFinLlegada1()
+    {
+        return Reloj.tiempoString(getProxLlegadaCamion());
+    }
 }

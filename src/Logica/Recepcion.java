@@ -97,4 +97,15 @@ public class Recepcion{
                 ", cola=" + cola +
                 '}';
     }
+
+    public String getTiempoAtencion1()
+    {
+        return Reloj.tiempoString(getTiempoAtencion());
+    }
+
+    public String getProxFinAtencion1()
+    {
+        return Reloj.tiempoString(getProxFinAtencion());
+    }
+
 }
