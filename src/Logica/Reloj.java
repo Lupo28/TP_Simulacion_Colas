@@ -42,10 +42,10 @@ public class Reloj {
     public static String tiempoString(double tiempo){
 
 //        return String.valueOf(tiempoActual);
-        tiempoActual=(long)tiempoActual;
-        long horas = (long)tiempoActual / 3600;
-        long minutos = (long)(tiempoActual - horas*3600) / 60;
-        long segundos = (long) (tiempoActual - (horas*3600 + minutos*60));
+        tiempo=(long)tiempo;
+        long horas = (long)tiempo / 3600;
+        long minutos = (long)(tiempo - horas*3600) / 60;
+        long segundos = (long) (tiempo - (horas*3600 + minutos*60));
         String ceroH = "", ceroM = "", ceroS = "";
         if( horas < 10 ) ceroH = "0";
         if( minutos < 10 ) ceroM = "0";
