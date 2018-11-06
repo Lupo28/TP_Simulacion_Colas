@@ -3,6 +3,20 @@ package Logica;
 public class Reloj {
     private static Reloj instancia;
     private static double tiempoActual;
+    private static int dia;
+
+    public static void setInstancia(Reloj instancia) {
+        Reloj.instancia = instancia;
+        setDia(0);
+    }
+
+    public static int getDia() {
+        return dia;
+    }
+
+    public static void setDia(int dia) {
+        Reloj.dia = dia;
+    }
 
     public Reloj() {
         this.tiempoActual = 0;

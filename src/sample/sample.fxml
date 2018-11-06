@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="593.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="sample.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <top>
       <MenuBar>
         <menus>
@@ -31,7 +31,7 @@
       </MenuBar>
    </top>
    <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" stylesheets="@table-view.css">
+      <HBox prefHeight="100.0" prefWidth="200.0" stylesheets="@table-view.css" BorderPane.alignment="CENTER">
          <children>
             <TableView fx:id="tvSim" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="453.0" prefWidth="644.0" HBox.hgrow="ALWAYS">
               <columns>
@@ -43,24 +43,24 @@
                   <TableColumn fx:id="prox" prefWidth="75.0" text="Proxima Fin Atencion" />
                   <TableColumn fx:id="colaRecepcion" prefWidth="75.0" text="Cola Recepcion" />
                   <TableColumn fx:id="camionRecepcion" prefWidth="75.0" text="Camion" />
-                  <TableColumn fx:id="estadoRecepcion" prefWidth="75.0" text="Estado" />
+                  <TableColumn fx:id="estadoRecepcion" prefWidth="75.0" text="Estado Recepcion" />
                   <TableColumn fx:id="rndRecepcion" prefWidth="75.0" text="Rnd" />
                   <TableColumn fx:id="tiempoLlegadaRecepcion" prefWidth="75.0" text="Tiempo Llegada" />
                   <TableColumn fx:id="proxFinAtencionRecepcion" prefWidth="75.0" text="Proximo Fin Atencion" />
                   <TableColumn fx:id="colaRecep" prefWidth="75.0" text="Cola" />
                   <TableColumn fx:id="camionBalanz" prefWidth="75.0" text="Camion" />
-                  <TableColumn fx:id="estadBalanza" prefWidth="75.0" text="Estado" />
+                  <TableColumn fx:id="estadBalanza" prefWidth="75.0" text="Estado Balanza" />
                   <TableColumn fx:id="rndBalanz" prefWidth="75.0" text="Rnd" />
                   <TableColumn fx:id="tiempoAtencionBalanz" prefWidth="75.0" text="Tiempo Atencion" />
                   <TableColumn fx:id="proxFinAtBalan" prefWidth="75.0" text="Proximo Fin Atencion" />
                   <TableColumn fx:id="colaBalan" prefWidth="75.0" text="Cola" />
                   <TableColumn fx:id="camionDarsen1" prefWidth="75.0" text="Camion" />
-                  <TableColumn fx:id="estadoDarsen1" prefWidth="75.0" text="Estado" />
+                  <TableColumn fx:id="estadoDarsen1" prefWidth="75.0" text="Estado Darsena 1" />
                   <TableColumn fx:id="rndDarsen1" prefWidth="75.0" text="Rnd" />
                   <TableColumn fx:id="tiempoAtencionDarse1" prefWidth="75.0" text="Tiempo Atencion" />
                   <TableColumn fx:id="finAtencionProxDarse1" prefWidth="75.0" text="Proximo Fin Atencion" />
                   <TableColumn fx:id="camionDarse2" prefWidth="75.0" text="Camion" />
-                  <TableColumn fx:id="estadoDarse2" prefWidth="75.0" text="Estado" />
+                  <TableColumn fx:id="estadoDarse2" prefWidth="75.0" text="Estado Darsena 2" />
                   <TableColumn fx:id="rndDarse2" prefWidth="75.0" text="Rnd" />
                   <TableColumn fx:id="tiempoAtDarse2" prefWidth="75.0" text="Tiempo Atencion" />
                   <TableColumn fx:id="proxFinAtDarse2" prefWidth="75.0" text="Proximo Fin Atencion" />

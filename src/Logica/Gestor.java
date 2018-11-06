@@ -250,13 +250,13 @@ public class Gestor {
         String camionDarse1Content=(getServidoresDarsena().getDarsenas()[0].getCamion() != null) ? getServidoresDarsena().getDarsenas()[0].getCamion().getNumeroString() : "-";
         String estadoDarse1Content=getServidoresDarsena().getDarsenas()[0].getEstadoDarsena().getName();
         String rndmDarse1Content=Double.toString(getServidoresDarsena().getDarsenas()[0].getRandomAtencion());
-        String tiempoAtencionDarse1Content=Double.toString(getServidoresDarsena().getDarsenas()[0].getTiempoAtencion());
-        String finAtencionProxDarse1Content=Double.toString(getServidoresDarsena().getDarsenas()[0].getProxFinAtencion());
+        String tiempoAtencionDarse1Content=getServidoresDarsena().getDarsenas()[0].getTiempoAtencion1();
+        String finAtencionProxDarse1Content=getServidoresDarsena().getDarsenas()[0].getProxFinAtencion1();
         String camionDarse2Content=(getServidoresDarsena().getDarsenas()[1].getCamion() != null) ? getServidoresDarsena().getDarsenas()[1].getCamion().getNumeroString() : "-";
         String estadoDarse2Content=getServidoresDarsena().getDarsenas()[1].getEstadoDarsena().getName();
         String rndDarse2Content=Double.toString(getServidoresDarsena().getDarsenas()[1].getRandomAtencion());
-        String tiempoArDarse2Content=Double.toString(getServidoresDarsena().getDarsenas()[1].getTiempoAtencion());
-        String proxFinAtDarse2Content=Double.toString(getServidoresDarsena().getDarsenas()[1].getProxFinAtencion());
+        String tiempoArDarse2Content=getServidoresDarsena().getDarsenas()[1].getTiempoAtencion1();
+        String proxFinAtDarse2Content=getServidoresDarsena().getDarsenas()[1].getProxFinAtencion1();
         String colaDarsenas=Integer.toString(getServidoresDarsena().getCola().size());
 
         data.add(new Fila(relojContent,eventContent,camionContent,rnd1Content,tiempoEntreLlegadasContent,proxContent,colaRecepcionContent,
