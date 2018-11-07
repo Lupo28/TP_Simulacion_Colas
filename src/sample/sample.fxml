@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -11,9 +13,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.TextField?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <top>
-        <MenuBar>
+        <MenuBar prefHeight="29.0" prefWidth="661.0">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
@@ -26,7 +29,7 @@
     <center>
         <HBox prefHeight="100.0" prefWidth="200.0" stylesheets="@table-view.css" BorderPane.alignment="CENTER">
             <children>
-                <TableView fx:id="tvSim" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="453.0" prefWidth="644.0" HBox.hgrow="ALWAYS">
+                <TableView fx:id="tvSim" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="370.0" prefWidth="688.0" HBox.hgrow="ALWAYS">
                     <columns>
                         <TableColumn fx:id="dia" prefWidth="75.0" text="Dia" />
                         <TableColumn fx:id="reloj" prefWidth="75.0" text="Reloj" />
@@ -75,6 +78,9 @@
             <Label fx:id="txCamionesNoAtendidos" layoutX="700.0" layoutY="16.0" prefHeight="17.0" prefWidth="14.0" text="0" />
             <Text layoutX="500.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duracion Promedio de Servicio" wrappingWidth="193.0263671875" />
             <Label fx:id="txAvgDurationService" layoutX="700.0" layoutY="43.0" maxHeight="1.7976931348623157E308" prefHeight="17.0" prefWidth="14.0" text="0" />
+            <Button fx:id="btnsimular" layoutX="900.0" layoutY="43.0" mnemonicParsing="false" onAction="#simulacionOnAction" text="Simular" />
+            <TextField fx:id="txtDiaHasta"  layoutX="900.0" layoutY="11.0" />
+            <TextField fx:id="txtDiaDesde"  layoutX="781.0" layoutY="11.0" prefHeight="28.0" prefWidth="82.0" />
          </children>
       </AnchorPane>
    </bottom>

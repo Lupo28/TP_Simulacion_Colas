@@ -45,6 +45,8 @@ public class Controller implements Initializable {
     @FXML
     private Label txCamionesTotales;
     @FXML
+    private Button btnsimular;
+    @FXML
     private TextField txtDiaDesde;
     @FXML
     private TextField txtDiaHasta;
@@ -175,9 +177,6 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.cargarTabla();
-        this.setStats();
-
 
 
     }
@@ -213,6 +212,50 @@ public class Controller implements Initializable {
         txCamionesTotales.setText(gestor.cantidadDeCamionesTotales());
         txCamionesNoAtendidos.setText(gestor.cantidadDeCamionesNoAtendidos());
         txAvgDurationService.setText(gestor.promedioDeTiempoDePermanencia());
+
     }
+    @FXML
+    void simulacionOnAction(ActionEvent event) {
+//        clearItemsInTableView();
+//        gestor.setDiaDesde(Integer.valueOf(txtDiaHasta.getText()));
+//        gestor.setDiaHasta(Integer.valueOf(txtDiaDesde.getText()));
+//        this.resetSimulation();
+        this.cargarTabla();
+        this.setStats();
+    }
+
+
+    public boolean verificadorDeDias(String txtFromDay, String txtToDay){
+        if(txtFromDay.equals("")) txtFromDay = "1";
+        if(txtToDay.equals("")) txtToDay = "30";
+
+        return  isInDayRange(Integer.parseInt(txtFromDay), Integer.parseInt(txtToDay));
+    }
+
+    private boolean isInDayRange(Integer fromDay, Integer toDay){
+        return gestor.getDia() >= fromDay && gestor.getDia() <= toDay;
+    }
+
+
+    private void runOneStepAndAddToTable() {
+
+        if (this.verificadorDeDias(txtDiaDesde.getText(), txtDiaHasta.getText())) {
+
+        }
+    }
+
+//    private void initializeNewSimulation() {
+//
+//        data = FXCollections.observableArrayList();
+//    }
+
+//    private void resetSimulation() {
+//        txAvgDurationService.setText("0");
+//        txCamionesNoAtendidos.setText("0");
+//        txCamionesTotales.setText("0");
+//        txCamionesXDia.setText("0");
+//        clearItemsInTableView();
+//        initializeNewSimulation();
+//    }
 
 }

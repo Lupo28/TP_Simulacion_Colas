@@ -17,6 +17,24 @@ public class Gestor {
     private static Evento eventoActual;
     private int ultNumCamion;
     private int dia;
+    private int diaDesde;
+    private int diaHasta;
+
+    public int getDiaHasta() {
+        return diaHasta;
+    }
+
+    public void setDiaHasta(int diaHasta) {
+        this.diaHasta = diaHasta;
+    }
+
+    public int getDiaDesde() {
+        return diaDesde;
+    }
+
+    public void setDiaDesde(int diaDesde) {
+        this.diaDesde = diaDesde;
+    }
 
     public int getDia() {
         return dia;
@@ -64,6 +82,8 @@ public class Gestor {
         this.ServidoresDarsena = new ConjuntoDarsena();
         this.llegadaCamion = new LlegadaDeCamion(getServidorRecepcion());
         this.data = FXCollections.observableArrayList();
+        this.diaDesde=0;
+        this.diaHasta=30;
 
     }
 
@@ -96,17 +116,31 @@ public class Gestor {
     }
 
 
+    public void ejecutarSimulacion(boolean bool)
+    {
+        if(bool)
+        {
+            this.iterar();
+        }
+    }
 
     public void iterar() {
+
+
         int aux = 0;
-        for (int i = 0; i < 20; i++) { //29 dias
+        for ( int i=0; i < 30; i++) { //29 dias
             if(i>0){
                 aux=aux+24;
                 setDia(i);
             }
 
             while ((Reloj.getInstancia().getTiempoActual()/3600) < 18+aux) { //Esta seria la hora de cierre (18hs)
+//                if(i>getDiaDesde() && i<getDiaHasta()){
+//                    this.cargarFila();
+//                }
+
                 this.cargarFila();
+
 
                 switch (proxEvento()) {
                     case "Recepcion":
