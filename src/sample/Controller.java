@@ -43,17 +43,17 @@ public class Controller implements Initializable {
 
 
     @FXML
+    private Label txCamionesTotales;
+    @FXML
     private TextField txtDiaDesde;
     @FXML
     private TextField txtDiaHasta;
     @FXML
-    private Text txAvgDurationService;
+    private Label txAvgDurationService;
     @FXML
-    private Text txCamionesNoAtendidos;
+    private Label txCamionesNoAtendidos;
     @FXML
-    private Text txCamionesXDia;
-    @FXML
-    private Text txCamionesTotales;
+    private Label txCamionesXDia;
     @FXML
     private Pane paneMain;
     @FXML
@@ -176,7 +176,8 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.cargarTabla();
-//        this.setStats();
+        this.setStats();
+
 
 
     }

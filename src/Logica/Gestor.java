@@ -398,7 +398,7 @@ public class Gestor {
 
 
     public String promedioDeCamionesAtendidosPorDia() {
-        return "";
+        return "buen promedio";
     }
 
     public String cantidadDeCamionesNoAtendidos(){
@@ -406,12 +406,12 @@ public class Gestor {
     }
 
     public String promedioDeTiempoDePermanencia() {
-        return "";
+        return "otro buen promedio";
     }
 
     public  String cantidadDeCamionesTotales()
     {
-        return "12";
+        return "Muchos camiones";
     }
 
 }

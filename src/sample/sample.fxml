@@ -67,10 +67,14 @@
    <bottom>
       <AnchorPane fx:id="anchorPane" prefHeight="82.0" prefWidth="593.0" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="187.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="47.0263671875" />
-            <Text layoutX="188.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="44.0263671875" />
-            <Label layoutX="24.0" layoutY="20.0" text="Promedio Camiones" />
-            <Label layoutX="24.0" layoutY="42.0" text="Total Camiones" />
+            <Text layoutX="27.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Camiones" wrappingWidth="150.0263671875" />
+            <Text layoutX="27.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Promedio Camiones" wrappingWidth="142.0263671875" />
+            <Label fx:id="txCamionesTotales" layoutX="230.0" layoutY="16.0" text="0" />
+            <Label fx:id="txCamionesXDia" layoutX="230.0" layoutY="43.0" text="0" />
+            <Text layoutX="500.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Camiones no atendidos" wrappingWidth="159.0263671875" />
+            <Label fx:id="txCamionesNoAtendidos" layoutX="700.0" layoutY="16.0" prefHeight="17.0" prefWidth="14.0" text="0" />
+            <Text layoutX="500.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duracion Promedio de Servicio" wrappingWidth="193.0263671875" />
+            <Label fx:id="txAvgDurationService" layoutX="700.0" layoutY="43.0" maxHeight="1.7976931348623157E308" prefHeight="17.0" prefWidth="14.0" text="0" />
          </children>
       </AnchorPane>
    </bottom>
