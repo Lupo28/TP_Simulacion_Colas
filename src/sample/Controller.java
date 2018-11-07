@@ -57,6 +57,8 @@ public class Controller implements Initializable {
     @FXML
     private Pane paneMain;
     @FXML
+    private AnchorPane anchorPane;
+    @FXML
     private TableView<Fila> tvSim;
     @FXML
     private TableColumn<Fila, String>dia;
@@ -174,6 +176,9 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.cargarTabla();
+//        this.setStats();
+
+
     }
 
 

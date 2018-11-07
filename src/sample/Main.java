@@ -8,15 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 public class Main extends Application {
-
-
 
     public void start(Stage primaryStage) throws Exception{
 
-        MenuBar menuBar = new MenuBar();
-        VBox vBox = new VBox(menuBar);
-        Parent root = FXMLLoader.load(getClass().getResource("simulacion/sample.fxml"));
+
+        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Trabajo Practico N5 Simulacion de Colas");
         primaryStage.setScene(new Scene(root, 1366, 768));
         primaryStage.setMaximized(true);
