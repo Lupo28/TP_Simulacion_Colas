@@ -4,20 +4,30 @@ import com.sun.javafx.scene.control.skin.NestedTableColumnHeader;
 import com.sun.javafx.scene.control.skin.TableColumnHeader;
 import com.sun.javafx.scene.control.skin.TableHeaderRow;
 import com.sun.javafx.scene.control.skin.TableViewSkin;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import util.*;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.event.*;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.control.*;
 
 public class Controller implements Initializable {
 
@@ -31,14 +41,29 @@ public class Controller implements Initializable {
         this.tvSim = new TableView<Fila>();
     }
 
+
+    @FXML
+    private TextField txtDiaDesde;
+    @FXML
+    private TextField txtDiaHasta;
+    @FXML
+    private Text txAvgDurationService;
+    @FXML
+    private Text txCamionesNoAtendidos;
+    @FXML
+    private Text txCamionesXDia;
+    @FXML
+    private Text txCamionesTotales;
+    @FXML
+    private Pane paneMain;
     @FXML
     private TableView<Fila> tvSim;
+    @FXML
+    private TableColumn<Fila, String>dia;
     @FXML
     private TableColumn<Fila, String>reloj;
     @FXML
     private TableColumn<Fila, String>event;
-    @FXML
-    private TableColumn<Fila, String>colaEnPuerta;
     @FXML
     private TableColumn<Fila, String>camion;
     @FXML
@@ -48,7 +73,7 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<Fila, String>prox;
     @FXML
-    private TableColumn<Fila, String> colaRecepcion;
+    private TableColumn<Fila, String>colaEnPuerta;
     @FXML
     private TableColumn<Fila, String>camionRecepcion;
     @FXML
@@ -60,7 +85,7 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<Fila, String>proxFinAtencionRecepcion;
     @FXML
-    private TableColumn<Fila, String>colaRecep;
+    private TableColumn<Fila, String> colaRecepcion;
     @FXML
     private TableColumn<Fila, String>camionBalanz;
     @FXML
@@ -72,7 +97,7 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<Fila, String> proxFinAtBalan;
     @FXML
-    private TableColumn<Fila, String> colaBalan;
+    private TableColumn<Fila, String>colaBalanza;
     @FXML
     private TableColumn<Fila, String> camionDarsen1;
     @FXML
@@ -93,6 +118,8 @@ public class Controller implements Initializable {
     private TableColumn<Fila, String> tiempoAtDarse2;
     @FXML
     private TableColumn<Fila, String> proxFinAtDarse2;
+    @FXML
+    private TableColumn<Fila, String> colaDarsena;
 
 
     public void cargarTabla()
@@ -108,6 +135,7 @@ public class Controller implements Initializable {
 
     public void setearColummnas()
     {
+        dia.setCellValueFactory(new PropertyValueFactory<>("dia"));
         reloj.setCellValueFactory(new PropertyValueFactory<>("reloj"));
         event.setCellValueFactory(new PropertyValueFactory<>("event"));
         colaEnPuerta.setCellValueFactory(new PropertyValueFactory<>("colaEnPuerta"));
@@ -121,12 +149,12 @@ public class Controller implements Initializable {
         rndRecepcion.setCellValueFactory(new PropertyValueFactory<>("rndRecepcion"));
         tiempoLlegadaRecepcion.setCellValueFactory(new PropertyValueFactory<>("tiempoLlegadaRecepcion"));
         proxFinAtencionRecepcion.setCellValueFactory(new PropertyValueFactory<>("proxFinAtencionRecepcion"));
-        colaRecep.setCellValueFactory(new PropertyValueFactory<>("colaRecep"));
+        colaRecepcion.setCellValueFactory(new PropertyValueFactory<>("colaRecepcion"));
         camionBalanz.setCellValueFactory(new PropertyValueFactory<>("camionBalanz"));
         estadBalanza.setCellValueFactory(new PropertyValueFactory<>("estadBalanza"));
         tiempoAtencionBalanz.setCellValueFactory(new PropertyValueFactory<>("tiempoAtencionBalanz"));
         proxFinAtBalan.setCellValueFactory(new PropertyValueFactory<>("proxFinAtBalan"));
-        colaBalan.setCellValueFactory(new PropertyValueFactory<>("colaBalan"));
+        colaBalanza.setCellValueFactory(new PropertyValueFactory<>("colaBalanza"));
         rndBalanz.setCellValueFactory(new PropertyValueFactory<>("rndBalanz"));
         camionDarsen1.setCellValueFactory(new PropertyValueFactory<>("camionDarsen1"));
         estadoDarsen1.setCellValueFactory(new PropertyValueFactory<>("estadoDarsen1"));
@@ -139,6 +167,7 @@ public class Controller implements Initializable {
         rndDarse2.setCellValueFactory(new PropertyValueFactory<>("rndDarse2"));
         tiempoAtDarse2.setCellValueFactory(new PropertyValueFactory<>("tiempoAtDarse2"));
         proxFinAtDarse2.setCellValueFactory(new PropertyValueFactory<>("proxFinAtDarse2"));
+        colaDarsena.setCellValueFactory(new PropertyValueFactory<>("colaDarsena"));
     }
 
 
@@ -147,5 +176,37 @@ public class Controller implements Initializable {
         this.cargarTabla();
     }
 
+
+    private void clearItemsInTableView() {
+        tvSim.getItems().clear();
+    }
+
+    public void closeApp(ActionEvent event)
+    {
+        Platform.exit();
+        System.exit(0);
+    }
+
+    @FXML
+    void openEstadisticas(ActionEvent event)throws Exception {
+        setSimulationDialog();
+
+
+    }
+
+    private void setSimulationDialog() throws Exception {
+
+        paneMain.getChildren().setAll((AnchorPane) FXMLLoader.load(getClass().getResource("estadisticas.fxml")));
+
+
+    }
+
+
+    private void setStats() {
+        txCamionesXDia.setText(gestor.promedioDeCamionesAtendidosPorDia());
+        txCamionesTotales.setText(gestor.cantidadDeCamionesTotales());
+        txCamionesNoAtendidos.setText(gestor.cantidadDeCamionesNoAtendidos());
+        txAvgDurationService.setText(gestor.promedioDeTiempoDePermanencia());
+    }
 
 }

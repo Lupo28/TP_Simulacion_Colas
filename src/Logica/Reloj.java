@@ -52,13 +52,14 @@ public class Reloj {
         if( segundos < 10 ) ceroS = "0";
         horas = horas % 24;
 
+
         return ceroH + String.valueOf(horas) + ":"  + ceroM + String.valueOf(minutos) + ":" + ceroS + String.valueOf(segundos);
     }
     public static String tiempoString(){
 
 
         tiempoActual=(long)tiempoActual;
-        long horas = (long)tiempoActual / 3600;
+        long horas = (long)tiempoActual/3600 ;
         long minutos = (long)(tiempoActual - horas*3600) / 60;
         long segundos = (long) (tiempoActual - (horas*3600 + minutos*60));
         String ceroH = "", ceroM = "", ceroS = "";
@@ -66,6 +67,10 @@ public class Reloj {
         if( minutos < 10 ) ceroM = "0";
         if( segundos < 10 ) ceroS = "0";
         horas = horas % 24;
+        if(horas==1)
+        {
+            dia++;
+        }
 
         return ceroH + horas + ":"  + ceroM + minutos + ":" + ceroS + segundos;
     }
