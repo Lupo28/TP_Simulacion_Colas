@@ -1,4 +1,5 @@
 package sample;
+
 import Logica.*;
 import com.sun.javafx.scene.control.skin.NestedTableColumnHeader;
 import com.sun.javafx.scene.control.skin.TableColumnHeader;
@@ -27,6 +28,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.scene.control.*;
 
 public class Controller implements Initializable {
@@ -63,45 +65,45 @@ public class Controller implements Initializable {
     @FXML
     private TableView<Fila> tvSim;
     @FXML
-    private TableColumn<Fila, String>dia;
+    private TableColumn<Fila, String> dia;
     @FXML
-    private TableColumn<Fila, String>reloj;
+    private TableColumn<Fila, String> reloj;
     @FXML
-    private TableColumn<Fila, String>event;
+    private TableColumn<Fila, String> event;
     @FXML
-    private TableColumn<Fila, String>camion;
+    private TableColumn<Fila, String> camion;
     @FXML
-    private TableColumn<Fila, String>rnd1;
+    private TableColumn<Fila, String> rnd1;
     @FXML
-    private TableColumn<Fila, String>tiempoEntreLlegadas;
+    private TableColumn<Fila, String> tiempoEntreLlegadas;
     @FXML
-    private TableColumn<Fila, String>prox;
+    private TableColumn<Fila, String> prox;
     @FXML
-    private TableColumn<Fila, String>colaEnPuerta;
+    private TableColumn<Fila, String> colaEnPuerta;
     @FXML
-    private TableColumn<Fila, String>camionRecepcion;
+    private TableColumn<Fila, String> camionRecepcion;
     @FXML
-    private TableColumn<Fila, String>estadoRecepcion;
+    private TableColumn<Fila, String> estadoRecepcion;
     @FXML
-    private TableColumn<Fila, String>rndRecepcion;
+    private TableColumn<Fila, String> rndRecepcion;
     @FXML
-    private TableColumn<Fila, String>tiempoLlegadaRecepcion;
+    private TableColumn<Fila, String> tiempoLlegadaRecepcion;
     @FXML
-    private TableColumn<Fila, String>proxFinAtencionRecepcion;
+    private TableColumn<Fila, String> proxFinAtencionRecepcion;
     @FXML
     private TableColumn<Fila, String> colaRecepcion;
     @FXML
-    private TableColumn<Fila, String>camionBalanz;
+    private TableColumn<Fila, String> camionBalanz;
     @FXML
-    private TableColumn<Fila, String>estadBalanza;
+    private TableColumn<Fila, String> estadBalanza;
     @FXML
-    private TableColumn<Fila, String>rndBalanz;
+    private TableColumn<Fila, String> rndBalanz;
     @FXML
     private TableColumn<Fila, String> tiempoAtencionBalanz;
     @FXML
     private TableColumn<Fila, String> proxFinAtBalan;
     @FXML
-    private TableColumn<Fila, String>colaBalanza;
+    private TableColumn<Fila, String> colaBalanza;
     @FXML
     private TableColumn<Fila, String> camionDarsen1;
     @FXML
@@ -126,8 +128,7 @@ public class Controller implements Initializable {
     private TableColumn<Fila, String> colaDarsena;
 
 
-    public void cargarTabla()
-    {
+    public void cargarTabla() {
         this.gestor.inicio();
 
         this.setearColummnas();
@@ -137,8 +138,7 @@ public class Controller implements Initializable {
         tvSim.setItems(list);
     }
 
-    public void setearColummnas()
-    {
+    public void setearColummnas() {
         dia.setCellValueFactory(new PropertyValueFactory<>("dia"));
         reloj.setCellValueFactory(new PropertyValueFactory<>("reloj"));
         event.setCellValueFactory(new PropertyValueFactory<>("event"));
@@ -146,7 +146,7 @@ public class Controller implements Initializable {
         rnd1.setCellValueFactory(new PropertyValueFactory<>("rnd1"));
         camion.setCellValueFactory(new PropertyValueFactory<>("camion"));
         tiempoEntreLlegadas.setCellValueFactory(new PropertyValueFactory<>("tiempoEntreLlegadas"));
-        colaRecepcion.setCellValueFactory(new PropertyValueFactory<>("colaRecepcion"));
+        //colaRecepcion.setCellValueFactory(new PropertyValueFactory<>("colaRecepcion"));
         prox.setCellValueFactory(new PropertyValueFactory<>("prox"));
         camionRecepcion.setCellValueFactory(new PropertyValueFactory<>("camionRecepcion"));
         estadoRecepcion.setCellValueFactory(new PropertyValueFactory<>("estadoRecepcion"));
@@ -186,14 +186,13 @@ public class Controller implements Initializable {
         tvSim.getItems().clear();
     }
 
-    public void closeApp(ActionEvent event)
-    {
+    public void closeApp(ActionEvent event) {
         Platform.exit();
         System.exit(0);
     }
 
     @FXML
-    void openEstadisticas(ActionEvent event)throws Exception {
+    void openEstadisticas(ActionEvent event) throws Exception {
         setSimulationDialog();
 
 
@@ -214,25 +213,36 @@ public class Controller implements Initializable {
         txAvgDurationService.setText(gestor.promedioDeTiempoDePermanencia());
 
     }
+
     @FXML
     void simulacionOnAction(ActionEvent event) {
 //        clearItemsInTableView();
-//        gestor.setDiaDesde(Integer.valueOf(txtDiaHasta.getText()));
-//        gestor.setDiaHasta(Integer.valueOf(txtDiaDesde.getText()));
+        if (txtDiaDesde.getText() == null || txtDiaDesde.getText().trim().isEmpty()) {
+            gestor.setDiaDesde(0);
+
+        } else {
+            gestor.setDiaDesde(Integer.valueOf(txtDiaDesde.getText()));
+        }
+        if (txtDiaHasta.getText() == null || txtDiaHasta.getText().trim().isEmpty()) {
+            gestor.setDiaHasta(30);
+        } else {
+            gestor.setDiaHasta(Integer.valueOf(txtDiaHasta.getText()));
+        }
+
 //        this.resetSimulation();
         this.cargarTabla();
         this.setStats();
     }
 
 
-    public boolean verificadorDeDias(String txtFromDay, String txtToDay){
-        if(txtFromDay.equals("")) txtFromDay = "1";
-        if(txtToDay.equals("")) txtToDay = "30";
+    public boolean verificadorDeDias(String txtFromDay, String txtToDay) {
+        if (txtFromDay.equals("")) txtFromDay = "1";
+        if (txtToDay.equals("")) txtToDay = "30";
 
-        return  isInDayRange(Integer.parseInt(txtFromDay), Integer.parseInt(txtToDay));
+        return isInDayRange(Integer.parseInt(txtFromDay), Integer.parseInt(txtToDay));
     }
 
-    private boolean isInDayRange(Integer fromDay, Integer toDay){
+    private boolean isInDayRange(Integer fromDay, Integer toDay) {
         return gestor.getDia() >= fromDay && gestor.getDia() <= toDay;
     }
 

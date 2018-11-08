@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -8,12 +7,12 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.TextField?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="593.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <top>
         <MenuBar prefHeight="29.0" prefWidth="661.0">
@@ -38,19 +37,19 @@
                         <TableColumn fx:id="rnd1" prefWidth="75.0" text="RND" />
                         <TableColumn fx:id="tiempoEntreLlegadas" prefWidth="75.0" text="T.Entre Llegadas" />
                         <TableColumn fx:id="prox" prefWidth="75.0" text="Proxima Fin Atencion" />
-                        <TableColumn fx:id="colaEnPuerta" prefWidth="75.0" text="Cola Recepcion" />
+                        <TableColumn fx:id="colaEnPuerta" visible="false" prefWidth="120.0" text="Camiones fuera de Hora" />
                         <TableColumn fx:id="camionRecepcion" prefWidth="75.0" text="Camion" />
                         <TableColumn fx:id="estadoRecepcion" prefWidth="75.0" text="Estado Recepcion" />
                         <TableColumn fx:id="rndRecepcion" prefWidth="75.0" text="Rnd" />
                         <TableColumn fx:id="tiempoLlegadaRecepcion" prefWidth="75.0" text="Tiempo Llegada" />
                         <TableColumn fx:id="proxFinAtencionRecepcion" prefWidth="75.0" text="Proximo Fin Atencion" />
-                        <TableColumn fx:id="colaRecepcion" prefWidth="75.0" text="Cola" />
+                        <TableColumn fx:id="colaRecepcion" prefWidth="75.0" text="Cola Recepcion" />
                         <TableColumn fx:id="camionBalanz" prefWidth="75.0" text="Camion" />
                         <TableColumn fx:id="estadBalanza" prefWidth="75.0" text="Estado Balanza" />
                         <TableColumn fx:id="rndBalanz" prefWidth="75.0" text="Rnd" />
                         <TableColumn fx:id="tiempoAtencionBalanz" prefWidth="75.0" text="Tiempo Atencion" />
                         <TableColumn fx:id="proxFinAtBalan" prefWidth="75.0" text="Proximo Fin Atencion" />
-                        <TableColumn fx:id="colaBalanza" prefWidth="75.0" text="Cola" />
+                        <TableColumn fx:id="colaBalanza" prefWidth="75.0" text="Cola Balanza" />
                         <TableColumn fx:id="camionDarsen1" prefWidth="75.0" text="Camion" />
                         <TableColumn fx:id="estadoDarsen1" prefWidth="75.0" text="Estado Darsena 1" />
                         <TableColumn fx:id="rndDarsen1" prefWidth="75.0" text="Rnd" />
@@ -71,16 +70,18 @@
       <AnchorPane fx:id="anchorPane" prefHeight="82.0" prefWidth="593.0" BorderPane.alignment="CENTER">
          <children>
             <Text layoutX="27.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Camiones" wrappingWidth="150.0263671875" />
-            <Text layoutX="27.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Promedio Camiones" wrappingWidth="142.0263671875" />
-            <Label fx:id="txCamionesTotales" layoutX="230.0" layoutY="16.0" text="0" />
-            <Label fx:id="txCamionesXDia" layoutX="230.0" layoutY="43.0" text="0" />
-            <Text layoutX="500.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Camiones no atendidos" wrappingWidth="159.0263671875" />
-            <Label fx:id="txCamionesNoAtendidos" layoutX="700.0" layoutY="16.0" prefHeight="17.0" prefWidth="14.0" text="0" />
-            <Text layoutX="500.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duracion Promedio de Servicio" wrappingWidth="193.0263671875" />
-            <Label fx:id="txAvgDurationService" layoutX="700.0" layoutY="43.0" maxHeight="1.7976931348623157E308" prefHeight="17.0" prefWidth="14.0" text="0" />
+            <Text layoutX="27.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Promedio Camiones Atentidos Diarios" wrappingWidth="242.0263671875" />
+            <Label fx:id="txCamionesTotales" layoutX="280.0" layoutY="43.0" text="0" />
+            <Label fx:id="txCamionesXDia" layoutX="280.0" layoutY="16.0" text="0" />
+            <Text layoutX="446.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Camiones no atendidos" wrappingWidth="159.0263671875" />
+            <Label fx:id="txCamionesNoAtendidos" layoutX="664.0" layoutY="16.0" prefHeight="18.0" prefWidth="61.0" text="0" />
+            <Text layoutX="446.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duracion Promedio de Servicio" wrappingWidth="193.0263671875" />
+            <Label fx:id="txAvgDurationService" layoutX="665.0" layoutY="43.0" maxHeight="1.7976931348623157E308" prefHeight="18.0" prefWidth="100.0" text="0" />
             <Button fx:id="btnsimular" layoutX="900.0" layoutY="43.0" mnemonicParsing="false" onAction="#simulacionOnAction" text="Simular" />
-            <TextField fx:id="txtDiaHasta"  layoutX="900.0" layoutY="11.0" />
-            <TextField fx:id="txtDiaDesde"  layoutX="781.0" layoutY="11.0" prefHeight="28.0" prefWidth="82.0" />
+            <TextField fx:id="txtDiaDesde" layoutX="801.0" layoutY="45.0" prefHeight="28.0" prefWidth="69.0" />
+            <TextField fx:id="txtDiaHasta" layoutX="801.0" layoutY="10.0" prefHeight="28.0" prefWidth="69.0" />
+            <Text layoutX="743.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desde" wrappingWidth="48.0263671875" />
+            <Text layoutX="743.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hasta" wrappingWidth="48.0263671875" />
          </children>
       </AnchorPane>
    </bottom>

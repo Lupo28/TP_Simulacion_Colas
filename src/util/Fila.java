@@ -89,7 +89,7 @@ public class Fila {
         return colaRecepcion.get();
     }
 
-    public SimpleStringProperty colaRececionProperty() {
+    public SimpleStringProperty colaRecepcionProperty() {
         return colaRecepcion;
     }
 
@@ -405,11 +405,7 @@ public class Fila {
         this.dia.set(dia);
     }
 
-    public SimpleStringProperty colaRecepcionProperty() {
-        return colaRecepcion;
-    }
-
-    public Fila(String dia, String reloj, String event, String colaEnPuerta, String camion, String rnd1, String tiempoEntreLlegadas, String prox, String colaRececion, String camionRecepcion, String estadoRecepcion, String rndRecepcion, String tiempoLlegadaRecepcion, String proxFinAtencionRecepcion, String colaBalanza, String camionBalanz, String estadBalanza, String rndBalanz, String tiempoAtencionBalanz, String proxFinAtBalan, String camionDarsen1, String estadoDarsen1, String rndmDarsen1, String tiempoAtencionDarse1, String finAtencionProxDarse1, String camionDarse2, String estadoDarse2, String rndDarse2, String tiempoAtDarse2, String proxFinAtDarse2, String colaDarsena) {
+    public Fila(String dia, String reloj, String event, String colaEnPuerta, String camion, String rnd1, String tiempoEntreLlegadas, String prox, String colaRecepcion, String camionRecepcion, String estadoRecepcion, String rndRecepcion, String tiempoLlegadaRecepcion, String proxFinAtencionRecepcion, String colaBalanza, String camionBalanz, String estadBalanza, String rndBalanz, String tiempoAtencionBalanz, String proxFinAtBalan, String camionDarsen1, String estadoDarsen1, String rndmDarsen1, String tiempoAtencionDarse1, String finAtencionProxDarse1, String camionDarse2, String estadoDarse2, String rndDarse2, String tiempoAtDarse2, String proxFinAtDarse2, String colaDarsena) {
         this.dia= new SimpleStringProperty(dia);
         this.reloj = new SimpleStringProperty(reloj);
         this.event = new SimpleStringProperty(event);
@@ -418,7 +414,7 @@ public class Fila {
         this.rnd1 = new SimpleStringProperty(rnd1);
         this.tiempoEntreLlegadas = new SimpleStringProperty(tiempoEntreLlegadas);
         this.prox = new SimpleStringProperty(prox);
-        this.colaRecepcion = new SimpleStringProperty(colaRececion);
+        this.colaRecepcion = new SimpleStringProperty(colaRecepcion);
         this.camionRecepcion = new SimpleStringProperty(camionRecepcion);
         this.estadoRecepcion = new SimpleStringProperty(estadoRecepcion);
         this.rndRecepcion = new SimpleStringProperty(rndRecepcion);

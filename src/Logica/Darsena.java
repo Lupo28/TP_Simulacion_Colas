@@ -18,6 +18,7 @@ public class Darsena {
         this.tiempoAtencion = 0;
         this.proxFinAtencion = 0;
         this.estadoDarsena = EstadoDarsena.Libre;
+
     }
 
     public int getId() {
@@ -128,7 +129,8 @@ public class Darsena {
         this.setRandomRecal2(Math.random());
         double z = Math.sqrt(-2*Math.log(this.getRandomRecal1())*Math.cos(2*Math.PI*this.getRandomRecal2()));
         double demora = 10 + (z*1.2);
-        this.tiempoRecalibrado = (demora / 60);
+        this.tiempoRecalibrado = ((demora / 60)*3600);
+        proximoFinRecalibrado(Reloj.getInstancia().getTiempoActual());
         this.estadoDarsena = EstadoDarsena.En_Recalibracion;
     }
 
