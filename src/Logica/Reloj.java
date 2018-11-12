@@ -81,4 +81,9 @@ public class Reloj {
     }
 
 
+    public static void resetearReloj()
+    {
+        setDia(0);
+    }
+
 }

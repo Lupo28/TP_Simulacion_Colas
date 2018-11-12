@@ -178,7 +178,6 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-
     }
 
 
@@ -216,7 +215,7 @@ public class Controller implements Initializable {
 
     @FXML
     void simulacionOnAction(ActionEvent event) {
-//        clearItemsInTableView();
+
         if (txtDiaDesde.getText() == null || txtDiaDesde.getText().trim().isEmpty()) {
             gestor.setDiaDesde(0);
 
@@ -229,8 +228,7 @@ public class Controller implements Initializable {
             gestor.setDiaHasta(Integer.valueOf(txtDiaHasta.getText()));
         }
 
-//        this.resetSimulation();
-        this.cargarTabla();
+        this.initializeNewSimulation();
         this.setStats();
     }
 
@@ -254,18 +252,20 @@ public class Controller implements Initializable {
         }
     }
 
-//    private void initializeNewSimulation() {
-//
-//        data = FXCollections.observableArrayList();
-//    }
+    private void initializeNewSimulation() {
 
-//    private void resetSimulation() {
-//        txAvgDurationService.setText("0");
-//        txCamionesNoAtendidos.setText("0");
-//        txCamionesTotales.setText("0");
-//        txCamionesXDia.setText("0");
-//        clearItemsInTableView();
-//        initializeNewSimulation();
-//    }
+        this.resetSimulation();
+    }
+
+    private void resetSimulation() {
+        txAvgDurationService.setText("0");
+        txCamionesNoAtendidos.setText("0");
+        txCamionesTotales.setText("0");
+        txCamionesXDia.setText("0");
+        this.gestor = new Gestor();
+        Reloj.resetearReloj();
+        clearItemsInTableView();
+        cargarTabla();
+    }
 
 }
