@@ -35,15 +35,19 @@ public class Controller implements Initializable {
 
     private ObservableList<Fila> data;
     private Gestor gestor;
+    private GestorAlternativa gestorAlternativa;
     private Reloj reloj1;
 
     public Controller() {
         this.gestor = new Gestor();
+        this.gestorAlternativa = new GestorAlternativa();
         this.reloj1 = Reloj.getInstancia();
         this.tvSim = new TableView<Fila>();
     }
 
 
+    @FXML
+    private Button btnsimularAlternativo;
     @FXML
     private Label txCamionesTotales;
     @FXML
@@ -130,6 +134,7 @@ public class Controller implements Initializable {
 
     public void cargarTabla() {
 
+
         this.gestor.inicio();
 
         this.setearColummnas();
@@ -215,8 +220,15 @@ public class Controller implements Initializable {
     @FXML
     void simulacionOnAction(ActionEvent event) {
 
-        this.initializeNewSimulation();
+        this.initializeNewSimulation(true);//true porque es la simulacion comun
         this.setStats();
+    }
+
+    @FXML
+    void simulacionAlternativaOnAction(ActionEvent event) {
+
+        this.initializeNewSimulation(false);//false porque es la simulacion alternativa
+        this.setStatsAlternativa();
     }
 
     public void setearDias()
@@ -231,6 +243,21 @@ public class Controller implements Initializable {
             gestor.setDiaHasta(30);
         } else {
             gestor.setDiaHasta(Integer.valueOf(txtDiaHasta.getText()));
+        }
+    }
+
+    public void setearDiasAlternativa()
+    {
+        if (txtDiaDesde.getText() == null || txtDiaDesde.getText().trim().isEmpty()) {
+            gestorAlternativa.setDiaDesde(0);
+
+        } else {
+            gestorAlternativa.setDiaDesde(Integer.valueOf(txtDiaDesde.getText()));
+        }
+        if (txtDiaHasta.getText() == null || txtDiaHasta.getText().trim().isEmpty()) {
+            gestorAlternativa.setDiaHasta(30);
+        } else {
+            gestorAlternativa.setDiaHasta(Integer.valueOf(txtDiaHasta.getText()));
         }
     }
 
@@ -254,23 +281,60 @@ public class Controller implements Initializable {
         }
     }
 
-    private void initializeNewSimulation() {
+    private void initializeNewSimulation(boolean bool) {
 
-        this.resetSimulation();
+        this.resetSimulation(bool);
     }
 
-    private void resetSimulation() {
+    private void resetSimulation(boolean bool) {
         txAvgDurationService.setText("0");
         txCamionesNoAtendidos.setText("0");
         txCamionesTotales.setText("0");
         txCamionesXDia.setText("0");
 
         Reloj.resetearReloj();
-        this.gestor = new Gestor();
-        this.setearDias();
+        if (bool)
+        {
+            this.gestor = new Gestor();
+            this.setearDias();
+        }else
+        {
+            this.gestorAlternativa = new GestorAlternativa();
+            this.setearDiasAlternativa();
+        }
+
+
 
         clearItemsInTableView();
-        cargarTabla();
+
+        if(bool)
+        {
+            cargarTabla();
+        }else
+        {
+            cargarTablaAlternativa();
+        }
+
     }
 
+
+    public void cargarTablaAlternativa() {
+
+
+        this.gestorAlternativa.inicio();
+
+        this.setearColummnas();
+
+        ObservableList<Fila> list = gestorAlternativa.getData();
+
+        tvSim.setItems(list);
+    }
+
+    private void setStatsAlternativa() {
+        txCamionesXDia.setText(gestorAlternativa.promedioDeCamionesAtendidosPorDia());
+        txCamionesTotales.setText(gestorAlternativa.cantidadDeCamionesTotales());
+        txCamionesNoAtendidos.setText(gestorAlternativa.cantidadDeCamionesNoAtendidos());
+        txAvgDurationService.setText(gestorAlternativa.promedioDeTiempoDePermanencia());
+
+    }
 }

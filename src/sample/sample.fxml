@@ -37,7 +37,7 @@
                         <TableColumn fx:id="rnd1" prefWidth="75.0" text="RND" />
                         <TableColumn fx:id="tiempoEntreLlegadas" prefWidth="75.0" text="T.Entre Llegadas" />
                         <TableColumn fx:id="prox" prefWidth="75.0" text="Proxima Fin Atencion" />
-                        <TableColumn fx:id="colaEnPuerta" visible="false" prefWidth="120.0" text="Camiones fuera de Hora" />
+                        <TableColumn fx:id="colaEnPuerta" prefWidth="120.0" text="Camiones fuera de Hora" visible="false" />
                         <TableColumn fx:id="camionRecepcion" prefWidth="75.0" text="Camion" />
                         <TableColumn fx:id="estadoRecepcion" prefWidth="75.0" text="Estado Recepcion" />
                         <TableColumn fx:id="rndRecepcion" prefWidth="75.0" text="Rnd" />
@@ -51,11 +51,13 @@
                         <TableColumn fx:id="proxFinAtBalan" prefWidth="75.0" text="Proximo Fin Atencion" />
                         <TableColumn fx:id="colaBalanza" prefWidth="75.0" text="Cola Balanza" />
                         <TableColumn fx:id="camionDarsen1" prefWidth="75.0" text="Camion" />
+                        <TableColumn fx:id="litros1" prefWidth="75.0" text="Litros D1" />
                         <TableColumn fx:id="estadoDarsen1" prefWidth="75.0" text="Estado Darsena 1" />
                         <TableColumn fx:id="rndDarsen1" prefWidth="75.0" text="Rnd" />
                         <TableColumn fx:id="tiempoAtencionDarse1" prefWidth="75.0" text="Tiempo Atencion" />
                         <TableColumn fx:id="finAtencionProxDarse1" prefWidth="75.0" text="Proximo Fin Atencion" />
                         <TableColumn fx:id="camionDarse2" prefWidth="75.0" text="Camion" />
+                        <TableColumn fx:id="litros2" prefWidth="75.0" text="Litros D2" />
                         <TableColumn fx:id="estadoDarse2" prefWidth="75.0" text="Estado Darsena 2" />
                         <TableColumn fx:id="rndDarse2" prefWidth="75.0" text="Rnd" />
                         <TableColumn fx:id="tiempoAtDarse2" prefWidth="75.0" text="Tiempo Atencion" />
@@ -77,11 +79,12 @@
             <Label fx:id="txCamionesNoAtendidos" layoutX="664.0" layoutY="16.0" prefHeight="18.0" prefWidth="61.0" text="0" />
             <Text layoutX="446.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duracion Promedio de Servicio" wrappingWidth="193.0263671875" />
             <Label fx:id="txAvgDurationService" layoutX="665.0" layoutY="43.0" maxHeight="1.7976931348623157E308" prefHeight="18.0" prefWidth="100.0" text="0" />
-            <Button fx:id="btnsimular" layoutX="900.0" layoutY="43.0" mnemonicParsing="false" onAction="#simulacionOnAction" text="Simular" />
+            <Button fx:id="btnsimular" layoutX="900.0" layoutY="43.0" mnemonicParsing="false" onAction="#simulacionOnAction" text="Simulacion Comun" />
             <TextField fx:id="txtDiaHasta" layoutX="801.0" layoutY="45.0" prefHeight="28.0" prefWidth="69.0" />
             <TextField fx:id="txtDiaDesde" layoutX="801.0" layoutY="10.0" prefHeight="28.0" prefWidth="69.0" />
             <Text layoutX="743.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desde" wrappingWidth="48.0263671875" />
             <Text layoutX="743.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hasta" wrappingWidth="48.0263671875" />
+            <Button fx:id="btnsimularAlternativo" layoutX="901.0" layoutY="3.0" mnemonicParsing="false" onAction="#simulacionAlternativaOnAction" text="Simulacion Alternativa" />
          </children>
       </AnchorPane>
    </bottom>

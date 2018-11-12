@@ -108,7 +108,7 @@ public class LlegadaDeCamion extends Evento
 
     public void calcularTiempoLlegada2() {
         double demora = (7 + this.randomLlegada)*3600;
-        setTiempoLlegada(demora);
+        setTiempoLlegada(demora/60);
     }
 
     public void calcularProxLlegada2()
