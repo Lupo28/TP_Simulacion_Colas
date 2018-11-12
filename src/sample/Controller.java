@@ -126,6 +126,10 @@ public class Controller implements Initializable {
     private TableColumn<Fila, String> proxFinAtDarse2;
     @FXML
     private TableColumn<Fila, String> colaDarsena;
+    @FXML
+    private TableColumn<Fila, String> litros1;
+    @FXML
+    private TableColumn<Fila, String> litros2;
 
 
     public void cargarTabla() {
@@ -172,6 +176,8 @@ public class Controller implements Initializable {
         tiempoAtDarse2.setCellValueFactory(new PropertyValueFactory<>("tiempoAtDarse2"));
         proxFinAtDarse2.setCellValueFactory(new PropertyValueFactory<>("proxFinAtDarse2"));
         colaDarsena.setCellValueFactory(new PropertyValueFactory<>("colaDarsena"));
+        litros1.setCellValueFactory(new PropertyValueFactory<>("litros1"));
+        litros2.setCellValueFactory(new PropertyValueFactory<>("litros2"));
     }
 
 

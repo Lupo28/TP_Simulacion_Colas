@@ -119,15 +119,6 @@ public class Gestor {
         iterar();
     }
 
-
-    public void ejecutarSimulacion(boolean bool)
-    {
-        if(bool)
-        {
-            this.iterar();
-        }
-    }
-
     public void iterar() {
 
 
@@ -418,12 +409,13 @@ public class Gestor {
             String tiempoArDarse2Content = getServidoresDarsena().getDarsenas()[1].getTiempoAtencion1();
             String proxFinAtDarse2Content = getServidoresDarsena().getDarsenas()[1].getProxFinAtencion1();
             String colaDarsenaContent = Integer.toString(getServidoresDarsena().getCola().size());
-
+            String litros1Content =Double.toString(getServidoresDarsena().getDarsenas()[0].getCamion().getLitrosCombustible());
+            String litros2Content =Double.toString(getServidoresDarsena().getDarsenas()[1].getCamion().getLitrosCombustible());
             data.add(new Fila(diaContent, relojContent, eventContent, colaEnPuertaContent,camionContent, rnd1Content, tiempoEntreLlegadasContent, proxContent, colaRecepcionContent,
                     camionRecepcionContent, estadoRecepcionContet, rndRecepcionContent, tiempoLlegadaRecepcionContent, proxFinAtencionRecepcionContent,
                     colaBalanzaContent, camionBalanzContent, estadBalanzContent, rndBalanzaContent, tiempoAtencionBalanzContent, proxFinAtBalContent,
                     camionDarse1Content, estadoDarse1Content, rndDarsen1Content, tiempoAtencionDarse1Content, finAtencionProxDarse1Content,
-                    camionDarse2Content, estadoDarse2Content, rndDarse2Content, tiempoArDarse2Content, proxFinAtDarse2Content, colaDarsenaContent));
+                    camionDarse2Content, estadoDarse2Content, rndDarse2Content, tiempoArDarse2Content, proxFinAtDarse2Content, colaDarsenaContent,litros1Content,litros2Content));
         }
 
 
@@ -462,8 +454,10 @@ public class Gestor {
             String tiempoArDarse2Content = "00:00:00";
             String proxFinAtDarse2Content = "00:00:00";
             String colaDarsenaContent = "0";
+            String litros1Content="0";
+            String litros2Content="0";
 
-            data.add(new Fila(diaContent, relojContent, eventContent, colaEnPuertaContent, camionContent, rnd1Content, tiempoEntreLlegadasContent, proxContent, colaRecepcionContent, camionRecepcionContent, estadoRecepcionContet, rndRecepcionContent, tiempoLlegadaRecepcionContent, proxFinAtencionRecepcionContent, colaRecepcionContent, camionBalanzContent, estadBalanzContent, rndBalanzaContent, tiempoAtencionBalanzContent, proxFinAtBalContent, camionDarse1Content, estadoDarse1Content, rndDarsen1Content, tiempoAtencionDarse1Content, finAtencionProxDarse1Content, camionDarse2Content, estadoDarse2Content, rndDarse2Content, tiempoArDarse2Content, proxFinAtDarse2Content, colaDarsenaContent));
+            data.add(new Fila(diaContent, relojContent, eventContent, colaEnPuertaContent, camionContent, rnd1Content, tiempoEntreLlegadasContent, proxContent, colaRecepcionContent, camionRecepcionContent, estadoRecepcionContet, rndRecepcionContent, tiempoLlegadaRecepcionContent, proxFinAtencionRecepcionContent, colaRecepcionContent, camionBalanzContent, estadBalanzContent, rndBalanzaContent, tiempoAtencionBalanzContent, proxFinAtBalContent, camionDarse1Content, estadoDarse1Content, rndDarsen1Content, tiempoAtencionDarse1Content, finAtencionProxDarse1Content, camionDarse2Content, estadoDarse2Content, rndDarse2Content, tiempoArDarse2Content, proxFinAtDarse2Content, colaDarsenaContent,litros1Content, litros2Content));
         }
     }
 
