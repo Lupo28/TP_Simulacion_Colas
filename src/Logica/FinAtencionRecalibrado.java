@@ -21,8 +21,12 @@ public class FinAtencionRecalibrado extends Evento
             darsenas.getDarsena(darsenaFinalizada).setEstadoDarsena(EstadoDarsena.Ocupado);
         }
 
-
     }
+
+    public Darsena getDarsenaFinalizada(){
+        return darsenas.getDarsena(darsenaFinalizada);
+    }
+
     public  String getNombre()
     {
         String nombre= "Fin At Recalibrado - Darsena " + darsenaFinalizada;

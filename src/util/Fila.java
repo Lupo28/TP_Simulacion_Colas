@@ -1,6 +1,17 @@
 package util;
 import javafx.beans.property.SimpleStringProperty;
 public class Fila {
+    public String getColaEnPuerta() {
+        return colaEnPuerta.get();
+    }
+
+    public SimpleStringProperty colaEnPuertaProperty() {
+        return colaEnPuerta;
+    }
+
+    public void setColaEnPuerta(String colaEnPuerta) {
+        this.colaEnPuerta.set(colaEnPuerta);
+    }
 
     public String getReloj() {
         return reloj.get();
@@ -74,16 +85,16 @@ public class Fila {
         this.prox.set(prox);
     }
 
-    public String getColaRececion() {
-        return colaRececion.get();
+    public String getColaRecepcion() {
+        return colaRecepcion.get();
     }
 
-    public SimpleStringProperty colaRececionProperty() {
-        return colaRececion;
+    public SimpleStringProperty colaRecepcionProperty() {
+        return colaRecepcion;
     }
 
-    public void setColaRececion(String colaRececion) {
-        this.colaRececion.set(colaRececion);
+    public void setColaRecepcion(String colaRecepcion) {
+        this.colaRecepcion.set(colaRecepcion);
     }
 
     public String getCamionRecepcion() {
@@ -146,18 +157,6 @@ public class Fila {
         this.proxFinAtencionRecepcion.set(proxFinAtencionRecepcion);
     }
 
-    public String getColaRecep() {
-        return colaRecep.get();
-    }
-
-    public SimpleStringProperty colaRecepProperty() {
-        return colaRecep;
-    }
-
-    public void setColaRecep(String colaRecep) {
-        this.colaRecep.set(colaRecep);
-    }
-
     public String getCamionBalanz() {
         return camionBalanz.get();
     }
@@ -218,16 +217,16 @@ public class Fila {
         this.proxFinAtBalan.set(proxFinAtBalan);
     }
 
-    public String getColaBalanz() {
-        return colaBalanz.get();
+    public String getColaBalanza() {
+        return colaBalanza.get();
     }
 
-    public SimpleStringProperty colaBalanzProperty() {
-        return colaBalanz;
+    public SimpleStringProperty colaBalanzaProperty() {
+        return colaBalanza;
     }
 
-    public void setColaBalanz(String colaBalanz) {
-        this.colaBalanz.set(colaBalanz);
+    public void setColaBalanza(String colaBalanza) {
+        this.colaBalanza.set(colaBalanza);
     }
 
     public String getCamionDarsen1() {
@@ -254,16 +253,16 @@ public class Fila {
         this.estadoDarsen1.set(estadoDarsen1);
     }
 
-    public String getRndmDarsen1() {
-        return rndmDarsen1.get();
+    public String getRndDarsen1() {
+        return rndDarsen1.get();
     }
 
-    public SimpleStringProperty rndmDarsen1Property() {
-        return rndmDarsen1;
+    public SimpleStringProperty rndDarsen1Property() {
+        return rndDarsen1;
     }
 
-    public void setRndmDarsen1(String rndmDarsen1) {
-        this.rndmDarsen1.set(rndmDarsen1);
+    public void setRndDarsen1(String rndmDarsen1) {
+        this.rndDarsen1.set(rndmDarsen1);
     }
 
     public String getTiempoAtencionDarse1() {
@@ -350,40 +349,41 @@ public class Fila {
         this.proxFinAtDarse2.set(proxFinAtDarse2);
     }
 
-    public String getColaDarsenas() {
-        return colaDarsenas.get();
+    public String getColaDarsena() {
+        return colaDarsena.get();
     }
 
-    public SimpleStringProperty colaDarsenasProperty() {
-        return colaDarsenas;
+    public SimpleStringProperty colaDarsenaProperty() {
+        return colaDarsena;
     }
 
-    public void setColaDarsenas(String colaDarsenas) {
-        this.colaDarsenas.set(colaDarsenas);
+    public void setColaDarsena(String colaDarsenas) {
+        this.colaDarsena.set(colaDarsenas);
     }
 
+    private final SimpleStringProperty dia;
     private final SimpleStringProperty reloj;
     private final SimpleStringProperty event;
+    private final SimpleStringProperty colaEnPuerta;
     private final SimpleStringProperty camion;
     private final SimpleStringProperty rnd1;
     private final SimpleStringProperty tiempoEntreLlegadas;
     private final SimpleStringProperty prox;
-    private final SimpleStringProperty colaRececion;
+    private final SimpleStringProperty colaRecepcion;
     private final SimpleStringProperty camionRecepcion;
     private final SimpleStringProperty estadoRecepcion;
     private final SimpleStringProperty rndRecepcion;
     private final SimpleStringProperty tiempoLlegadaRecepcion;
     private final SimpleStringProperty proxFinAtencionRecepcion;
-    private final SimpleStringProperty colaRecep;
+    private final SimpleStringProperty colaBalanza;
     private final SimpleStringProperty camionBalanz;
     private final SimpleStringProperty estadBalanza;
     private final SimpleStringProperty rndBalanz;
     private final SimpleStringProperty tiempoAtencionBalanz;
     private final SimpleStringProperty proxFinAtBalan;
-    private final SimpleStringProperty colaBalanz;
     private final SimpleStringProperty camionDarsen1;
     private final SimpleStringProperty estadoDarsen1;
-    private final SimpleStringProperty rndmDarsen1;
+    private final SimpleStringProperty rndDarsen1;
     private final SimpleStringProperty tiempoAtencionDarse1;
     private final SimpleStringProperty finAtencionProxDarse1;
     private final SimpleStringProperty camionDarse2;
@@ -391,31 +391,44 @@ public class Fila {
     private final SimpleStringProperty rndDarse2;
     private final SimpleStringProperty tiempoAtDarse2;
     private final SimpleStringProperty proxFinAtDarse2;
-    private final SimpleStringProperty colaDarsenas;
+    private final SimpleStringProperty colaDarsena;
 
-    public Fila(String reloj, String event, String camion, String rnd1, String tiempoEntreLlegadas, String prox, String colaRececion, String camionRecepcion, String estadoRecepcion, String rndRecepcion, String tiempoLlegadaRecepcion, String proxFinAtencionRecepcion, String colaRecep, String camionBalanz, String estadBalanza, String rndBalanz, String tiempoAtencionBalanz, String proxFinAtBalan, String colaBalanz, String camionDarsen1, String estadoDarsen1, String rndmDarsen1, String tiempoAtencionDarse1, String finAtencionProxDarse1, String camionDarse2, String estadoDarse2, String rndDarse2, String tiempoAtDarse2, String proxFinAtDarse2, String colaDarsenas) {
+    public String getDia() {
+        return dia.get();
+    }
+
+    public SimpleStringProperty diaProperty() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia.set(dia);
+    }
+
+    public Fila(String dia, String reloj, String event, String colaEnPuerta, String camion, String rnd1, String tiempoEntreLlegadas, String prox, String colaRecepcion, String camionRecepcion, String estadoRecepcion, String rndRecepcion, String tiempoLlegadaRecepcion, String proxFinAtencionRecepcion, String colaBalanza, String camionBalanz, String estadBalanza, String rndBalanz, String tiempoAtencionBalanz, String proxFinAtBalan, String camionDarsen1, String estadoDarsen1, String rndmDarsen1, String tiempoAtencionDarse1, String finAtencionProxDarse1, String camionDarse2, String estadoDarse2, String rndDarse2, String tiempoAtDarse2, String proxFinAtDarse2, String colaDarsena) {
+        this.dia= new SimpleStringProperty(dia);
         this.reloj = new SimpleStringProperty(reloj);
         this.event = new SimpleStringProperty(event);
+        this.colaEnPuerta = new SimpleStringProperty(colaEnPuerta);
         this.camion = new SimpleStringProperty(camion);
         this.rnd1 = new SimpleStringProperty(rnd1);
         this.tiempoEntreLlegadas = new SimpleStringProperty(tiempoEntreLlegadas);
         this.prox = new SimpleStringProperty(prox);
-        this.colaRececion = new SimpleStringProperty(colaRececion);
+        this.colaRecepcion = new SimpleStringProperty(colaRecepcion);
         this.camionRecepcion = new SimpleStringProperty(camionRecepcion);
         this.estadoRecepcion = new SimpleStringProperty(estadoRecepcion);
         this.rndRecepcion = new SimpleStringProperty(rndRecepcion);
         this.tiempoLlegadaRecepcion = new SimpleStringProperty(tiempoLlegadaRecepcion);
         this.proxFinAtencionRecepcion = new SimpleStringProperty(proxFinAtencionRecepcion);
-        this.colaRecep = new SimpleStringProperty(colaRecep);
+        this.colaBalanza = new SimpleStringProperty(colaBalanza);
         this.camionBalanz = new SimpleStringProperty(camionBalanz);
         this.estadBalanza = new SimpleStringProperty(estadBalanza);
         this.rndBalanz = new SimpleStringProperty(rndBalanz);
         this.tiempoAtencionBalanz = new SimpleStringProperty(tiempoAtencionBalanz);
         this.proxFinAtBalan = new SimpleStringProperty(proxFinAtBalan);
-        this.colaBalanz = new SimpleStringProperty(colaBalanz);
         this.camionDarsen1 = new SimpleStringProperty(camionDarsen1);
         this.estadoDarsen1 = new SimpleStringProperty(estadoDarsen1);
-        this.rndmDarsen1 = new SimpleStringProperty(rndmDarsen1);
+        this.rndDarsen1 = new SimpleStringProperty(rndmDarsen1);
         this.tiempoAtencionDarse1 = new SimpleStringProperty(tiempoAtencionDarse1);
         this.finAtencionProxDarse1 = new SimpleStringProperty(finAtencionProxDarse1);
         this.camionDarse2 = new SimpleStringProperty(camionDarse2);
@@ -423,6 +436,6 @@ public class Fila {
         this.rndDarse2 = new SimpleStringProperty(rndDarse2);
         this.tiempoAtDarse2 = new SimpleStringProperty(tiempoAtDarse2);
         this.proxFinAtDarse2 = new SimpleStringProperty(proxFinAtDarse2);
-        this.colaDarsenas = new SimpleStringProperty(colaDarsenas);
+        this.colaDarsena = new SimpleStringProperty(colaDarsena);
     }
 }

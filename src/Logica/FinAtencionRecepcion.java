@@ -30,6 +30,26 @@ public class FinAtencionRecepcion extends Evento {
         }
     }
 
+    public void ejecutarFueraDeHora(){
+        if(recepcion.getCamion()!= null)
+        {
+            if (balanza.getEstadoBalanza() == EstadoBalanza.Ocupado) {
+                recepcion.getCamion().setEstado(EstadoCamion.En_Cola_Balanza_);
+                balanza.getCola().add(recepcion.getCamion());
+                recepcion.setCamion(null);
+
+            } else {
+                recepcion.getCamion().setEstado(EstadoCamion.En_Pesaje);
+                balanza.setCamion(recepcion.getCamion());
+                recepcion.setCamion(null);
+
+            }
+
+        }
+        recepcion.setEstado(EstadoRecepcion.Libre);
+        }
+
+
     public String getNombre() {
         String nombre = "Fin At Recepcion";
         return nombre;

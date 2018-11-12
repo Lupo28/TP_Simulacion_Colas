@@ -11,16 +11,17 @@ public class FinAtencionDarsena extends Evento {
 
 
     public void ejecutar() {
-        getCamionDarsena(darsenas.getDarsena(darsenaFinalizada).getCamion());
-        if(!darsenas.getCola().isEmpty()){
-            darsenas.getCola().getFirst().setEstado(EstadoCamion.En_Descargue);
-            darsenas.getDarsena(darsenaFinalizada).setCamion(darsenas.getCola().poll());
-        }
-        else
-        {
-            darsenas.getDarsena(darsenaFinalizada).setCamion(null);
-            darsenas.getDarsena(darsenaFinalizada).setEstadoDarsena(EstadoDarsena.Libre);
-        }
+            getCamionDarsena(darsenas.getDarsena(darsenaFinalizada).getCamion());
+            if(!darsenas.getCola().isEmpty()){
+                darsenas.getCola().getFirst().setEstado(EstadoCamion.En_Descargue);
+                darsenas.getDarsena(darsenaFinalizada).setCamion(darsenas.getCola().poll());
+            }
+            else
+            {
+                darsenas.getDarsena(darsenaFinalizada).setCamion(null);
+                darsenas.getDarsena(darsenaFinalizada).setEstadoDarsena(EstadoDarsena.Libre);
+            }
+
     }
 
     public Camion getCamionDarsena(Camion camion){

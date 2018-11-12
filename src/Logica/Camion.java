@@ -12,6 +12,11 @@ public class Camion
         this.numero = numero;
         this.estado=estado;
     }
+
+    public Camion(EstadoCamion estado){
+        this.numero = 0;
+        this.estado = estado;
+    }
     public int getNumero() {
         return numero;
     }
@@ -31,6 +36,6 @@ public class Camion
 
     public String getNumeroString() {
 
-        return Integer.toString(getNumero());
+        return (this.numero != 0) ? Integer.toString(getNumero()) : "-";
     }
 }
