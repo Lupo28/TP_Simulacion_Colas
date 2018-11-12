@@ -111,16 +111,39 @@ public class Darsena {
         return "Darsena (" + id + ") {" + "estado=" + this.getEstadoDarsena() + '}';
     }
 
-    //Calcula el tiempo de atencion
+    //Calcula el tiempo de atencion usando Euler
     public void calcularTiempoAtencion() {
-        this.setRandomAtencion(Math.random());
-        double demora = (15 + this.getRandomAtencion() * 5)*3600;
-        this.tiempoAtencion = (demora / 60);
+        double k = 0;
+        double h = 0.1;
+        double l = getCamion().getLitrosCombustible();
+        double t = 0;
+        double derivadaPrimera = 0;
+        double derivadaSegunda = k * l - 20 * derivadaPrimera;
+
+        while(!(k>=0.15 && k<=0.25)){
+            k = calcularK();
+        }
+
+        while(l > 1){
+            t += h;
+            l += (h * derivadaPrimera);
+            derivadaPrimera += (h * derivadaSegunda);
+            derivadaSegunda = k * l - 20 * derivadaPrimera;
+        }
+        setTiempoAtencion(t/60);
     }
 
     //Calcula el proximo fin de atencion
     public void proximoDarsena(double relojActual) {
         this.proxFinAtencion = relojActual + this.tiempoAtencion;
+    }
+
+    //Calcula el parametro k con distribucion normal
+    public double calcularK(){
+        double r1 = Math.random();
+        double r2 = Math.random();
+        double z = Math.sqrt(-2*Math.log(r1)*Math.cos(2*Math.PI*r2));
+        return (0.2 + (z*0.7));
     }
 
     //Calcula el tiempo que tomara recalibrar la darsena

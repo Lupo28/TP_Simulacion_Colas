@@ -409,8 +409,8 @@ public class Gestor {
             String tiempoArDarse2Content = getServidoresDarsena().getDarsenas()[1].getTiempoAtencion1();
             String proxFinAtDarse2Content = getServidoresDarsena().getDarsenas()[1].getProxFinAtencion1();
             String colaDarsenaContent = Integer.toString(getServidoresDarsena().getCola().size());
-            String litros1Content =Double.toString(getServidoresDarsena().getDarsenas()[0].getCamion().getLitrosCombustible());
-            String litros2Content =Double.toString(getServidoresDarsena().getDarsenas()[1].getCamion().getLitrosCombustible());
+            String litros1Content = (getServidoresDarsena().getDarsenas()[0].getCamion() == null) ? "-" : Double.toString(getServidoresDarsena().getDarsenas()[0].getCamion().getLitrosCombustible());
+            String litros2Content = (getServidoresDarsena().getDarsenas()[1].getCamion() == null) ? "-" :Double.toString(getServidoresDarsena().getDarsenas()[1].getCamion().getLitrosCombustible());
             data.add(new Fila(diaContent, relojContent, eventContent, colaEnPuertaContent,camionContent, rnd1Content, tiempoEntreLlegadasContent, proxContent, colaRecepcionContent,
                     camionRecepcionContent, estadoRecepcionContet, rndRecepcionContent, tiempoLlegadaRecepcionContent, proxFinAtencionRecepcionContent,
                     colaBalanzaContent, camionBalanzContent, estadBalanzContent, rndBalanzaContent, tiempoAtencionBalanzContent, proxFinAtBalContent,
