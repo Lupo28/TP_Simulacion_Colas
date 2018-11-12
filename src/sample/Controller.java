@@ -129,6 +129,7 @@ public class Controller implements Initializable {
 
 
     public void cargarTabla() {
+
         this.gestor.inicio();
 
         this.setearColummnas();
@@ -146,7 +147,6 @@ public class Controller implements Initializable {
         rnd1.setCellValueFactory(new PropertyValueFactory<>("rnd1"));
         camion.setCellValueFactory(new PropertyValueFactory<>("camion"));
         tiempoEntreLlegadas.setCellValueFactory(new PropertyValueFactory<>("tiempoEntreLlegadas"));
-        //colaRecepcion.setCellValueFactory(new PropertyValueFactory<>("colaRecepcion"));
         prox.setCellValueFactory(new PropertyValueFactory<>("prox"));
         camionRecepcion.setCellValueFactory(new PropertyValueFactory<>("camionRecepcion"));
         estadoRecepcion.setCellValueFactory(new PropertyValueFactory<>("estadoRecepcion"));
@@ -194,7 +194,6 @@ public class Controller implements Initializable {
     void openEstadisticas(ActionEvent event) throws Exception {
         setSimulationDialog();
 
-
     }
 
     private void setSimulationDialog() throws Exception {
@@ -216,6 +215,12 @@ public class Controller implements Initializable {
     @FXML
     void simulacionOnAction(ActionEvent event) {
 
+        this.initializeNewSimulation();
+        this.setStats();
+    }
+
+    public void setearDias()
+    {
         if (txtDiaDesde.getText() == null || txtDiaDesde.getText().trim().isEmpty()) {
             gestor.setDiaDesde(0);
 
@@ -227,9 +232,6 @@ public class Controller implements Initializable {
         } else {
             gestor.setDiaHasta(Integer.valueOf(txtDiaHasta.getText()));
         }
-
-        this.initializeNewSimulation();
-        this.setStats();
     }
 
 
@@ -262,8 +264,11 @@ public class Controller implements Initializable {
         txCamionesNoAtendidos.setText("0");
         txCamionesTotales.setText("0");
         txCamionesXDia.setText("0");
-        this.gestor = new Gestor();
+
         Reloj.resetearReloj();
+        this.gestor = new Gestor();
+        this.setearDias();
+
         clearItemsInTableView();
         cargarTabla();
     }

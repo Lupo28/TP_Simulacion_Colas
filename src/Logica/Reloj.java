@@ -19,8 +19,8 @@ public class Reloj {
     }
 
     public Reloj() {
-        this.tiempoActual = 43200.00;
-    } //12HS
+        this.tiempoActual = 43200.00;//12HS
+    }
 
     public static Reloj getInstancia() {
         if (instancia == null) {
@@ -83,7 +83,7 @@ public class Reloj {
 
     public static void resetearReloj()
     {
-        setDia(0);
+       setInstancia(null);
     }
 
 }
