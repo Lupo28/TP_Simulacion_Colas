@@ -70,7 +70,7 @@ public class LlegadaDeCamion extends Evento
 
     public Camion generarCamion()
     {
-        Camion camion = new Camion(contadorCamiones,EstadoCamion.Nuevo);
+        Camion camion = new Camion(contadorCamiones,EstadoCamion.Nuevo, Reloj.getInstancia().getTiempoActual());
         this.randomLlegada = Math.random();
         this.calcularTiempoLlegada();
         this.calcularProxLlegada();
@@ -78,7 +78,7 @@ public class LlegadaDeCamion extends Evento
     }
 
     public Camion generarCamionFueraHora(){
-        Camion camion = new Camion(EstadoCamion.Nuevo);
+        Camion camion = new Camion(EstadoCamion.Nuevo, Reloj.getInstancia().getTiempoActual());
         this.randomLlegada = Math.random();
         this.calcularTiempoLlegada();
         this.calcularProxLlegada();
@@ -87,7 +87,7 @@ public class LlegadaDeCamion extends Evento
 
     public Camion generarCamion2()
     {
-        Camion camion = new Camion(contadorCamiones,EstadoCamion.Nuevo);
+        Camion camion = new Camion(contadorCamiones,EstadoCamion.Nuevo, Reloj.getInstancia(false).getTiempoActual());
         this.randomLlegada = Math.random();
         this.calcularTiempoLlegada2();
         this.calcularProxLlegada2();
@@ -95,7 +95,7 @@ public class LlegadaDeCamion extends Evento
     }
 
     public Camion generarCamionFueraHora2(){
-        Camion camion = new Camion(EstadoCamion.Nuevo);
+        Camion camion = new Camion(EstadoCamion.Nuevo, Reloj.getInstancia(false).getTiempoActual());
         this.randomLlegada = Math.random();
         this.calcularTiempoLlegada2();
         this.calcularProxLlegada2();

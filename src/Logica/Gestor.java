@@ -109,6 +109,7 @@ public class Gestor {
                         this.setEventoActual(finAtRecepcion);
                         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
                         this.tiempoPermanencia += getServidorRecepcion().getTiempoAtencion();
+                        getServidorRecepcion().getCamion().setTiempoFinAtRecepcion(getServidorRecepcion().getProxFinAtencion());
                         Reloj.getInstancia().setTiempoActual(this.getServidorRecepcion().getProxFinAtencion());
                         finAtRecepcion.ejecutar();
                         if (getServidorRecepcion().getCamion() == null) {
@@ -123,6 +124,7 @@ public class Gestor {
                         this.setEventoActual(finAtBalanza);
                         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
                         this.tiempoPermanencia += getServidorBalanza().getTiempoAtencion();
+                        getServidorBalanza().getCamion().setTiempoFinAtBalanza(getServidorBalanza().getProxFinAtencion());
                         Reloj.getInstancia().setTiempoActual(this.getServidorBalanza().getProxFinAtencion());
                         finAtBalanza.ejecutar();
                         if (getServidorBalanza().getCamion() == null) {

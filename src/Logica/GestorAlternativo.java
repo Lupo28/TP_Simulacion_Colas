@@ -90,7 +90,8 @@ public class GestorAlternativo {
                         FinAtencionRecepcion finAtRecepcion = new FinAtencionRecepcion(this.ServidorRecepcion, this.ServidorBalanza);
                         this.setEventoActual(finAtRecepcion);
                         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
-                        this.tiempoPermanencia += getServidorRecepcion().getTiempoAtencion();
+                        this.tiempoPermanencia += (getServidorRecepcion().getProxFinAtencion() - getServidorRecepcion().getCamion().getTiempoDeEntrada());
+                        getServidorRecepcion().getCamion().setTiempoFinAtRecepcion(getServidorRecepcion().getProxFinAtencion());
                         Reloj.getInstancia().setTiempoActual(this.getServidorRecepcion().getProxFinAtencion());
                         finAtRecepcion.ejecutar();
                         if (getServidorRecepcion().getCamion() == null) {
@@ -104,7 +105,8 @@ public class GestorAlternativo {
                         FinAtencionBalanza finAtBalanza = new FinAtencionBalanza(this.ServidorBalanza, this.ServidoresDarsena);
                         this.setEventoActual(finAtBalanza);
                         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
-                        this.tiempoPermanencia += getServidorBalanza().getTiempoAtencion();
+                        this.tiempoPermanencia += (getServidorBalanza().getProxFinAtencion() - getServidorBalanza().getCamion().getTiempoFinAtRecepcion());
+                        getServidorBalanza().getCamion().setTiempoFinAtBalanza(getServidorBalanza().getProxFinAtencion());
                         Reloj.getInstancia().setTiempoActual(this.getServidorBalanza().getProxFinAtencion());
                         finAtBalanza.ejecutar();
                         if (getServidorBalanza().getCamion() == null) {
@@ -119,7 +121,9 @@ public class GestorAlternativo {
                         FinAtencionDarsena finAtDarsena = new FinAtencionDarsena(this.ServidoresDarsena, darsenaFinalizada.getId() - 1);
                         this.setEventoActual(finAtDarsena);
                         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
-                        this.tiempoPermanencia += getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).getTiempoAtencion();
+                        if(getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).getCamion() != null){
+                            this.tiempoPermanencia += (getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).getProxFinAtencion() - getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).getCamion().getTiempoFinAtBalanza());
+                        }
                         Reloj.getInstancia().setTiempoActual(this.getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).getProxFinAtencion());
                         finAtDarsena.ejecutar();
                         this.caminonesAtendidos++;
