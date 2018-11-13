@@ -68,12 +68,12 @@ public class Gestor {
         this.setEventoActual(llegadaCamion);
         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
         Reloj.getInstancia().setTiempoActual(llegadaCamion.getProxLlegadaCamion());
+        llegadaCamion.ejecutar();
+        this.llegadaCamion.setCamion(llegadaCamion.generarCamion());
         if(getDiaDesde()==0)
         {
             this.cargarFila(true);
         }
-        llegadaCamion.ejecutar();
-        this.llegadaCamion.setCamion(llegadaCamion.generarCamion());
         this.llegadaCamion.sumarContadorCamiones();
         iterar();
     }

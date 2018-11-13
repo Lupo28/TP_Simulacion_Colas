@@ -51,12 +51,12 @@ public class GestorAlternativo {
         this.setEventoActual(llegadaCamion);
         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
         Reloj.getInstancia(false).setTiempoActual(llegadaCamion.getProxLlegadaCamion());
+        llegadaCamion.ejecutar();
+        this.llegadaCamion.setCamion(llegadaCamion.generarCamion2());
         if(getDiaDesde()==0)
         {
             this.cargarFila(true);
         }
-        llegadaCamion.ejecutar();
-        this.llegadaCamion.setCamion(llegadaCamion.generarCamion2());
         this.llegadaCamion.sumarContadorCamiones();
         iterar();
     }
