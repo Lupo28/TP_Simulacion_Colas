@@ -51,13 +51,11 @@
                         <TableColumn fx:id="proxFinAtBalan" prefWidth="75.0" text="Proximo Fin Atencion" />
                         <TableColumn fx:id="colaBalanza" prefWidth="75.0" text="Cola Balanza" />
                         <TableColumn fx:id="camionDarsen1" prefWidth="75.0" text="Camion" />
-                        <TableColumn fx:id="litros1" prefWidth="75.0" text="Litros D1" />
                         <TableColumn fx:id="estadoDarsen1" prefWidth="75.0" text="Estado Darsena 1" />
                         <TableColumn fx:id="rndDarsen1" prefWidth="75.0" text="Rnd" />
                         <TableColumn fx:id="tiempoAtencionDarse1" prefWidth="75.0" text="Tiempo Atencion" />
                         <TableColumn fx:id="finAtencionProxDarse1" prefWidth="75.0" text="Proximo Fin Atencion" />
                         <TableColumn fx:id="camionDarse2" prefWidth="75.0" text="Camion" />
-                        <TableColumn fx:id="litros2" prefWidth="75.0" text="Litros D2" />
                         <TableColumn fx:id="estadoDarse2" prefWidth="75.0" text="Estado Darsena 2" />
                         <TableColumn fx:id="rndDarse2" prefWidth="75.0" text="Rnd" />
                         <TableColumn fx:id="tiempoAtDarse2" prefWidth="75.0" text="Tiempo Atencion" />
@@ -84,7 +82,7 @@
             <TextField fx:id="txtDiaDesde" layoutX="801.0" layoutY="10.0" prefHeight="28.0" prefWidth="69.0" />
             <Text layoutX="743.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desde" wrappingWidth="48.0263671875" />
             <Text layoutX="743.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hasta" wrappingWidth="48.0263671875" />
-            <Button fx:id="btnsimularAlternativo" layoutX="901.0" layoutY="3.0" mnemonicParsing="false" onAction="#simulacionAlternativaOnAction" text="Simulacion Alternativa" />
+            <Button fx:id="btnsimularAlternativo" layoutX="900.0" layoutY="9.0" mnemonicParsing="false" onAction="#simulacionAlternativaOnAction" text="Simulacion Alternativa" />
          </children>
       </AnchorPane>
    </bottom>

@@ -1,31 +1,19 @@
 package sample;
 
 import Logica.*;
-import com.sun.javafx.scene.control.skin.NestedTableColumnHeader;
-import com.sun.javafx.scene.control.skin.TableColumnHeader;
-import com.sun.javafx.scene.control.skin.TableHeaderRow;
-import com.sun.javafx.scene.control.skin.TableViewSkin;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import util.*;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.event.*;
 
-import java.io.IOException;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -35,11 +23,11 @@ public class Controller implements Initializable {
 
     private ObservableList<Fila> data;
     private Gestor gestor;
-    private GestorAlternativa gestorAlternativa;
+    private GestorAlternativo gestorAlternativo;
 
     public Controller() {
         this.gestor = new Gestor();
-        this.gestorAlternativa = new GestorAlternativa();
+        this.gestorAlternativo = new GestorAlternativo();
         this.tvSim = new TableView<Fila>();
     }
 
@@ -246,15 +234,15 @@ public class Controller implements Initializable {
     public void setearDiasAlternativa()
     {
         if (txtDiaDesde.getText() == null || txtDiaDesde.getText().trim().isEmpty()) {
-            gestorAlternativa.setDiaDesde(0);
+            gestorAlternativo.setDiaDesde(0);
 
         } else {
-            gestorAlternativa.setDiaDesde(Integer.valueOf(txtDiaDesde.getText()));
+            gestorAlternativo.setDiaDesde(Integer.valueOf(txtDiaDesde.getText()));
         }
         if (txtDiaHasta.getText() == null || txtDiaHasta.getText().trim().isEmpty()) {
-            gestorAlternativa.setDiaHasta(30);
+            gestorAlternativo.setDiaHasta(30);
         } else {
-            gestorAlternativa.setDiaHasta(Integer.valueOf(txtDiaHasta.getText()));
+            gestorAlternativo.setDiaHasta(Integer.valueOf(txtDiaHasta.getText()));
         }
     }
 
@@ -296,7 +284,7 @@ public class Controller implements Initializable {
             this.setearDias();
         }else
         {
-            this.gestorAlternativa = new GestorAlternativa();
+            this.gestorAlternativo = new GestorAlternativo();
             this.setearDiasAlternativa();
         }
 
@@ -317,20 +305,20 @@ public class Controller implements Initializable {
 
     public void cargarTablaAlternativa() {
 
-        this.gestorAlternativa.inicio();
+        this.gestorAlternativo.inicio();
 
         this.setearColummnas();
 
-        ObservableList<Fila> list = gestorAlternativa.getData();
+        ObservableList<Fila> list = gestorAlternativo.getData();
 
         tvSim.setItems(list);
     }
 
     private void setStatsAlternativa() {
-        txCamionesXDia.setText(gestorAlternativa.promedioDeCamionesAtendidosPorDia());
-        txCamionesTotales.setText(gestorAlternativa.cantidadDeCamionesTotales());
-        txCamionesNoAtendidos.setText(gestorAlternativa.cantidadDeCamionesNoAtendidos());
-        txAvgDurationService.setText(gestorAlternativa.promedioDeTiempoDePermanencia());
+        txCamionesXDia.setText(gestorAlternativo.promedioDeCamionesAtendidosPorDia());
+        txCamionesTotales.setText(gestorAlternativo.cantidadDeCamionesTotales());
+        txCamionesNoAtendidos.setText(gestorAlternativo.cantidadDeCamionesNoAtendidos());
+        txAvgDurationService.setText(gestorAlternativo.promedioDeTiempoDePermanencia());
 
     }
 }

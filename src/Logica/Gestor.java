@@ -3,9 +3,8 @@ package Logica;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import util.Fila;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
+
 
 public class Gestor {
     private int caminonesAtendidos;
@@ -22,59 +21,11 @@ public class Gestor {
     private int diaDesde;
     private int diaHasta;
     private boolean bool;
-
-    public int getDiaHasta() {
-        return diaHasta;
-    }
-
-    public void setDiaHasta(int diaHasta) {
-        this.diaHasta = diaHasta;
-    }
-
-    public int getDiaDesde() {
-        return diaDesde;
-    }
-
-    public void setDiaDesde(int diaDesde) {
-        this.diaDesde = diaDesde;
-    }
-
-    public int getDia() {
-        return dia;
-    }
-
-    public void setDia(int dia) {
-        this.dia = dia;
-    }
-
     private Recepcion ServidorRecepcion;
     private Balanza ServidorBalanza;
     private ConjuntoDarsena ServidoresDarsena;
 
-    public int getContadorRecalibracion() {
-        return contadorRecalibracion;
-    }
 
-    public void setContadorRecalibracion(int contador) {
-        this.contadorRecalibracion = contador;
-    }
-
-
-    public ArrayList<String> getConjuntoEventos() {
-        return conjuntoEventos;
-    }
-
-    public void setConjuntoEventos(ArrayList<String> conjuntoEventos) {
-        this.conjuntoEventos = conjuntoEventos;
-    }
-
-    public int getCamionesSinEntrar() {
-        return camionesSinEntrar;
-    }
-
-    public void setCamionesSinEntrar(int camionesSinEntrar) {
-        this.camionesSinEntrar = camionesSinEntrar;
-    }
 
     public Gestor() {
         this.contadorRecalibracion = 0;
@@ -108,7 +59,10 @@ public class Gestor {
     }
 
     public void inicio() {
-        this.cargarFilaPrimeravez(true);
+        if(getDiaDesde()==0)
+        {
+            this.cargarFilaPrimeravez(true);
+        }
         this.setEventoActual(llegadaCamion);
         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
         Reloj.getInstancia().setTiempoActual(llegadaCamion.getProxLlegadaCamion());
@@ -116,15 +70,6 @@ public class Gestor {
         this.llegadaCamion.setCamion(llegadaCamion.generarCamion());
         this.llegadaCamion.sumarContadorCamiones();
         iterar();
-    }
-
-
-    public void ejecutarSimulacion(boolean bool)
-    {
-        if(bool)
-        {
-            this.iterar();
-        }
     }
 
     public void iterar() {
@@ -283,11 +228,8 @@ public class Gestor {
                         this.setEventoActual(llegadaCamion);
                         this.getConjuntoEventos().add(this.getEventoActual().getNombre() + " Fuera de hora");
                         Reloj.getInstancia().setTiempoActual(llegadaCamion.getProxLlegadaCamion());
-//                        this.camionesSinEntrar++;
-//                        llegadaCamion.ejecutarFueraDeHora();
                         llegadaCamion.setCamion(null);
                         this.llegadaCamion.setCamion(llegadaCamion.generarCamionFueraHora());
-//                        llegadaCamion.sumarContadorCamiones();
                         break;
 
                     case "FinRecalibracion":
@@ -300,33 +242,9 @@ public class Gestor {
                         break;
                 }
             }
-            //Reloj.getInstancia().setTiempoActual(18000); Las 5AM de nuevo, arranca la jornada
         }
     }
 
-    public Recepcion getServidorRecepcion() {
-        return ServidorRecepcion;
-    }
-
-    public void setServidorRecepcion(Recepcion servidorRecepcion) {
-        ServidorRecepcion = servidorRecepcion;
-    }
-
-    public Balanza getServidorBalanza() {
-        return ServidorBalanza;
-    }
-
-    public void setServidorBalanza(Balanza servidorBalanza) {
-        ServidorBalanza = servidorBalanza;
-    }
-
-    public ConjuntoDarsena getServidoresDarsena() {
-        return ServidoresDarsena;
-    }
-
-    public void setServidoresDarsena(ConjuntoDarsena servidoresDarsena) {
-        ServidoresDarsena = servidoresDarsena;
-    }
 
     public double tiempoMinimo() {
         double minTiempo = 25920000;   //seteo el tiempo minimo en un valor bien alto para que pueda funcionar
@@ -351,11 +269,6 @@ public class Gestor {
         if (ServidoresDarsena.getDarsenas()[1].getProxFinRecalibrado() != 0 && ServidoresDarsena.getDarsenas()[1].getProxFinRecalibrado() < minTiempo) {
             minTiempo = ServidoresDarsena.getDarsenas()[1].getProxFinRecalibrado();
         }
-
-//        minTiempo=Math.min(ServidoresDarsena.getDarsenas()[0].getProxFinAtencion(),ServidoresDarsena.getDarsenas()[1].getProxFinAtencion());
-//        minTiempo=Math.min(minTiempo,ServidorBalanza.getProxFinAtencion());
-//        minTiempo=Math.min(minTiempo,ServidorRecepcion.getProxFinAtencion());
-//        minTiempo=Math.min(minTiempo,llegadaCamion.getProxLlegadaCamion());
         return minTiempo;
     }
 
@@ -466,9 +379,8 @@ public class Gestor {
         }
     }
 
-
     public String promedioDeCamionesAtendidosPorDia() {
-        return String.valueOf((caminonesAtendidos/diaHasta));
+        return String.valueOf((caminonesAtendidos/30));
     }
 
     public String cantidadDeCamionesNoAtendidos(){
@@ -484,4 +396,76 @@ public class Gestor {
         return String.valueOf(this.caminonesAtendidos);
     }
 
+
+    public Recepcion getServidorRecepcion() {
+        return ServidorRecepcion;
+    }
+
+    public void setServidorRecepcion(Recepcion servidorRecepcion) {
+        ServidorRecepcion = servidorRecepcion;
+    }
+
+    public Balanza getServidorBalanza() {
+        return ServidorBalanza;
+    }
+
+    public void setServidorBalanza(Balanza servidorBalanza) {
+        ServidorBalanza = servidorBalanza;
+    }
+
+    public ConjuntoDarsena getServidoresDarsena() {
+        return ServidoresDarsena;
+    }
+
+    public void setServidoresDarsena(ConjuntoDarsena servidoresDarsena) {
+        ServidoresDarsena = servidoresDarsena;
+    }
+    public int getDiaHasta() {
+        return diaHasta;
+    }
+
+    public void setDiaHasta(int diaHasta) {
+        this.diaHasta = diaHasta;
+    }
+
+    public int getDiaDesde() {
+        return diaDesde;
+    }
+
+    public void setDiaDesde(int diaDesde) {
+        this.diaDesde = diaDesde;
+    }
+
+    public int getDia() {
+        return dia;
+    }
+
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
+
+    public int getContadorRecalibracion() {
+        return contadorRecalibracion;
+    }
+
+    public void setContadorRecalibracion(int contador) {
+        this.contadorRecalibracion = contador;
+    }
+
+
+    public ArrayList<String> getConjuntoEventos() {
+        return conjuntoEventos;
+    }
+
+    public void setConjuntoEventos(ArrayList<String> conjuntoEventos) {
+        this.conjuntoEventos = conjuntoEventos;
+    }
+
+    public int getCamionesSinEntrar() {
+        return camionesSinEntrar;
+    }
+
+    public void setCamionesSinEntrar(int camionesSinEntrar) {
+        this.camionesSinEntrar = camionesSinEntrar;
+    }
 }

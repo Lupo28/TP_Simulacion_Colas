@@ -29,7 +29,7 @@ public class FinAtencionRecalibrado extends Evento
 
     public  String getNombre()
     {
-        String nombre= "Fin At Recalibrado - Darsena " + darsenaFinalizada;
+        String nombre= "Fin At Recalibrado - Darsena " + (darsenaFinalizada+1);
         return nombre;
     }
 }

@@ -9,10 +9,6 @@ public class FinAtencionBalanza extends Evento {
         this.conjuntoDarsena = conjuntoDarsena;
     }
 
-    public FinAtencionBalanza()
-    {
-    }
-
     public void ejecutar()
     {
 

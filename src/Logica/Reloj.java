@@ -28,8 +28,8 @@ public class Reloj {
     }
 
     /**
-     * True: Simulacion comun,
-     * False: Alternativa con llegada de camiones uniforme (Punto D)
+     * True: Simulacion comun.
+     * False: Alternativa con llegada de camiones uniforme (Punto D).
      */
     public Reloj() {
         this.tiempoActual = 43200.00;//12HS
@@ -103,12 +103,6 @@ public class Reloj {
 
         return ceroH + horas + ":" + ceroM + minutos + ":" + ceroS + segundos;
     }
-
-
-    public Boolean esCierrePlanta() {
-        return (this.tiempoActual < 18 && this.tiempoActual > 5) ? false : true;
-    }
-
 
     public static void resetearReloj() {
         setInstancia(null);
