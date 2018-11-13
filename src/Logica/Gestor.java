@@ -38,7 +38,7 @@ public class Gestor {
         this.llegadaCamion = new LlegadaDeCamion(getServidorRecepcion());
         this.data = FXCollections.observableArrayList();
         this.diaDesde=0;
-        this.diaHasta=30;
+        this.diaHasta=31;
         this.dia=1;
         this.diasSimulados=30;
 
@@ -82,7 +82,7 @@ public class Gestor {
 
 
         int aux = 0;
-        for ( int i=0; i < 30; i++) { //29 dias
+        for ( int i=0; i < 31; i++) { //30 dias
 
             if(i==0)
             {
@@ -90,13 +90,13 @@ public class Gestor {
             }
             if(i>0){
                 aux=aux+24;
-                setDia(i+1);
+                setDia(i);
                 this.cargarFilaPrimeravez(bool);
             }
             ;
 
             while ((Reloj.getInstancia().getTiempoActual()/3600) < 18+aux) { //Esta seria la hora de cierre (18hs)
-                if((i+1)>=getDiaDesde() && (i+1)<=getDiaHasta()){
+                if((i)>=getDiaDesde() && (i)<=getDiaHasta()){
                     bool=true;
                 }else
                 {

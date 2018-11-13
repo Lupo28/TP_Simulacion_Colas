@@ -65,7 +65,7 @@ public class GestorAlternativo {
 
 
         int aux = 0;
-        for ( int i=0; i < 30; i++) { //29 dias
+        for ( int i=0; i < 31; i++) { //30 dias
 
             if(i==0)
             {
