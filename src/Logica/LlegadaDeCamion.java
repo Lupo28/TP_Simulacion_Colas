@@ -1,6 +1,5 @@
 package Logica;
 
-import java.util.LinkedList;
 
 public class LlegadaDeCamion extends Evento
 {

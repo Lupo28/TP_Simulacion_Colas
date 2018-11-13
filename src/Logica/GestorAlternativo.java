@@ -24,6 +24,7 @@ public class GestorAlternativo {
     private Recepcion ServidorRecepcion;
     private Balanza ServidorBalanza;
     private ConjuntoDarsena ServidoresDarsena;
+    private int diasSimulados;
 
 
     public GestorAlternativo() {
@@ -38,23 +39,8 @@ public class GestorAlternativo {
         this.diaDesde=0;
         this.diaHasta=30;
         this.dia=1;
+        this.diasSimulados=30;
 
-    }
-
-    public Evento getEventoActual() {
-        return eventoActual;
-    }
-
-    public void setEventoActual(Evento eventoActual) {
-        this.eventoActual = eventoActual;
-    }
-
-    public int getUltNumCamion() {
-        return ultNumCamion;
-    }
-
-    public void setUltNumCamion(int ultNumCamion) {
-        this.ultNumCamion = ultNumCamion;
     }
 
     public void inicio() {
@@ -65,6 +51,10 @@ public class GestorAlternativo {
         this.setEventoActual(llegadaCamion);
         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
         Reloj.getInstancia(false).setTiempoActual(llegadaCamion.getProxLlegadaCamion());
+        if(getDiaDesde()==0)
+        {
+            this.cargarFila(true);
+        }
         llegadaCamion.ejecutar();
         this.llegadaCamion.setCamion(llegadaCamion.generarCamion2());
         this.llegadaCamion.sumarContadorCamiones();
@@ -76,6 +66,11 @@ public class GestorAlternativo {
 
         int aux = 0;
         for ( int i=0; i < 30; i++) { //29 dias
+
+            if(i==0)
+            {
+                this.cargarFila(bool);
+            }
             if(i>0){
                 aux=aux+24;
                 setDia(i);
@@ -90,9 +85,6 @@ public class GestorAlternativo {
                     bool=false;
                 }
 
-                this.cargarFila(bool);
-
-
                 switch (proxEvento()) {
                     case "Recepcion":
                         FinAtencionRecepcion finAtRecepcion = new FinAtencionRecepcion(this.ServidorRecepcion, this.ServidorBalanza);
@@ -106,6 +98,7 @@ public class GestorAlternativo {
                             getServidorRecepcion().setTiempoAtencion(0);
                             getServidorRecepcion().setProxFinAtencion(0);
                         }
+                        this.cargarFila(bool);
                         break;
                     case "Balanza":
                         FinAtencionBalanza finAtBalanza = new FinAtencionBalanza(this.ServidorBalanza, this.ServidoresDarsena);
@@ -119,6 +112,7 @@ public class GestorAlternativo {
                             getServidorBalanza().setTiempoAtencion(0);
                             getServidorBalanza().setProxFinAtencion(0);
                         }
+                        this.cargarFila(bool);
                         break;
                     case "Darsena":
                         Darsena darsenaFinalizada = this.ServidoresDarsena.getUltimaDarsena();
@@ -134,6 +128,7 @@ public class GestorAlternativo {
                             setContadorRecalibracion(0);
                             ServidoresDarsena.getDarsena(darsenaFinalizada.getId() - 1).calcularTiempoRecalibrado();
                             this.finAtRecalibrado = new FinAtencionRecalibrado(ServidoresDarsena, darsenaFinalizada.getId() - 1);
+                            this.cargarFila(bool);
                             break;
                         }
                         if (getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).getCamion() == null) {
@@ -141,6 +136,7 @@ public class GestorAlternativo {
                             getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).setTiempoAtencion(0);
                             getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).setProxFinAtencion(0);
                         }
+                        this.cargarFila(bool);
                         break;
 
                     case "LlegadaCamion":
@@ -151,6 +147,7 @@ public class GestorAlternativo {
                         llegadaCamion.ejecutar();
                         this.llegadaCamion.setCamion(llegadaCamion.generarCamion2());
                         llegadaCamion.sumarContadorCamiones();
+                        this.cargarFila(bool);
                         break;
 
                     case "FinRecalibracion":
@@ -160,6 +157,7 @@ public class GestorAlternativo {
                         this.finAtRecalibrado.ejecutar();
                         this.finAtRecalibrado.getDarsenaFinalizada().setTiempoRecalibrado(0);
                         this.finAtRecalibrado.getDarsenaFinalizada().setProxFinRecalibrado(0);
+                        this.cargarFila(bool);
                         break;
 
                 }
@@ -169,7 +167,6 @@ public class GestorAlternativo {
 
                 switch (proxEvento()) {
                     case "Recepcion":
-                        this.cargarFila(bool);
                         FinAtencionRecepcion finAtRecepcion = new FinAtencionRecepcion(this.ServidorRecepcion, this.ServidorBalanza);
                         this.setEventoActual(finAtRecepcion);
                         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
@@ -182,9 +179,9 @@ public class GestorAlternativo {
                             getServidorRecepcion().setTiempoAtencion(0);
                             getServidorRecepcion().setProxFinAtencion(0);
                         }
+                        this.cargarFila(bool);
                         break;
                     case "Balanza":
-                        this.cargarFila(bool);
                         FinAtencionBalanza finAtBalanza = new FinAtencionBalanza(this.ServidorBalanza, this.ServidoresDarsena);
                         this.setEventoActual(finAtBalanza);
                         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
@@ -196,9 +193,10 @@ public class GestorAlternativo {
                             getServidorBalanza().setTiempoAtencion(0);
                             getServidorBalanza().setProxFinAtencion(0);
                         }
+                        this.cargarFila(bool);
                         break;
                     case "Darsena":
-                        this.cargarFila(bool);
+
                         Darsena darsenaFinalizada = this.ServidoresDarsena.getUltimaDarsena();
                         FinAtencionDarsena finAtDarsena = new FinAtencionDarsena(this.ServidoresDarsena, darsenaFinalizada.getId() - 1);
                         this.setEventoActual(finAtDarsena);
@@ -219,6 +217,7 @@ public class GestorAlternativo {
                             getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).setTiempoAtencion(0);
                             getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).setProxFinAtencion(0);
                         }
+                        this.cargarFila(bool);
                         break;
 
                     case "LlegadaCamion": //La diferencia es que ahora no se despachan camiones a recepcion
@@ -237,6 +236,7 @@ public class GestorAlternativo {
                         this.finAtRecalibrado.ejecutar();
                         this.finAtRecalibrado.getDarsenaFinalizada().setTiempoRecalibrado(0);
                         this.finAtRecalibrado.getDarsenaFinalizada().setProxFinRecalibrado(0);
+                        this.cargarFila(bool);
                         break;
                 }
             }
@@ -378,10 +378,10 @@ public class GestorAlternativo {
         }
     }
 
-
     public String promedioDeCamionesAtendidosPorDia() {
-        return String.valueOf((caminonesAtendidos/30));
+        return String.valueOf((caminonesAtendidos/diasSimulados));
     }
+
     public String cantidadDeCamionesNoAtendidos(){
         return String.valueOf(getCamionesSinEntrar());
     }
@@ -465,6 +465,22 @@ public class GestorAlternativo {
 
     public void setServidoresDarsena(ConjuntoDarsena servidoresDarsena) {
         ServidoresDarsena = servidoresDarsena;
+    }
+
+    public Evento getEventoActual() {
+        return eventoActual;
+    }
+
+    public void setEventoActual(Evento eventoActual) {
+        this.eventoActual = eventoActual;
+    }
+
+    public int getUltNumCamion() {
+        return ultNumCamion;
+    }
+
+    public void setUltNumCamion(int ultNumCamion) {
+        this.ultNumCamion = ultNumCamion;
     }
 
 }

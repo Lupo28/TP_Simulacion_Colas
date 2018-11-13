@@ -24,6 +24,7 @@ public class Gestor {
     private Recepcion ServidorRecepcion;
     private Balanza ServidorBalanza;
     private ConjuntoDarsena ServidoresDarsena;
+    private int diasSimulados;
 
 
 
@@ -39,6 +40,7 @@ public class Gestor {
         this.diaDesde=0;
         this.diaHasta=30;
         this.dia=1;
+        this.diasSimulados=30;
 
     }
 
@@ -66,6 +68,10 @@ public class Gestor {
         this.setEventoActual(llegadaCamion);
         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
         Reloj.getInstancia().setTiempoActual(llegadaCamion.getProxLlegadaCamion());
+        if(getDiaDesde()==0)
+        {
+            this.cargarFila(true);
+        }
         llegadaCamion.ejecutar();
         this.llegadaCamion.setCamion(llegadaCamion.generarCamion());
         this.llegadaCamion.sumarContadorCamiones();
@@ -77,6 +83,11 @@ public class Gestor {
 
         int aux = 0;
         for ( int i=0; i < 30; i++) { //29 dias
+
+            if(i==0)
+            {
+                this.cargarFila(bool);
+            }
             if(i>0){
                 aux=aux+24;
                 setDia(i+1);
@@ -92,9 +103,6 @@ public class Gestor {
                     bool=false;
                 }
 
-                this.cargarFila(bool);
-
-
                 switch (proxEvento()) {
                     case "Recepcion":
                         FinAtencionRecepcion finAtRecepcion = new FinAtencionRecepcion(this.ServidorRecepcion, this.ServidorBalanza);
@@ -108,6 +116,7 @@ public class Gestor {
                             getServidorRecepcion().setTiempoAtencion(0);
                             getServidorRecepcion().setProxFinAtencion(0);
                         }
+                        this.cargarFila(bool);
                         break;
                     case "Balanza":
                         FinAtencionBalanza finAtBalanza = new FinAtencionBalanza(this.ServidorBalanza, this.ServidoresDarsena);
@@ -121,6 +130,7 @@ public class Gestor {
                             getServidorBalanza().setTiempoAtencion(0);
                             getServidorBalanza().setProxFinAtencion(0);
                         }
+                        this.cargarFila(bool);
                         break;
                     case "Darsena":
                         Darsena darsenaFinalizada = this.ServidoresDarsena.getUltimaDarsena();
@@ -136,6 +146,7 @@ public class Gestor {
                             setContadorRecalibracion(0);
                             ServidoresDarsena.getDarsena(darsenaFinalizada.getId() - 1).calcularTiempoRecalibrado();
                             this.finAtRecalibrado = new FinAtencionRecalibrado(ServidoresDarsena, darsenaFinalizada.getId() - 1);
+                            this.cargarFila(bool);
                             break;
                         }
                         if (getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).getCamion() == null) {
@@ -143,6 +154,7 @@ public class Gestor {
                             getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).setTiempoAtencion(0);
                             getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).setProxFinAtencion(0);
                         }
+                        this.cargarFila(bool);
                         break;
 
                     case "LlegadaCamion":
@@ -153,6 +165,7 @@ public class Gestor {
                         llegadaCamion.ejecutar();
                         this.llegadaCamion.setCamion(llegadaCamion.generarCamion());
                         llegadaCamion.sumarContadorCamiones();
+                        this.cargarFila(bool);
                         break;
 
                     case "FinRecalibracion":
@@ -162,13 +175,13 @@ public class Gestor {
                         this.finAtRecalibrado.ejecutar();
                         this.finAtRecalibrado.getDarsenaFinalizada().setTiempoRecalibrado(0);
                         this.finAtRecalibrado.getDarsenaFinalizada().setProxFinRecalibrado(0);
+                        this.cargarFila(bool);
                         break;
 
                 }
             }
 
             while ((Reloj.getInstancia().getTiempoActual()/(3600)) < 36+aux) {//Son las 5AM pasado para el otro dia (Hora 29)
-
                 switch (proxEvento()) {
                     case "Recepcion":
                         this.cargarFila(bool);
@@ -184,9 +197,9 @@ public class Gestor {
                             getServidorRecepcion().setTiempoAtencion(0);
                             getServidorRecepcion().setProxFinAtencion(0);
                         }
+                        this.cargarFila(bool);
                         break;
                     case "Balanza":
-                        this.cargarFila(bool);
                         FinAtencionBalanza finAtBalanza = new FinAtencionBalanza(this.ServidorBalanza, this.ServidoresDarsena);
                         this.setEventoActual(finAtBalanza);
                         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
@@ -198,9 +211,9 @@ public class Gestor {
                             getServidorBalanza().setTiempoAtencion(0);
                             getServidorBalanza().setProxFinAtencion(0);
                         }
+                        this.cargarFila(bool);
                         break;
                     case "Darsena":
-                        this.cargarFila(bool);
                         Darsena darsenaFinalizada = this.ServidoresDarsena.getUltimaDarsena();
                         FinAtencionDarsena finAtDarsena = new FinAtencionDarsena(this.ServidoresDarsena, darsenaFinalizada.getId() - 1);
                         this.setEventoActual(finAtDarsena);
@@ -214,6 +227,7 @@ public class Gestor {
                             setContadorRecalibracion(0);
                             ServidoresDarsena.getDarsena(darsenaFinalizada.getId() - 1).calcularTiempoRecalibrado();
                             this.finAtRecalibrado = new FinAtencionRecalibrado(ServidoresDarsena, darsenaFinalizada.getId() - 1);
+                            this.cargarFila(bool);
                             break;
                         }
                         if (getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).getCamion() == null) {
@@ -221,6 +235,7 @@ public class Gestor {
                             getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).setTiempoAtencion(0);
                             getServidoresDarsena().getDarsena(darsenaFinalizada.getId() - 1).setProxFinAtencion(0);
                         }
+                        this.cargarFila(bool);
                         break;
 
                     case "LlegadaCamion": //La diferencia es que ahora no se despachan camiones a recepcion
@@ -233,12 +248,14 @@ public class Gestor {
                         break;
 
                     case "FinRecalibracion":
+                        this.cargarFila(bool);
                         this.setEventoActual(finAtRecalibrado);
                         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
                         Reloj.getInstancia().setTiempoActual(finAtRecalibrado.getDarsenaFinalizada().getProxFinRecalibrado());
                         this.finAtRecalibrado.ejecutar();
                         this.finAtRecalibrado.getDarsenaFinalizada().setTiempoRecalibrado(0);
                         this.finAtRecalibrado.getDarsenaFinalizada().setProxFinRecalibrado(0);
+                        this.cargarFila(bool);
                         break;
                 }
             }
@@ -380,7 +397,7 @@ public class Gestor {
     }
 
     public String promedioDeCamionesAtendidosPorDia() {
-        return String.valueOf((caminonesAtendidos/30));
+        return String.valueOf((caminonesAtendidos/diasSimulados));
     }
 
     public String cantidadDeCamionesNoAtendidos(){
