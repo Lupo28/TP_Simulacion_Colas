@@ -301,7 +301,7 @@ public class GestorAlternativa {
                         break;
                 }
             }
-            Reloj.getInstancia().setTiempoActual(18000); //Las 5AM de nuevo, arranca la jornada
+
         }
 
     }

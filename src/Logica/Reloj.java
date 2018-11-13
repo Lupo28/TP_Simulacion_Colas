@@ -4,6 +4,15 @@ public class Reloj {
     private static Reloj instancia;
     private static double tiempoActual;
     private static int dia;
+    private static boolean alternativa;
+
+    public static boolean isAlternativa() {
+        return alternativa;
+    }
+
+    public static void setAlternativa(boolean alternativa) {
+        Reloj.alternativa = alternativa;
+    }
 
     public static void setInstancia(Reloj instancia) {
         Reloj.instancia = instancia;
@@ -19,7 +28,13 @@ public class Reloj {
     }
 
     public Reloj() {
-        this.tiempoActual = 43200.00;//12HS
+        if(alternativa)
+        {
+            this.tiempoActual = 43200.00;//12HS
+        }
+        else{
+            this.tiempoActual = 18000;//5HS
+        }
     }
 
     public static Reloj getInstancia() {

@@ -134,6 +134,7 @@ public class Controller implements Initializable {
 
     public void cargarTabla() {
 
+        Reloj.setAlternativa(false);
 
         this.gestor.inicio();
 
@@ -320,6 +321,7 @@ public class Controller implements Initializable {
 
     public void cargarTablaAlternativa() {
 
+        Reloj.setAlternativa(true);
 
         this.gestorAlternativa.inicio();
 
