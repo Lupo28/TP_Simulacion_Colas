@@ -82,7 +82,7 @@ public class GestorAlternativa {
         this.ServidorRecepcion = new Recepcion();
         this.ServidorBalanza = new Balanza();
         this.ServidoresDarsena = new ConjuntoDarsena();
-        this.llegadaCamion = new LlegadaDeCamion(getServidorRecepcion());
+        this.llegadaCamion = new LlegadaDeCamion(getServidorRecepcion(), true);
         this.data = FXCollections.observableArrayList();
         this.diaDesde=0;
         this.diaHasta=30;
@@ -110,9 +110,7 @@ public class GestorAlternativa {
         this.cargarFilaPrimeravez(true);
         this.setEventoActual(llegadaCamion);
         this.getConjuntoEventos().add(this.getEventoActual().getNombre());
-        Reloj.getInstancia().setTiempoActual(18000);
-        Reloj.getInstancia().setTiempoActual(llegadaCamion.getProxLlegadaCamion());
-        this.cargarFila(true);
+        Reloj.getInstancia(false).setTiempoActual(llegadaCamion.getProxLlegadaCamion());
         llegadaCamion.ejecutar();
         this.llegadaCamion.setCamion(llegadaCamion.generarCamion2());
         this.llegadaCamion.sumarContadorCamiones();
@@ -135,13 +133,12 @@ public class GestorAlternativa {
         for ( int i=0; i < 30; i++) { //29 dias
             if(i>0){
                 aux=aux+24;
-                setDia(i+1);
+                setDia(i);
                 this.cargarFilaPrimeravez(bool);
             }
-            ;
 
-            while ((Reloj.getInstancia().getTiempoActual()/3600) < 18+aux) { //Esta seria la hora de cierre (18hs)
-                if((i+1)>=getDiaDesde() && (i+1)<=getDiaHasta()){
+            while ((Reloj.getInstancia(false).getTiempoActual()/3600) < 18+aux) { //Esta seria la hora de cierre (18hs)
+                if((i)>=getDiaDesde() && (i)<=getDiaHasta()){
                     bool=true;
                 }else
                 {
@@ -223,7 +220,7 @@ public class GestorAlternativa {
                 }
             }
 
-            while ((Reloj.getInstancia().getTiempoActual()/(3600)) < 36+aux) {//Son las 5AM pasado para el otro dia (Hora 29)
+            while ((Reloj.getInstancia(false).getTiempoActual()/(3600)) < 29+aux) {//Son las 5AM pasado para el otro dia (Hora 29)
 
                 switch (proxEvento()) {
                     case "Recepcion":

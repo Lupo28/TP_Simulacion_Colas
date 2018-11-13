@@ -36,12 +36,10 @@ public class Controller implements Initializable {
     private ObservableList<Fila> data;
     private Gestor gestor;
     private GestorAlternativa gestorAlternativa;
-    private Reloj reloj1;
 
     public Controller() {
         this.gestor = new Gestor();
         this.gestorAlternativa = new GestorAlternativa();
-        this.reloj1 = Reloj.getInstancia();
         this.tvSim = new TableView<Fila>();
     }
 
@@ -133,8 +131,6 @@ public class Controller implements Initializable {
 
 
     public void cargarTabla() {
-
-        Reloj.setAlternativa(false);
 
         this.gestor.inicio();
 
@@ -320,8 +316,6 @@ public class Controller implements Initializable {
 
 
     public void cargarTablaAlternativa() {
-
-        Reloj.setAlternativa(true);
 
         this.gestorAlternativa.inicio();
 

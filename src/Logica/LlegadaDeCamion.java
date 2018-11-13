@@ -54,6 +54,13 @@ public class LlegadaDeCamion extends Evento
         //contadorCamiones++;
     }
 
+    public LlegadaDeCamion( Recepcion recepcion, boolean alternativa)
+    {
+        this.camion=generarCamion2();
+        this.recepcion=recepcion;
+        //contadorCamiones++;
+    }
+
     public String getNombre()
     {
         String nombre= "Lleg Camion";
@@ -113,7 +120,7 @@ public class LlegadaDeCamion extends Evento
 
     public void calcularProxLlegada2()
     {
-        setProxLlegadaCamion(this.getTiempoLlegada()+Reloj.getInstancia().getTiempoActual());
+        setProxLlegadaCamion(this.getTiempoLlegada()+Reloj.getInstancia(false).getTiempoActual());
     }
 
     public void ejecutar()
